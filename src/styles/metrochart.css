@@ -1,0 +1,17 @@
+
+#metrochart {
+
+}
+
+
+.node {
+    fill: #eee;
+    stroke: #111;
+    stroke-width: 2px;
+}
+
+.link {
+    stroke: #777;
+    stroke-width: 2px;
+}
+

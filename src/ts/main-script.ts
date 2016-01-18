@@ -3,6 +3,7 @@ let histogram: Histogram;
 let timeline: Timeline;
 let punchcard: Punchcard;
 let spiral: Spiral;
+let metrochart: MetroChart;
 
 function doit(data: any) {
 
@@ -42,9 +43,11 @@ function doit(data: any) {
     spiral = new Spiral('spiral');
     spiral.data = data;
     spiral.render();
-};
 
 
+    metrochart = new MetroChart();
+
+}
 
 
 // make a new dataloader
