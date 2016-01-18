@@ -12,6 +12,26 @@
 
 .link {
     stroke: #777;
-    stroke-width: 2px;
+    stroke-width: 4px;
+    opacity: 100;
 }
+
+
+.line50 {
+    stroke: #008000;
+}
+
+.line51 {
+    stroke: #ff8000;
+}
+
+.line53 {
+    stroke: #ff0000;
+}
+
+.line54 {
+    stroke: #ffff00;
+}
+
+
 
