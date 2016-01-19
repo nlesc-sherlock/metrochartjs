@@ -13,7 +13,7 @@ class MetroChart {
         this.h = window.innerHeight;
         this.nodes = [];
         this.links = [];
-        this.stationShapeRadius = 10;
+        this.stationShapeRadius = 5;
 
         // for now, use inline data until I figure out how to load it
         this.links.push(
@@ -251,6 +251,141 @@ class MetroChart {
                 'source': 34,
                 'target': 35,
                 'line': 51
+            },
+            {
+                'source': 0,
+                'target': 1,
+                'line': 53
+            },
+            {
+                'source': 1,
+                'target': 2,
+                'line': 53
+            },
+            {
+                'source': 2,
+                'target': 3,
+                'line': 53
+            },
+            {
+                'source': 3,
+                'target': 4,
+                'line': 53
+            },
+            {
+                'source': 4,
+                'target': 5,
+                'line': 53
+            },
+            {
+                'source': 5,
+                'target': 6,
+                'line': 53
+            },
+            {
+                'source': 6,
+                'target': 7,
+                'line': 53
+            },
+            {
+                'source': 7,
+                'target': 8,
+                'line': 53
+            },
+            {
+                'source': 8,
+                'target': 9,
+                'line': 53
+            },
+            {
+                'source': 9,
+                'target': 10,
+                'line': 53
+            },
+            {
+                'source': 10,
+                'target': 11,
+                'line': 53
+            },
+            {
+                'source': 11,
+                'target': 12,
+                'line': 53
+            },
+            {
+                'source': 12,
+                'target': 13,
+                'line': 53
+            },
+            {
+                'source': 0,
+                'target': 1,
+                'line': 54
+            },
+            {
+                'source': 1,
+                'target': 2,
+                'line': 54
+            },
+            {
+                'source': 2,
+                'target': 3,
+                'line': 54
+            },
+            {
+                'source': 3,
+                'target': 4,
+                'line': 54
+            },
+            {
+                'source': 4,
+                'target': 5,
+                'line': 54
+            },
+            {
+                'source': 5,
+                'target': 6,
+                'line': 54
+            },
+            {
+                'source': 6,
+                'target': 7,
+                'line': 54
+            },
+            {
+                'source': 7,
+                'target': 36,
+                'line': 54
+            },
+            {
+                'source': 36,
+                'target': 37,
+                'line': 54
+            },
+            {
+                'source': 37,
+                'target': 38,
+                'line': 54
+            },
+            {
+                'source': 38,
+                'target': 39,
+                'line': 54
+            },
+            {
+                'source': 39,
+                'target': 40,
+                'line': 54
+            },
+            {
+                'source': 40,
+                'target': 41,
+                'line': 54
+            },
+            {
+                'source': 41,
+                'target': 42,
+                'line': 54
             }
         );
 
@@ -259,262 +394,262 @@ class MetroChart {
             {
                 'index': 0,
                 'name': 'Centraal Station',
-                'lines': [51, 53, 54],
+                'lines': [51, 53, 54]
             },
             {
                 'index': 1,
                 'name': 'Nieuwmarkt',
-                'lines': [51, 53, 54],
+                'lines': [51, 53, 54]
             },
             {
                 'index': 2,
                 'name': 'Waterlooplein',
-                'lines': [51, 53, 54],
+                'lines': [51, 53, 54]
             },
             {
                 'index': 3,
                 'name': 'Weesperplein',
-                'lines': [51, 53, 54],
+                'lines': [51, 53, 54]
             },
             {
                 'index': 4,
                 'name': 'Wibautstraat',
-                'lines': [51, 53, 54],
+                'lines': [51, 53, 54]
             },
             {
                 'index': 5,
                 'name': 'Amstelstation',
-                'lines': [51, 53, 54],
+                'lines': [51, 53, 54]
             },
             {
                 'index': 6,
                 'name': 'Spaklerweg',
-                'lines': [51, 53, 54],
+                'lines': [51, 53, 54]
             },
             {
                 'index': 7,
                 'name': 'Van der Madeweg',
-                'lines': [50, 53, 54],
+                'lines': [50, 53, 54]
             },
             {
                 'index': 8,
                 'name': 'Venserpolder',
-                'lines': [53],
+                'lines': [53]
             },
             {
                 'index': 9,
                 'name': 'Station Diemen Zuid',
-                'lines': [53],
+                'lines': [53]
             },
             {
                 'index': 10,
                 'name': 'Verrijn Stuartweg',
-                'lines': [53],
+                'lines': [53]
             },
             {
                 'index': 11,
                 'name': 'Ganzenhoef',
-                'lines': [53],
+                'lines': [53]
             },
             {
                 'index': 12,
                 'name': 'Kraaiennest',
-                'lines': [53],
+                'lines': [53]
             },
             {
                 'index': 13,
                 'name': 'Gaasperplas',
-                'lines': [53],
+                'lines': [53]
             },
             {
                 'index': 14,
                 'name': 'Overamstel',
-                'lines': [50, 51],
+                'lines': [50, 51]
             },
             {
                 'index': 15,
                 'name': 'Station RAI',
-                'lines': [50, 51],
+                'lines': [50, 51]
             },
             {
                 'index': 16,
                 'name': 'Station Zuid',
-                'lines': [50, 51],
+                'lines': [50, 51]
             },
             {
                 'index': 17,
                 'name': 'De Boelelaan/VU',
-                'lines': [51],
+                'lines': [51]
             },
             {
                 'index': 18,
                 'name': 'A.J. Ernststraat',
-                'lines': [51],
+                'lines': [51]
             },
             {
                 'index': 19,
                 'name': 'Van Boshuizenstraat',
-                'lines': [51],
+                'lines': [51]
             },
             {
                 'index': 20,
                 'name': 'Uilenstede',
-                'lines': [51],
+                'lines': [51]
             },
             {
                 'index': 21,
                 'name': 'Kronenburg',
-                'lines': [51],
+                'lines': [51]
             },
             {
                 'index': 22,
                 'name': 'Zonnestein',
-                'lines': [51],
+                'lines': [51]
             },
             {
                 'index': 23,
                 'name': 'Onderuit',
-                'lines': [51],
+                'lines': [51]
             },
             {
                 'index': 24,
                 'name': 'Oranjebaan',
-                'lines': [51],
+                'lines': [51]
             },
             {
                 'index': 25,
                 'name': 'Amstelveen Centrum',
-                'lines': [51],
+                'lines': [51]
             },
             {
                 'index': 26,
                 'name': 'Ouderkerkerlaan',
-                'lines': [51],
+                'lines': [51]
             },
             {
                 'index': 27,
                 'name': 'Sportlaan',
-                'lines': [51],
+                'lines': [51]
             },
             {
                 'index': 28,
                 'name': 'Marne',
-                'lines': [51],
+                'lines': [51]
             },
             {
                 'index': 29,
                 'name': 'Gondel',
-                'lines': [51],
+                'lines': [51]
             },
             {
                 'index': 30,
                 'name': 'Meent',
-                'lines': [51],
+                'lines': [51]
             },
             {
                 'index': 31,
                 'name': 'Brink',
-                'lines': [51],
+                'lines': [51]
             },
             {
                 'index': 32,
                 'name': 'Poortwachter',
-                'lines': [51],
+                'lines': [51]
             },
             {
                 'index': 33,
                 'name': 'Spinnerij',
-                'lines': [51],
+                'lines': [51]
             },
             {
                 'index': 34,
                 'name': 'Sacharovlaan',
-                'lines': [51],
+                'lines': [51]
             },
             {
                 'index': 35,
                 'name': 'Westwijk',
-                'lines': [51],
+                'lines': [51]
             },
             {
                 'index': 36,
                 'name': 'Station Duivendrecht',
-                'lines': [50, 54],
+                'lines': [50, 54]
             },
             {
                 'index': 37,
                 'name': 'Strandvliet',
-                'lines': [50, 54],
+                'lines': [50, 54]
             },
             {
                 'index': 38,
                 'name': 'Station Bijlmer ArenA',
-                'lines': [50, 54],
+                'lines': [50, 54]
             },
             {
                 'index': 39,
                 'name': 'Bullewijk',
-                'lines': [50, 54],
+                'lines': [50, 54]
             },
             {
                 'index': 40,
                 'name': 'Station Holendrecht',
-                'lines': [50, 54],
+                'lines': [50, 54]
             },
             {
                 'index': 41,
                 'name': 'Reigersbos',
-                'lines': [50, 54],
+                'lines': [50, 54]
             },
             {
                 'index': 42,
                 'name': 'Gein',
-                'lines': [50, 54],
+                'lines': [50, 54]
             },
             {
                 'index': 43,
                 'name': 'Isolatorweg',
-                'lines': [50],
+                'lines': [50]
             },
             {
                 'index': 44,
                 'name': 'Station Sloterdijk',
-                'lines': [50],
+                'lines': [50]
             },
             {
                 'index': 45,
                 'name': 'De Vlugtlaan',
-                'lines': [50],
+                'lines': [50]
             },
             {
                 'index': 46,
                 'name': 'Jan van Galenstraat',
-                'lines': [50],
+                'lines': [50]
             },
             {
                 'index': 47,
                 'name': 'Postjesweg',
-                'lines': [50],
+                'lines': [50]
             },
             {
                 'index': 48,
                 'name': 'Station Lelylaan',
-                'lines': [50],
+                'lines': [50]
             },
             {
                 'index': 49,
                 'name': 'Heemstedestraat',
-                'lines': [50],
+                'lines': [50]
             },
             {
                 'index': 50,
                 'name': 'Henk Sneevlietweg',
-                'lines': [50],
+                'lines': [50]
             },
             {
                 'index': 51,
                 'name': 'Amstelveenseweg',
-                'lines': [50],
+                'lines': [50]
             }
         );
         // set the initial position on all nodes:
@@ -567,8 +702,7 @@ class MetroChart {
 
 
 
-     calcStationShape(nLines) {
-
+     calcStationShape(nLines: number): string {
 
         // half the width of the entire station symbol
         let hw: number = this.stationShapeRadius;
@@ -584,6 +718,50 @@ class MetroChart {
                           'Z';
          return str;
      } // end method calcStationShape()
+
+
+
+
+    calcLinkShape(link: any): string {
+        // determine the coordinates of the given link
+
+        let str:string = '';
+
+        // draw straight lines between nodes
+
+        // The first time this method gets called, source and target are
+        // simply integer numbers, not objects with .x and .y properties.
+        // Therefore you need these two if-statementd to make sure you don't
+        // generate any errors:
+        if (typeof link.source === 'object') {
+
+            // x-from
+            let xf: number = link.source.x;
+            // y-from
+            let yf: number = link.source.y + this.calcStubOffset(link, 'source');
+
+            str += 'M' + xf + ',' + yf + ' ';
+
+        } else {
+            str += 'M0,0 ';
+        }
+        if (typeof(link.target) === 'object') {
+
+            // x-to
+            let xt: number = link.target.x;
+            // y-to
+            let yt: number = link.target.y + this.calcStubOffset(link, 'target');
+
+            str += 'L' + xt + ',' + yt;
+
+        } else {
+            str += 'L100,100';
+        }
+
+
+        return str;
+
+    } // end method calcLinkShape()
 
 
 
@@ -632,36 +810,29 @@ class MetroChart {
             .links(this.links);
 
 
-        force.linkDistance(5 * this.stationShapeRadius);
-        force.gravity(0.02);
+        force.linkDistance(10 * this.stationShapeRadius);
+        force.gravity(0.005);
         force.charge(-30);
 
         var link = vis.selectAll('.link')
             .data(this.links)
-            .enter().append('line')
-            .attr('class', function (d:any) {return ('link line' + d.line); })
-            .on('click', function(d:any) {console.log('line ' + d.line); });
+            .enter().append('path')
+                .attr('class', function (d:any) {return ('link line' + d.line); })
+                .attr('d', function(d:any) {return that.calcLinkShape(d); })
+                .on('click', function(d:any) {console.log('line ' + d.line); });
 
         var node = vis.selectAll('.node')
             .data(this.nodes)
             .enter().append('path')
                 .attr('class', 'node')
-                .attr('transform', function(d:any) { return 'translate(' + d.x + ',' + d.y + ')'; })
-                .attr('d', function (d: any) {return that.calcStationShape(d.nLines); })
+                .attr('d', function(d: any) {return that.calcStationShape(d.nLines); })
                 .on('click', function(d:any) {console.log('station ' + d.index + ': ' + d.name); })
                 .call(force.drag);
 
-
-
         force.on('tick', function(e) {
 
-            vis.selectAll('path')
-                .attr('transform', function(d:any) { return 'translate(' + d.x + ',' + d.y + ')'; });
-
-            link.attr('x1', function(d:any) { return d.source.x; })
-                .attr('y1', function(d:any) { return d.source.y + that.calcStubOffset(d, 'source'); })
-                .attr('x2', function(d:any) { return d.target.x; })
-                .attr('y2', function(d:any) { return d.target.y + that.calcStubOffset(d, 'target'); });
+            node.attr('transform', function(d:any) {return 'translate(' + d.x + ',' + d.y + ')'; });
+            link.attr('d', function(d:any) {return that.calcLinkShape(d); });
 
         });
 

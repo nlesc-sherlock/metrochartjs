@@ -1,7 +1,8 @@
 
 #metrochart {
-
+    background-color: #bbb;
 }
+
 
 
 .node {
@@ -14,8 +15,8 @@
     stroke: #777;
     stroke-width: 4px;
     opacity: 100;
+    fill: none;
 }
-
 
 .line50 {
     stroke: #008000;
