@@ -6,6 +6,8 @@ class MetroChart {
     h: number;
     stationShapeRadius: number;
     url: string;
+    linelabel: string;
+    stationlabel: string;
 
     constructor(url:string) {
 
@@ -41,6 +43,10 @@ class MetroChart {
 
                 that.nodes = data.nodes;
                 that.links = data.links;
+                that.linelabel = data.linelabel;
+                that.stationlabel = data.stationlabel;
+
+                console.log(that);
 
                 console.log('MetroChart: done loading data from ' + that.url);
 
@@ -211,26 +217,25 @@ class MetroChart {
             .nodes(this.nodes)
             .links(this.links);
 
-
-        force.linkDistance(10 * this.stationShapeRadius);
-        force.gravity(0.005);
-        force.charge(-30);
+        //force.linkDistance(10 * this.stationShapeRadius);
+        force.linkStrength(0.001);
+        force.gravity(0.0005);
+        force.charge(-10);
 
         var link = vis.selectAll('.link')
             .data(this.links)
             .enter().append('path')
                 .attr('class', function (d:any) {return ('link line' + d.line); })
                 .attr('d', function(d:any) {return that.calcLinkShape(d); })
-                .on('click', function(d:any) {console.log('line ' + d.line); });
+                .on('click', function(d:any) {console.log(that.linelabel + ' ' + d.line); });
 
         var node = vis.selectAll('.node')
             .data(this.nodes)
             .enter().append('path')
                 .attr('class', 'node')
                 .attr('d', function(d: any) {return that.calcStationShape(d.nLines); })
-                .on('click', function(d:any) {console.log('station ' + d.index + ': ' + d.name); })
+                .on('click', function(d:any) {console.log(that.stationlabel + ' ' + d.index + ': ' + d.name); })
                 .call(force.drag);
-
 
 
         force.on('tick', function(e) {
