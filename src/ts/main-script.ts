@@ -45,7 +45,7 @@ function doit(data: any) {
     // spiral.render();
 
 
-    metrochart = new MetroChart('#metrochart', '/data/metrolines-amsterdam.json');
+    metrochart = new MetroChart('#metrochart', '/data/tintin-the-black-island.json');
 
 }
 
