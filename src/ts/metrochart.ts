@@ -29,21 +29,22 @@ interface MetroChartData {
 
 class MetroChart {
 
-    datasource        : string;
-    elem              : string;
-    elemSelection     : d3.Selection<any>;
-    forceCharge       : number;
-    forceGravity      : number;
-    forceLinkDistance : number;
-    forceLinkStrength : number;
-    h                 : number;
-    linelabel         : string;
-    links             : Connection[];
-    nodes             : Station[];
-    stationlabel      : string;
-    stationShapeRadius: number;
-    url               : string;
-    w                 : number;
+    public datasource         : string;
+    public elem               : string;
+    public elemSelection      : d3.Selection<any>;
+    public h                  : number;
+    public linelabel          : string;
+    public links              : Connection[];
+    public nodes              : Station[];
+    public stationlabel       : string;
+    public stationShapeRadius : number;
+    public url                : string;
+    public w                  : number;
+
+    private _forceCharge      : number;
+    private _forceLinkDistance: number;
+    private _forceGravity     : number;
+    private _forceLinkStrength: number;
 
     constructor(elem: string, url:string) {
 
@@ -68,10 +69,10 @@ class MetroChart {
         this.stationShapeRadius = 5;
 
         // set the force directed graph parameters
-        this.forceLinkDistance = 0;
-        this.forceLinkStrength = 0.001;
-        this.forceGravity = 0.0005;
         this.forceCharge = -10;
+        this.forceGravity = 0.0005;
+        this.forceLinkDistance = 0;
+        this.forceLinkStrength = 0.1;
 
         // load the data (internally defers to this.drawForceDirectedGraph() )
         this.loaddata();
@@ -285,8 +286,13 @@ class MetroChart {
             node.nLines = node.lines.length;
         }
 
-        // select the DOM element to draw in, and set its width and height
+        // if an metrochart-svg element exists, clear its contents:
+        d3.select('#metrochart-svg').remove();
+
+        // select the DOM element to draw in, and set its identifier, as well
+        // as its width and height
         let vis = this.elemSelection.append('svg')
+            .attr('id', 'metrochart-svg')
             .attr('width', this.w)
             .attr('height', this.h);
 
@@ -297,10 +303,11 @@ class MetroChart {
             .nodes(this.nodes)
             .links(this.links);
 
-        //force.linkDistance(10 * this.stationShapeRadius);
-        force.linkStrength(0.001);
-        force.gravity(0.0005);
-        force.charge(-10);
+        // set the directed-graph force parameters:
+        force.charge(this.forceCharge);
+        force.gravity(this.forceGravity);
+        force.linkDistance(this.forceLinkDistance);
+        force.linkStrength(this.forceLinkStrength);
 
         let link = vis.selectAll('.link')
             .data(this.links)
@@ -331,6 +338,38 @@ class MetroChart {
 
 
     } // end method drawForceDirectedGraph()
+
+
+    public set forceCharge(forceCharge: number) {
+        this._forceCharge = forceCharge;
+    }
+    public get forceCharge():number {
+        return this._forceCharge;
+    }
+
+
+    public set forceLinkDistance(forceLinkDistance: number) {
+        this._forceLinkDistance = forceLinkDistance;
+    }
+    public get forceLinkDistance():number {
+        return this._forceLinkDistance;
+    }
+
+
+    public set forceGravity(forceGravity: number) {
+        this._forceGravity = forceGravity;
+    }
+    public get forceGravity():number {
+        return this._forceGravity;
+    }
+
+
+    public set forceLinkStrength(forceLinkStrength: number) {
+        this._forceLinkStrength = forceLinkStrength;
+    }
+    public get forceLinkStrength():number {
+        return this._forceLinkStrength;
+    }
 
 }
 
