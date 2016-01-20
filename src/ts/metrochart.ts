@@ -51,6 +51,8 @@ class MetroChart {
     private _forceGravity     : number;
     private _forceLinkStrength: number;
 
+    private _colors           : string[];
+
     constructor(elem: string, url:string) {
 
         // store the string containing the DOM element ID
@@ -134,10 +136,10 @@ class MetroChart {
 
                 console.log('MetroChart: \'Done loading data from "' + that.url + '"\'');
 
-                // verify the data and add some properties:
-                that.verifyData();
                 // determine the list of unique line names:
                 that.calcUniqueLines();
+                // verify the data and add some properties:
+                that.verifyData();
                 // draw the force directed graph:
                 that.drawForceDirectedGraph();
             }
@@ -220,8 +222,11 @@ class MetroChart {
 
         // if nodes have time labels, set x-position
         if (typeof node.time === 'number') {
+            // calculate the fraction 
             let f: number = (node.time - this.timeValueLeft) / (this.timeValueRight - this.timeValueLeft);
-            node.x = this.w * f;
+
+            // don't use the whole width, only 90%, leaving 5% on the left and right
+            node.x = 0.05 * this.w + f * 0.90 * this.w;
         }
 
 
@@ -375,6 +380,7 @@ class MetroChart {
             .enter().append('path')
                 .attr('class', function(d:Connection) {return 'link' + ' ' + 'line' + d.uindex; } )
                 .attr('d', function(d:Connection) {return that.calcLinkShape(d); })
+                .style('stroke', function(d:Connection) {return that.getColor(d.uindex); })
                 .on('click', function(d:Connection) {console.log(that.linelabel + ' ' + d.line); })
                 .on('mouseover', this.onMouseOver)
                 .on('mouseout', this.onMouseOut);
@@ -407,6 +413,23 @@ class MetroChart {
 
 
     } // end method drawForceDirectedGraph()
+
+
+
+    public getColor(uindex:number): string {
+
+        let str:string;
+
+        if (typeof this.colors === 'undefined' || this.colors.length === 0) {
+            // in case there are no predefined colors, set all colors to 50% gray
+            str = '#808080';
+        } else {
+            let nColors:number = this.colors.length;
+            // use the modulo-nColors of the uindex value as index into the color table
+            str = this.colors[uindex % nColors];
+        }
+        return str;
+    }
 
 
 
@@ -463,6 +486,14 @@ class MetroChart {
     }
 
 
+    public set colors(colors: string[]) {
+        this._colors = colors;
+    }
+    public get colors():string[] {
+        return this._colors;
+    }
+
+
     public set forceCharge(forceCharge: number) {
         this._forceCharge = forceCharge;
     }
@@ -493,6 +524,8 @@ class MetroChart {
     public get forceLinkStrength():number {
         return this._forceLinkStrength;
     }
+
+
 
 }
 
