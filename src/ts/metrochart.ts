@@ -1,22 +1,79 @@
+
+
+// Station is basically a d3.layout.force.Node with added properties 'name',
+// and 'lines', and optional property 'nLines'.
+interface Station extends d3.layout.force.Node {
+    lines   : string[];
+    name    : string;
+    nLines? : number;
+};
+
+
+// Connection is basically a d3.layout.force.Link of Station
+// objects, except that it adds the 'line' property
+interface Connection extends d3.layout.force.Link<Station> {
+    line : string;
+}
+
+// MetroChartData combines Station and Connection, and adds the optional
+// properties 'source', 'stationlabel', and 'linelabel'.
+
+interface MetroChartData {
+    linelabel?    : string;
+    links         : Connection[];
+    nodes         : Station[];
+    source?       : string;
+    stationlabel? : string;
+}
+
+
 class MetroChart {
 
-    nodes: any;
-    links: any;
-    w: number;
-    h: number;
+    datasource        : string;
+    elem              : string;
+    elemSelection     : d3.Selection<any>;
+    forceCharge       : number;
+    forceGravity      : number;
+    forceLinkDistance : number;
+    forceLinkStrength : number;
+    h                 : number;
+    linelabel         : string;
+    links             : Connection[];
+    nodes             : Station[];
+    stationlabel      : string;
     stationShapeRadius: number;
-    url: string;
-    linelabel: string;
-    stationlabel: string;
+    url               : string;
+    w                 : number;
 
-    constructor(url:string) {
+    constructor(elem: string, url:string) {
 
-        // initialize the width and height parameters
-        this.w = window.innerWidth;
-        this.h = window.innerHeight;
-        this.stationShapeRadius = 5;
+        // store the string containing the DOM element ID
+        this.elem = elem;
+
+        // store the url to the data that was provided by the user
         this.url = url;
 
+
+
+        // store the D3 selection of the element we want to draw in
+        this.elemSelection = d3.select(this.elem);
+
+        // store the width and height of the DOM element we want to draw in
+        // (somehow typescript gives an error about getBoundingClientRect() but
+        // it works in the browser (Google Chrome version 46.0.2490.71 (64-bit)))
+        this.w = this.elemSelection.node().getBoundingClientRect().width;
+        this.h = this.elemSelection.node().getBoundingClientRect().height;
+
+        // set the radius of the station symbols
+        this.stationShapeRadius = 5;
+
+        // set the force directed graph parameters
+        this.forceLinkDistance = 0;
+        this.forceLinkStrength = 0.001;
+        this.forceGravity = 0.0005;
+        this.forceCharge = -10;
+
+        // load the data (internally defers to this.drawForceDirectedGraph() )
         this.loaddata();
 
     } // end method constructor()
@@ -39,14 +96,36 @@ class MetroChart {
             }
             if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
 
-                let data: any = JSON.parse(xmlHttp.responseText);
+                let data: MetroChartData = JSON.parse(xmlHttp.responseText);
 
+                // get the nodes and links from the parsed data
                 that.nodes = data.nodes;
                 that.links = data.links;
-                that.linelabel = data.linelabel;
-                that.stationlabel = data.stationlabel;
 
-                console.log(that);
+                // if the data includes an alternative descriptive name for
+                // line, use it, otherwise use 'line'
+                if (typeof data.linelabel === 'undefined') {
+                    that.linelabel = 'line';
+                } else {
+                    that.linelabel = data.linelabel;
+                }
+
+                // if the data includes an alternative descriptive name for
+                // station, use it, otherwise use 'station'
+                if (typeof data.stationlabel === 'undefined') {
+                    that.stationlabel = 'station';
+                } else {
+                    that.stationlabel = data.stationlabel;
+                }
+
+                // if the data includes a data source, use it, otherwise use
+                // 'unknown'
+                if (typeof data.source === 'undefined') {
+                    that.datasource = 'unknown';
+                } else {
+                    that.datasource = data.source;
+                }
+
 
                 console.log('MetroChart: done loading data from ' + that.url);
 
@@ -68,12 +147,12 @@ class MetroChart {
 
     calcStationShapeArc(fromy, r, topOrBottomStr) {
 
-        var iSection,
-            nSections,
-            outputStr,
-            angle,
-            dx,
-            dy;
+        let iSection: number;
+        let nSections: number;
+        let outputStr;
+        let angle: number;
+        let dx: number;
+        let dy: number;
 
         nSections = 8;
         outputStr = '';
@@ -132,7 +211,7 @@ class MetroChart {
 
         // The first time this method gets called, source and target are
         // simply integer numbers, not objects with .x and .y properties.
-        // Therefore you need these two if-statementd to make sure you don't
+        // Therefore you need these two if-statements to make sure you don't
         // generate any errors:
         if (typeof link.source === 'object') {
 
@@ -144,6 +223,7 @@ class MetroChart {
             str += 'M' + xf + ',' + yf + ' ';
 
         } else {
+            // starting point of a temporary line (only displayed in the very first frame)
             str += 'M0,0 ';
         }
         if (typeof(link.target) === 'object') {
@@ -156,9 +236,9 @@ class MetroChart {
             str += 'L' + xt + ',' + yt;
 
         } else {
-            str += 'L100,100';
+            // ending point of a temporary line (only displayed in the very first frame)
+            str += 'L10,10';
         }
-
 
         return str;
 
@@ -196,7 +276,7 @@ class MetroChart {
     drawForceDirectedGraph() {
 
         // capture the 'this' object:
-        var that = this;
+        let that = this;
 
         // set the initial position on all nodes:
         for (let node of this.nodes) {
@@ -206,13 +286,13 @@ class MetroChart {
         }
 
         // select the DOM element to draw in, and set its width and height
-        var vis = d3.select('#metrochart').append('svg')
+        let vis = this.elemSelection.append('svg')
             .attr('width', this.w)
             .attr('height', this.h);
 
         // initialize the force layout, set its width and height, then update it with
         // the nodes and links arrays (which initially are empty),
-        var force = d3.layout.force()
+        let force = d3.layout.force()
             .size([this.w, this.h])
             .nodes(this.nodes)
             .links(this.links);
@@ -222,14 +302,14 @@ class MetroChart {
         force.gravity(0.0005);
         force.charge(-10);
 
-        var link = vis.selectAll('.link')
+        let link = vis.selectAll('.link')
             .data(this.links)
             .enter().append('path')
                 .attr('class', function (d:any) {return ('link line' + d.line); })
                 .attr('d', function(d:any) {return that.calcLinkShape(d); })
                 .on('click', function(d:any) {console.log(that.linelabel + ' ' + d.line); });
 
-        var node = vis.selectAll('.node')
+        let node = vis.selectAll('.node')
             .data(this.nodes)
             .enter().append('path')
                 .attr('class', 'node')
