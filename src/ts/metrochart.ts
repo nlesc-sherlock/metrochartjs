@@ -6,6 +6,7 @@ interface Station extends d3.layout.force.Node {
     lines   : string[];
     name    : string;
     nLines? : number;
+    time?   : number;
 };
 
 
@@ -69,7 +70,7 @@ class MetroChart {
         this.stationShapeRadius = 5;
 
         // set the force directed graph parameters
-        this.forceCharge = -10;
+        this.forceCharge = -30;
         this.forceGravity = 0.0005;
         this.forceLinkDistance = 0;
         this.forceLinkStrength = 0.1;
@@ -127,9 +128,10 @@ class MetroChart {
                     that.datasource = data.source;
                 }
 
+                console.log('MetroChart: \'Done loading data from "' + that.url + '"\'');
 
-                console.log('MetroChart: done loading data from ' + that.url);
-
+                // verify the data and add some properties:
+                that.verifyData();
                 // execute the callback
                 that.drawForceDirectedGraph();
             }
@@ -183,19 +185,19 @@ class MetroChart {
 
 
 
-     calcStationShape(nLines: number): string {
+     calcStationShape(node: Station): string {
 
         // half the width of the entire station symbol
         let hw: number = this.stationShapeRadius;
         // half the height of the entire station symbol
-        let hh: number = nLines * this.stationShapeRadius;
+        let hh: number = node.nLines * this.stationShapeRadius;
 
         let str: string = 'M ' + (-hw) + ' 0 ' +
-                          'L ' + (-hw) + ' ' + ((nLines - 1) * -this.stationShapeRadius) + ' ' +
-                          this.calcStationShapeArc((nLines - 1) * -this.stationShapeRadius, this.stationShapeRadius, 'top') +
-                          'L ' + (+hw) + ' ' + ((nLines - 1) * this.stationShapeRadius) + ' ' +
-                          this.calcStationShapeArc((nLines - 1) * this.stationShapeRadius, this.stationShapeRadius, 'bottom') +
-                          'L ' + (-hw) + ' ' + ((nLines - 1) * this.stationShapeRadius) + ' ' +
+                          'L ' + (-hw) + ' ' + ((node.nLines - 1) * -this.stationShapeRadius) + ' ' +
+                          this.calcStationShapeArc((node.nLines - 1) * -this.stationShapeRadius, this.stationShapeRadius, 'top') +
+                          'L ' + (+hw) + ' ' + ((node.nLines - 1) * this.stationShapeRadius) + ' ' +
+                          this.calcStationShapeArc((node.nLines - 1) * this.stationShapeRadius, this.stationShapeRadius, 'bottom') +
+                          'L ' + (-hw) + ' ' + ((node.nLines - 1) * this.stationShapeRadius) + ' ' +
                           'Z';
          return str;
      } // end method calcStationShape()
@@ -203,7 +205,40 @@ class MetroChart {
 
 
 
-    calcLinkShape(link: any): string {
+    calcStationTranslate(node:Station): string {
+
+        // half the width of the entire station symbol
+        let hw: number = this.stationShapeRadius;
+        // half the height of the entire station symbol
+        let hh: number = node.nLines * this.stationShapeRadius;
+
+        // observe the bounding box edge on the right
+        if (node.x > this.w - hw) {
+            node.x = this.w - hw;
+        }
+
+        // observe the bounding box edge on the left
+        if (node.x < 0 + hw) {
+            node.x = 0 + hw;
+        }
+
+        // observe the bounding box edge on the top
+        if (node.y > this.h - hh) {
+            node.y = this.h - hh;
+        }
+
+        // observe the bounding box edge on the bottom
+        if (node.y < 0 + hh) {
+            node.y = 0 + hh;
+        }
+
+        return 'translate(' + node.x + ',' + node.y + ')';
+
+    }
+
+
+
+    calcLinkShape(link: Connection): string {
         // determine the coordinates of the given link
 
         let str:string = '';
@@ -279,13 +314,6 @@ class MetroChart {
         // capture the 'this' object:
         let that = this;
 
-        // set the initial position on all nodes:
-        for (let node of this.nodes) {
-            node.x = this.w / 2;
-            node.y = this.h / 2;
-            node.nLines = node.lines.length;
-        }
-
         // if an metrochart-svg element exists, clear its contents:
         d3.select('#metrochart-svg').remove();
 
@@ -312,23 +340,24 @@ class MetroChart {
         let link = vis.selectAll('.link')
             .data(this.links)
             .enter().append('path')
-                .attr('class', function (d:any) {return ('link line' + d.line); })
-                .attr('d', function(d:any) {return that.calcLinkShape(d); })
-                .on('click', function(d:any) {console.log(that.linelabel + ' ' + d.line); });
+                .attr('class', function (d:Connection) {return ('link line' + d.line); })
+                .attr('d', function(d:Connection) {return that.calcLinkShape(d); })
+                .on('click', function(d:Connection) {console.log(that.linelabel + ' ' + d.line); });
 
         let node = vis.selectAll('.node')
             .data(this.nodes)
             .enter().append('path')
                 .attr('class', 'node')
-                .attr('d', function(d: any) {return that.calcStationShape(d.nLines); })
-                .on('click', function(d:any) {console.log(that.stationlabel + ' ' + d.index + ': ' + d.name); })
+                .attr('d', function(d:Station) {return that.calcStationShape(d); })
+                .on('click', function(d:Station) {console.log(that.stationlabel + ' ' + d.index + ': ' + d.name); })
                 .call(force.drag);
 
 
         force.on('tick', function(e) {
 
-            node.attr('transform', function(d:any) {return 'translate(' + d.x + ',' + d.y + ')'; });
-            link.attr('d', function(d:any) {return that.calcLinkShape(d); });
+            node.attr('transform', function(d:Station) {return that.calcStationTranslate(d); });
+            //node.attr('d', function(d:Station) {return that.calcStationShape(d); });
+            link.attr('d', function(d:Connection) {return that.calcLinkShape(d); });
 
         });
 
@@ -338,6 +367,26 @@ class MetroChart {
 
 
     } // end method drawForceDirectedGraph()
+
+
+
+
+    verifyData() {
+
+        // set the initial position on all nodes:
+        for (let node of this.nodes) {
+            node.x = this.w / 2;
+            node.y = this.h / 2;
+            node.nLines = node.lines.length;
+            if (typeof node.time === 'undefined') {
+                // this node has no associated information that can be used
+                // to position it on a time axis
+                console.log('MetroChart: \'No time information.\'');
+            }
+        }
+
+
+    }
 
 
     public set forceCharge(forceCharge: number) {
