@@ -155,82 +155,82 @@
     "nodes":
     [
         {
-            "index": 0,
+            "time": 0,
             "name": "0",
             "lines": ["Nurse", "Doctor"]
         },
         {
-            "index": 1,
+            "time": 1,
             "name": "1",
             "lines": ["Nurse"]
         },
         {
-            "index": 2,
+            "time": 2,
             "name": "2",
             "lines": ["Nurse", "Thompson", "And Thompson"]
         },
         {
-            "index": 3,
+            "time": 3,
             "name": "3",
             "lines": ["Thompson", "And Thompson", "Tintin"]
         },
         {
-            "index": 4,
+            "time": 4,
             "name": "4",
             "lines": ["Thompson", "And Thompson", "Tintin"]
         },
         {
-            "index": 5,
+            "time": 5,
             "name": "5",
             "lines": ["Nurse", "Thompson"]
         },
         {
-            "index": 6,
+            "time": 6,
             "name": "6",
             "lines": ["Thompson", "And Thompson"]
         },
         {
-            "index": 7,
+            "time": 7,
             "name": "7",
             "lines": ["Thompson", "Tintin"]
         },
         {
-            "index": 8,
+            "time": 8,
             "name": "8",
             "lines": ["Tintin"]
         },
         {
-            "index": 9,
+            "time": 9,
             "name": "9",
             "lines": ["Thompson", "And Thompson"]
         },
         {
-            "index": 10,
+            "time": 10,
             "name": "10",
             "lines": ["Tintin"]
         },
         {
-            "index": 11,
+            "time": 11,
             "name": "11",
             "lines": ["Thompson", "And Thompson"]
         },
         {
-            "index": 12,
+            "time": 12,
             "name": "12",
             "lines": ["Tintin", "Snowy"]
         },
         {
-            "index": 13,
+            "time": 13,
             "name": "13",
             "lines": ["Nurse", "Tintin", "Snowy"]
         },
         {
-            "index": 14,
+            "time": 14,
             "name": "14",
             "lines": ["Beardman", "Fedoraman"]
         },
         {
-            "index": 15,
+            "time": 15,
             "name": "15",
             "lines": ["Tintin", "Beardman", "Fedoraman", "Blueman", "Redwoman", "Snowy"]
         }
