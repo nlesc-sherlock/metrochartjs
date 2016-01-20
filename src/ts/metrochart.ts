@@ -14,6 +14,7 @@ interface Station extends d3.layout.force.Node {
 // objects, except that it adds the 'line' property
 interface Connection extends d3.layout.force.Link<Station> {
     line : string;
+    uindex: number;
 }
 
 // MetroChartData combines Station and Connection, and adds the optional
@@ -41,6 +42,7 @@ class MetroChart {
     public stationShapeRadius : number;
     public timeValueLeft      : number;
     public timeValueRight     : number;
+    public ulinks             : string[];
     public url                : string;
     public w                  : number;
 
@@ -134,7 +136,9 @@ class MetroChart {
 
                 // verify the data and add some properties:
                 that.verifyData();
-                // execute the callback
+                // determine the list of unique line names:
+                that.calcUniqueLines();
+                // draw the force directed graph:
                 that.drawForceDirectedGraph();
             }
         };
@@ -150,7 +154,7 @@ class MetroChart {
 
 
 
-    calcStationShapeArc(fromy, r, topOrBottomStr) {
+    calcStationShapeArc(fromy, r, topOrBottomStr): string {
 
         let iSection: number;
         let nSections: number;
@@ -317,8 +321,28 @@ class MetroChart {
 
 
 
+    calcUniqueLines(): void {
+        // initialize the array that is going to hold the unique names of lines
+        this.ulinks = [];
+        // iterate over the links, whenever you see a previously unseen line name,
+        // add it to the list of strings in this.ulinks
+        for (let link of this.links) {
+            if (this.ulinks.indexOf(link.line) === -1 ) {
+                this.ulinks.push(link.line);
+            }
+        }
+        // sort the list of unique line names
+        this.ulinks.sort();
+        // assign the index of each link's line name to property .uindex
+        for (let link of this.links) {
+            link.uindex = this.ulinks.indexOf(link.line);
+        }
+    }
 
-    drawForceDirectedGraph() {
+
+
+
+    drawForceDirectedGraph(): MetroChart {
 
         // capture the 'this' object:
         let that = this;
@@ -349,9 +373,11 @@ class MetroChart {
         let link = vis.selectAll('.link')
             .data(this.links)
             .enter().append('path')
-                .attr('class', function (d:Connection) {return ('link line' + d.line); })
+                .attr('class', function(d:Connection) {return 'link' + ' ' + 'line' + d.uindex; } )
                 .attr('d', function(d:Connection) {return that.calcLinkShape(d); })
-                .on('click', function(d:Connection) {console.log(that.linelabel + ' ' + d.line); });
+                .on('click', function(d:Connection) {console.log(that.linelabel + ' ' + d.line); })
+                .on('mouseover', this.onMouseOver)
+                .on('mouseout', this.onMouseOut);
 
         let node = vis.selectAll('.node')
             .data(this.nodes)
@@ -364,23 +390,53 @@ class MetroChart {
 
         force.on('tick', function(e) {
 
+            // this is actually a loop in which the force-directing algorithm adjusts
+            // the values of node.x and node.y for all node of this.nodes.
             node.attr('transform', function(d:Station) {return that.calcStationTranslate(d); });
-            //node.attr('d', function(d:Station) {return that.calcStationShape(d); });
-            link.attr('d', function(d:Connection) {return that.calcLinkShape(d); });
 
+            // for each link of this.links, recalculate the path connecting the stations (since
+            // these were just changed)
+            link.attr('d', function(d:Connection) {return that.calcLinkShape(d); });
         });
 
 
         // Restart the layout.
         force.start();
 
+        return this;
+
 
     } // end method drawForceDirectedGraph()
 
 
 
+    private onMouseOver() {
 
-    verifyData() {
+        // Here, 'this' apparently refers to the line segment (path)
+        // that generated the event, not the instance of MetroChart!
+        let eventSource = this;
+        let uindex: number = d3.select(eventSource).datum().uindex;
+        let classname = '.link.line' + uindex;
+        d3.selectAll(classname).style('stroke-width', '5px');
+    }
+
+
+
+
+    private onMouseOut() {
+
+        // Here, 'this' apparently refers to the line segment (path)
+        // that generated the event, not the instance of MetroChart!
+        let eventSource = this;
+        let uindex: number = d3.select(eventSource).datum().uindex;
+        let classname = '.link.line' + uindex;
+        d3.selectAll(classname).style('stroke-width', '3px');
+    }
+
+
+
+
+    verifyData(): MetroChart {
 
         // set the initial position on all nodes:
         for (let node of this.nodes) {
@@ -403,6 +459,7 @@ class MetroChart {
                 throw 'MetroChart: \'node.time\'s type should be \'number\'.';
             }
         }
+        return this;
     }
 
 
