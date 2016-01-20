@@ -39,6 +39,8 @@ class MetroChart {
     public nodes              : Station[];
     public stationlabel       : string;
     public stationShapeRadius : number;
+    public timeValueLeft      : number;
+    public timeValueRight     : number;
     public url                : string;
     public w                  : number;
 
@@ -212,6 +214,13 @@ class MetroChart {
         // half the height of the entire station symbol
         let hh: number = node.nLines * this.stationShapeRadius;
 
+        // if nodes have time labels, set x-position
+        if (typeof node.time === 'number') {
+            let f: number = (node.time - this.timeValueLeft) / (this.timeValueRight - this.timeValueLeft);
+            node.x = this.w * f;
+        }
+
+
         // observe the bounding box edge on the right
         if (node.x > this.w - hw) {
             node.x = this.w - hw;
@@ -382,10 +391,18 @@ class MetroChart {
                 // this node has no associated information that can be used
                 // to position it on a time axis
                 console.log('MetroChart: \'No time information.\'');
+            } else if (typeof node.time === 'number') {
+
+                if (node.time < this.timeValueLeft || typeof this.timeValueLeft === 'undefined') {
+                    this.timeValueLeft = node.time;
+                }
+                if (node.time > this.timeValueRight || typeof this.timeValueRight === 'undefined') {
+                    this.timeValueRight = node.time;
+                }
+            } else {
+                throw 'MetroChart: \'node.time\'s type should be \'number\'.';
             }
         }
-
-
     }
 
 
