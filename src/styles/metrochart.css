@@ -1,8 +1,9 @@
 
 #metrochart {
     background-color: #ddd;
+    width: 1000px;
+    height: 600px;
 }
-
 
 
 .node {
