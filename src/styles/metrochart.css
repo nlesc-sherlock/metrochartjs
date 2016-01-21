@@ -7,9 +7,15 @@
 
 
 .node {
-    fill: #eee;
+    fill: #f8f8f8;
     stroke: #111;
     stroke-width: 2px;
+}
+
+.node:hover {
+    fill: #d8d8d8;
+    stroke: #000;
+    stroke-width: 3px;
 }
 
 .link {
