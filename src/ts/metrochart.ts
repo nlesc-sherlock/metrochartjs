@@ -106,7 +106,11 @@ class MetroChart {
         this.w = this.elemSelection.node().getBoundingClientRect().width;
         this.h = this.elemSelection.node().getBoundingClientRect().height;
 
-        this.applyDefaultOptions(options);
+        if (typeof options === 'undefined') {
+            this.applyDefaultOptions(MetroChart.defaultOptions);
+        } else {
+            this.applyDefaultOptions(options);
+        }
 
         // load the data (internally defers to this.drawForceDirectedGraph() )
         this.loaddata();
