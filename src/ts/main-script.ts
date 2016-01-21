@@ -8,41 +8,41 @@ let metrochart: MetroChart;
 function doit(data: any) {
 
 
-    // // make a new map
-    // map = new Map('leaflet');
-    // map.binddata(data);
-    // map.circleMarkerOptions = {
-    //     fillColor: '#F80',
-    //     fillOpacity: 0.5,
-    //     stroke: true,
-    //     color: '#000'
-    // };
-    // map.circleMarkerRadius = 6;
-    // map.showCrimeLocations();
-    //
-    //
-    // // make the histogram and then add it to the timeline
-    // histogram = new Histogram(data);
-    //
-    // let size: ISize = {
-    //     width: window.innerWidth * 0.9,
-    //     height: window.innerHeight * 0.4
-    // };
-    //
-    // let padding: IPadding = {
-    //     top: 40,
-    //     right: 40,
-    //     bottom: 40,
-    //     left: 50
-    // };
-    // timeline = new Timeline(size, padding, histogram);
-    //
-    // punchcard = new Punchcard();
-    // punchcard.binddata(data);
-    //
-    // spiral = new Spiral('spiral');
-    // spiral.data = data;
-    // spiral.render();
+    // make a new map
+    map = new Map('leaflet');
+    map.binddata(data);
+    map.circleMarkerOptions = {
+        fillColor: '#F80',
+        fillOpacity: 0.5,
+        stroke: true,
+        color: '#000'
+    };
+    map.circleMarkerRadius = 6;
+    map.showCrimeLocations();
+
+
+    // make the histogram and then add it to the timeline
+    histogram = new Histogram(data);
+
+    let size: ISize = {
+        width: window.innerWidth * 0.9,
+        height: window.innerHeight * 0.4
+    };
+
+    let padding: IPadding = {
+        top: 40,
+        right: 40,
+        bottom: 40,
+        left: 50
+    };
+    timeline = new Timeline(size, padding, histogram);
+
+    punchcard = new Punchcard();
+    punchcard.binddata(data);
+
+    spiral = new Spiral('spiral');
+    spiral.data = data;
+    spiral.render();
 
 
     metrochart = new MetroChart('#metrochart', '/data/tintin-the-black-island.json');
