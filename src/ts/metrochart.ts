@@ -28,46 +28,68 @@ interface MetroChartData {
     stationlabel? : string;
 }
 
-interface DefaultOptions {
-    colors            : {name:string, hexcode:string}[];
-    charge            : number;
-    enableTimeAxis    : boolean;
-    gravity           : number;
-    linkDistance      : number;
-    linkStrength      : number;
-    stationShapeRadius: number;
+interface Options {
+    colors?            : {name:string, hexcode:string}[];
+    charge?            : number;
+    enableTimeAxis?    : boolean;
+    gravity?           : number;
+    linkDistance?      : number;
+    linkStrength?      : number;
+    stationShapeRadius?: number;
 }
 
 
 
 class MetroChart {
 
-//    public static defaultOptions: DefaultOptions;
-    public datasource           : string;
-    public elem                 : string;
-    public elemSelection        : d3.Selection<any>;
-    public h                    : number;
-    public linelabel            : string;
-    public links                : Connection[];
-    public nodes                : Station[];
-    public stationlabel         : string;
-    public stationShapeRadius   : number;
-    public timeValueLeft        : number;
-    public timeValueRight       : number;
-    public ulinks               : string[];
-    public url                  : string;
-    public w                    : number;
-    private _colors             : string[];
-    private _enableTimeAxis     : boolean;
-    private _forceCharge        : number;
-    private _forceLinkDistance  : number;
-    private _forceGravity       : number;
-    private _forceLinkStrength  : number;
+
+    public datasource         : string;
+    public elem               : string;
+    public elemSelection      : d3.Selection<any>;
+    public h                  : number;
+    public linelabel          : string;
+    public links              : Connection[];
+    public nodes              : Station[];
+    public stationlabel       : string;
+    public stationShapeRadius : number;
+    public timeValueLeft      : number;
+    public timeValueRight     : number;
+    public ulinks             : string[];
+    public url                : string;
+    public w                  : number;
+    private _colors           : string[];
+    private _charge           : number;
+    private _enableTimeAxis   : boolean;
+    private _gravity          : number;
+    private _linkDistance     : number;
+    private _linkStrength     : number;
+
+    // set static class property defaultOptions (for some reason, I can't have
+    // separate declaration and initialization)
+    public static defaultOptions: Options = {
+        'charge': 0,
+        'colors': [
+            {'name': 'red', 'hexcode': '#FF0000'},
+            {'name': 'olive', 'hexcode': '#008000'},
+            {'name': 'blue', 'hexcode': '#0080FF'},
+            {'name': 'orange', 'hexcode': '#FF8000'},
+            {'name': 'magenta', 'hexcode': '#FF0080'},
+            {'name': 'yellow', 'hexcode': '#FFee00'},
+            {'name': 'lime', 'hexcode': '#80DD00'},
+            {'name': 'purple', 'hexcode': '#b200ff'},
+            {'name': 'seagreen', 'hexcode': '#00DD80'},
+            {'name': 'dark gray', 'hexcode': '#888888'},
+            {'name': 'black', 'hexcode': '#000000'}
+        ],
+        'enableTimeAxis': true,
+        'gravity': 0.0005,
+        'linkDistance': 1,
+        'linkStrength': 0.0,
+        'stationShapeRadius': 7.0
+    };
 
 
-
-
-    constructor(elem: string, url:string) {
+    constructor(elem: string, url:string, options?:Options) {
 
         // store the string containing the DOM element ID
         this.elem = elem;
@@ -84,7 +106,7 @@ class MetroChart {
         this.w = this.elemSelection.node().getBoundingClientRect().width;
         this.h = this.elemSelection.node().getBoundingClientRect().height;
 
-        this.applyDefaultOptions();
+        this.applyDefaultOptions(options);
 
         // load the data (internally defers to this.drawForceDirectedGraph() )
         this.loaddata();
@@ -94,52 +116,84 @@ class MetroChart {
 
 
 
-    applyDefaultOptions(): MetroChart {
-
-
-        // set static class property defaultOptions
-        let defaultOptions: DefaultOptions = {
-            'charge': 0,
-            'colors': [
-                {'name': 'red', 'hexcode': '#FF0000'},
-                {'name': 'olive', 'hexcode': '#008000'},
-                {'name': 'blue', 'hexcode': '#0080FF'},
-                {'name': 'orange', 'hexcode': '#FF8000'},
-                {'name': 'magenta', 'hexcode': '#FF0080'},
-                {'name': 'yellow', 'hexcode': '#FFee00'},
-                {'name': 'lime', 'hexcode': '#80DD00'},
-                {'name': 'purple', 'hexcode': '#b200ff'},
-                {'name': 'seagreen', 'hexcode': '#00DD80'},
-                {'name': 'dark gray', 'hexcode': '#888888'},
-                {'name': 'black', 'hexcode': '#000000'}
-            ],
-            'enableTimeAxis': true,
-            'gravity': 0.0005,
-            'linkDistance': 1,
-            'linkStrength': 0.0,
-            'stationShapeRadius': 7.0
-        };
-
+    applyDefaultOptions(options?:Options): MetroChart {
 
         // set the colors:
         let colors: string[];
         colors = [];
-        for (let color of defaultOptions.colors) {
-            colors.push(color.hexcode);
+        if (typeof options.colors === 'undefined') {
+            // use default colors
+            for (let color of MetroChart.defaultOptions.colors) {
+                colors.push(color.hexcode);
+            }
+        } else {
+            // use user-supplied colors
+            for (let color of options.colors) {
+                colors.push(color.hexcode);
+            }
         }
         this.colors = colors;
 
-        // set the force directed graph parameters
-        this.forceCharge = defaultOptions.charge;
-        this.forceGravity = defaultOptions.gravity;
-        this.forceLinkDistance = defaultOptions.linkDistance;
-        this.forceLinkStrength = defaultOptions.linkStrength;
+
+        // set the force directed graph parameter 'charge'
+        if (typeof options.charge === 'undefined') {
+            // use default
+            this.charge = MetroChart.defaultOptions.charge;
+        } else {
+            // use user supplied value
+            this.charge = options.charge;
+        }
+
+
+        // set the force directed graph parameter 'gravity'
+        if (typeof options.gravity === 'undefined') {
+            // use default
+            this.gravity = MetroChart.defaultOptions.gravity;
+        } else {
+            // use user supplied value
+            this.gravity = options.gravity;
+        }
+
+
+        // set the force directed graph parameter 'linkDistance'
+        if (typeof options.linkDistance === 'undefined') {
+            // use default
+            this.linkDistance = MetroChart.defaultOptions.linkDistance;
+        } else {
+            // use user supplied value
+            this.linkDistance = options.linkDistance;
+        }
+
+
+        // set the force directed graph parameter 'linkStrength'
+        if (typeof options.linkStrength === 'undefined') {
+            // use default
+            this.linkStrength = MetroChart.defaultOptions.linkStrength;
+        } else {
+            // use user supplied value
+            this.linkStrength = options.linkStrength;
+        }
+
 
         // define whether to enable the time axis
-        this.enableTimeAxis = defaultOptions.enableTimeAxis;
+        if (typeof options.enableTimeAxis === 'undefined') {
+            // use default
+            this.enableTimeAxis = MetroChart.defaultOptions.enableTimeAxis;
+        } else {
+            // use user supplied value
+            this.enableTimeAxis = options.enableTimeAxis;
+        }
+
 
         // set the radius of the station symbols
-        this.stationShapeRadius = defaultOptions.stationShapeRadius;
+        if (typeof options.stationShapeRadius === 'undefined') {
+            // use default
+            this.stationShapeRadius = MetroChart.defaultOptions.stationShapeRadius;
+        } else {
+            // use user supplied value
+            this.stationShapeRadius = options.stationShapeRadius;
+        }
+
 
         return this;
     }
@@ -429,10 +483,10 @@ class MetroChart {
             .links(this.links);
 
         // set the directed-graph force parameters:
-        force.charge(this.forceCharge);
-        force.gravity(this.forceGravity);
-        force.linkDistance(this.forceLinkDistance);
-        force.linkStrength(this.forceLinkStrength);
+        force.charge(this.charge);
+        force.gravity(this.gravity);
+        force.linkDistance(this.linkDistance);
+        force.linkStrength(this.linkStrength);
 
         let link = vis.selectAll('.link')
             .data(this.links)
@@ -565,35 +619,35 @@ class MetroChart {
     }
 
 
-    public set forceCharge(forceCharge: number) {
-        this._forceCharge = forceCharge;
+    public set charge(charge: number) {
+        this._charge = charge;
     }
-    public get forceCharge():number {
-        return this._forceCharge;
-    }
-
-
-    public set forceLinkDistance(forceLinkDistance: number) {
-        this._forceLinkDistance = forceLinkDistance;
-    }
-    public get forceLinkDistance():number {
-        return this._forceLinkDistance;
+    public get charge():number {
+        return this._charge;
     }
 
 
-    public set forceGravity(forceGravity: number) {
-        this._forceGravity = forceGravity;
+    public set linkDistance(linkDistance: number) {
+        this._linkDistance = linkDistance;
     }
-    public get forceGravity():number {
-        return this._forceGravity;
+    public get linkDistance():number {
+        return this._linkDistance;
     }
 
 
-    public set forceLinkStrength(forceLinkStrength: number) {
-        this._forceLinkStrength = forceLinkStrength;
+    public set gravity(gravity: number) {
+        this._gravity = gravity;
     }
-    public get forceLinkStrength():number {
-        return this._forceLinkStrength;
+    public get gravity():number {
+        return this._gravity;
+    }
+
+
+    public set linkStrength(linkStrength: number) {
+        this._linkStrength = linkStrength;
+    }
+    public get linkStrength():number {
+        return this._linkStrength;
     }
 
 
