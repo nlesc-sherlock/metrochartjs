@@ -22,11 +22,6 @@
             "line": "Nurse"
         },
         {
-            "source": 0,
-            "target": 0,
-            "line": "Doctor"
-        },
-        {
             "source": 2,
             "target": 3,
             "line": "Thompson"
@@ -132,16 +127,6 @@
             "line": "Fedoraman"
         },
         {
-            "source": 15,
-            "target": 15,
-            "line": "Blueman"
-        },
-        {
-            "source": 15,
-            "target": 15,
-            "line": "Redwoman"
-        },
-        {
             "source": 12,
             "target": 13,
             "line": "Snowy"
@@ -157,7 +142,7 @@
         {
             "time": 0,
             "name": "0",
-            "lines": ["Nurse", "Doctor"]
+            "lines": ["Nurse"]
         },
         {
             "time": 1,
@@ -232,7 +217,7 @@
         {
             "time": 15,
             "name": "15",
-            "lines": ["Tintin", "Beardman", "Fedoraman", "Blueman", "Redwoman", "Snowy"]
+            "lines": ["Tintin", "Beardman", "Fedoraman", "Snowy"]
         }
     ],
     "source": "The Adventures of Tintin - The Black Island - page 2",
