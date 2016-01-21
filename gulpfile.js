@@ -62,7 +62,8 @@ gulp.task('tsdoc', function() {
         .pipe(typedoc({
             module: 'commonjs',
             target: 'es5',
-            out: 'doc/',
+            out: 'tsdoc/',
+            includeDeclarations: true,
             name: packageinfo.name + ' v' + packageinfo.version
         }));
 });
