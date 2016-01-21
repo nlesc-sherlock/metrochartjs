@@ -8,6 +8,8 @@ var concatCss = require('gulp-concat-css');
 var watch = require('gulp-watch');
 var browsersync = require('browser-sync').create();
 var rimraf = require('rimraf');
+var typedoc = require("gulp-typedoc");
+var packageinfo = require('./package.json');
 
 // tasks
 // lint javascript and typescript
@@ -51,6 +53,21 @@ gulp.task('ts',
             .pipe(sourcemaps.write())
             .pipe(gulp.dest("./"));
     });
+
+
+// generate JSDoc style documentation
+gulp.task('tsdoc', function() {
+    return gulp
+        .src(['src/**/*.ts'])
+        .pipe(typedoc({
+            module: 'commonjs',
+            target: 'es5',
+            out: 'doc/',
+            name: packageinfo.name + ' v' + packageinfo.version
+        }));
+});
+
+
 
 
 //concatenate css files
