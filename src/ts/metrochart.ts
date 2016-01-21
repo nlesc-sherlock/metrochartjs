@@ -1,7 +1,9 @@
 
 
-// Station is basically a d3.layout.force.Node with added properties 'name',
-// and 'lines', and optional property 'nLines'.
+/**
+ * Station is basically a d3.layout.force.Node with added properties 'name',
+ * and 'lines', and optional property 'nLines'.
+ */
 interface Station extends d3.layout.force.Node {
     lines   : string[];
     name    : string;
@@ -10,16 +12,17 @@ interface Station extends d3.layout.force.Node {
 };
 
 
-// Connection is basically a d3.layout.force.Link of Station
-// objects, except that it adds the 'line' property
+/** Connection is basically a d3.layout.force.Link of Station
+ * objects, except that it adds the 'line' property
+ */
 interface Connection extends d3.layout.force.Link<Station> {
     line : string;
     uindex: number;
 }
 
-// MetroChartData combines Station and Connection, and adds the optional
-// properties 'source', 'stationlabel', and 'linelabel'.
-
+/** MetroChartData combines Station and Connection, and adds the optional
+ * properties 'source', 'stationlabel', and 'linelabel'.
+ */
 interface MetroChartData {
     linelabel?    : string;
     links         : Connection[];
@@ -28,6 +31,10 @@ interface MetroChartData {
     stationlabel? : string;
 }
 
+
+/**
+ * Options defines the options
+ */
 interface Options {
     colors?            : {name:string, hexcode:string}[];
     charge?            : number;
@@ -38,8 +45,9 @@ interface Options {
     stationShapeRadius?: number;
 }
 
-
-
+/**
+  This is the class MetroChart's tsdoc
+*/
 class MetroChart {
 
 
@@ -88,7 +96,14 @@ class MetroChart {
         'stationShapeRadius': 7.0
     };
 
-
+    /**
+     * Create a new MetroChart instance
+     * @param {string} elem The name of the DOM element in which you want to
+     *                      draw the MetroChart.
+     * @param {string} url The URL of the data file, which should be a JSON file
+     *                     formatted according to the (@link MetroChartData} interface.
+     * @param {Options} [options] Optional parameter containing the options.
+     */
     constructor(elem: string, url:string, options?:Options) {
 
         // store the string containing the DOM element ID
@@ -119,7 +134,10 @@ class MetroChart {
 
 
 
-
+    /**
+     * @param {Options} options User supplied options that override the default
+     *                          options from {@link MetroChart.defaultOptions}.
+     */
     applyDefaultOptions(options?:Options): MetroChart {
 
         // set the colors:
@@ -203,6 +221,11 @@ class MetroChart {
     }
 
 
+
+
+    /**
+     * Method to load the data.
+     */
     loaddata() {
         // load data from local file
 
@@ -219,7 +242,7 @@ class MetroChart {
             }
             if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
 
-                let data: MetroChartData = JSON.parse(xmlHttp.responseText);
+                let data: any = JSON.parse(xmlHttp.responseText);
 
                 // get the nodes and links from the parsed data
                 that.nodes = data.nodes;
@@ -255,6 +278,7 @@ class MetroChart {
                 that.calcUniqueLines();
                 // verify the data and add some properties:
                 that.verifyData();
+
                 // draw the force directed graph:
                 that.drawForceDirectedGraph();
             }
@@ -270,9 +294,17 @@ class MetroChart {
     }
 
 
-
-
-    calcStationShapeArc(fromy, r, topOrBottomStr): string {
+    /**
+     * Method that calculates the shape of the station symbol's top or bottom part.
+     *
+     * @param {number} fromy - The y-value of where the arc should start.
+     * @param {number} r - The radius of the arc.
+     * @param {string} topOrBottomString - whether the method is used to draw
+     *                                     the top part or the bottom part.
+     * @return {string} - String containing the SVG path 'd' data (for the part
+     * that describes the top or bottom arc).
+     */
+    calcStationShapeArc(fromy: number, topOrBottomStr: string): string {
 
         let iSection: number;
         let nSections: number;
@@ -287,16 +319,16 @@ class MetroChart {
         if (topOrBottomStr === 'top') {
             for (iSection = 0; iSection <= nSections; iSection += 1) {
                 angle = (nSections - iSection) / nSections * Math.PI;
-                dx = Math.cos(angle) * r;
-                dy = Math.sin(angle) * -r;
+                dx = Math.cos(angle) * this.stationShapeRadius;
+                dy = Math.sin(angle) * -this.stationShapeRadius;
                 outputStr += 'L ' + (dx) + ' ' + (fromy + dy) + ' ';
             }
             return outputStr;
         } else if (topOrBottomStr === 'bottom') {
             for (iSection = 0; iSection < nSections; iSection += 1) {
                 angle = (iSection) / nSections * Math.PI;
-                dx = Math.cos(angle) * r;
-                dy = Math.sin(angle) * r;
+                dx = Math.cos(angle) * this.stationShapeRadius;
+                dy = Math.sin(angle) * this.stationShapeRadius;
                 outputStr += 'L ' + (dx) + ' ' + (fromy + dy) + ' ';
                 }
             return outputStr;
@@ -308,6 +340,13 @@ class MetroChart {
 
 
 
+    /**
+     * Method that calculates the shape of the station symbol.
+     *
+     * @param {Station} node - The station for which to draw a symbol.
+     * @return {string} - String containing the SVG path 'd' data for the
+     * station symbol.
+     */
     calcStationShape(node: Station): string {
 
         // half the width of the entire station symbol
@@ -317,9 +356,9 @@ class MetroChart {
 
         let str: string = 'M ' + (-hw) + ' 0 ' +
                           'L ' + (-hw) + ' ' + ((node.nLines - 1) * -this.stationShapeRadius) + ' ' +
-                          this.calcStationShapeArc((node.nLines - 1) * -this.stationShapeRadius, this.stationShapeRadius, 'top') +
+                          this.calcStationShapeArc((node.nLines - 1) * -this.stationShapeRadius, 'top') +
                           'L ' + (+hw) + ' ' + ((node.nLines - 1) * this.stationShapeRadius) + ' ' +
-                          this.calcStationShapeArc((node.nLines - 1) * this.stationShapeRadius, this.stationShapeRadius, 'bottom') +
+                          this.calcStationShapeArc((node.nLines - 1) * this.stationShapeRadius, 'bottom') +
                           'L ' + (-hw) + ' ' + ((node.nLines - 1) * this.stationShapeRadius) + ' ' +
                           'Z';
          return str;
@@ -328,6 +367,14 @@ class MetroChart {
 
 
 
+    /**
+     * Method that calculates the translation of the station symbol, while
+     * observing the bounding box set by the dimensions of the SVG area and the
+     * dimension of the station symbols.
+     *
+     * @param {Station} node - The station that needs to be translated.
+     * @return {string} - String containing the translate offsets.
+     */
     calcStationTranslate(node:Station): string {
 
         // half the width of the entire station symbol
@@ -492,6 +539,7 @@ class MetroChart {
         force.linkDistance(this.linkDistance);
         force.linkStrength(this.linkStrength);
 
+
         let link = vis.selectAll('.link')
             .data(this.links)
             .enter().append('path')
@@ -509,7 +557,6 @@ class MetroChart {
                 .attr('d', function(d:Station) {return that.calcStationShape(d); })
                 .on('click', function(d:Station) {console.log(that.stationlabel + ' ' + d.index + ': ' + d.name); })
                 .call(force.drag);
-
 
         force.on('tick', function(e) {
 
@@ -579,6 +626,7 @@ class MetroChart {
 
 
     verifyData(): MetroChart {
+
 
         // set the initial position on all nodes:
         for (let node of this.nodes) {
