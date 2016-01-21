@@ -34,6 +34,9 @@ nvm --version
 # specified in package.json:
 npm install
 
+# need bower as well
+npm install bower
+
 # during the previous step, the build automation tool 'gulp' was installed locally.
 # We also need to install it globally however, using
 npm install --global gulp
