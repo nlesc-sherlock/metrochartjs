@@ -28,30 +28,44 @@ interface MetroChartData {
     stationlabel? : string;
 }
 
+interface DefaultOptions {
+    colors            : {name:string, hexcode:string}[];
+    charge            : number;
+    enableTimeAxis    : boolean;
+    gravity           : number;
+    linkDistance      : number;
+    linkStrength      : number;
+    stationShapeRadius: number;
+}
+
+
 
 class MetroChart {
 
-    public datasource         : string;
-    public elem               : string;
-    public elemSelection      : d3.Selection<any>;
-    public h                  : number;
-    public linelabel          : string;
-    public links              : Connection[];
-    public nodes              : Station[];
-    public stationlabel       : string;
-    public stationShapeRadius : number;
-    public timeValueLeft      : number;
-    public timeValueRight     : number;
-    public ulinks             : string[];
-    public url                : string;
-    public w                  : number;
+//    public static defaultOptions: DefaultOptions;
+    public datasource           : string;
+    public elem                 : string;
+    public elemSelection        : d3.Selection<any>;
+    public h                    : number;
+    public linelabel            : string;
+    public links                : Connection[];
+    public nodes                : Station[];
+    public stationlabel         : string;
+    public stationShapeRadius   : number;
+    public timeValueLeft        : number;
+    public timeValueRight       : number;
+    public ulinks               : string[];
+    public url                  : string;
+    public w                    : number;
+    private _colors             : string[];
+    private _enableTimeAxis     : boolean;
+    private _forceCharge        : number;
+    private _forceLinkDistance  : number;
+    private _forceGravity       : number;
+    private _forceLinkStrength  : number;
 
-    private _forceCharge      : number;
-    private _forceLinkDistance: number;
-    private _forceGravity     : number;
-    private _forceLinkStrength: number;
 
-    private _colors           : string[];
+
 
     constructor(elem: string, url:string) {
 
@@ -60,8 +74,6 @@ class MetroChart {
 
         // store the url to the data that was provided by the user
         this.url = url;
-
-
 
         // store the D3 selection of the element we want to draw in
         this.elemSelection = d3.select(this.elem);
@@ -72,20 +84,65 @@ class MetroChart {
         this.w = this.elemSelection.node().getBoundingClientRect().width;
         this.h = this.elemSelection.node().getBoundingClientRect().height;
 
-        // set the radius of the station symbols
-        this.stationShapeRadius = 5;
-
-        // set the force directed graph parameters
-        this.forceCharge = -30;
-        this.forceGravity = 0.0005;
-        this.forceLinkDistance = 0;
-        this.forceLinkStrength = 0.1;
+        this.applyDefaultOptions();
 
         // load the data (internally defers to this.drawForceDirectedGraph() )
         this.loaddata();
 
     } // end method constructor()
 
+
+
+
+    applyDefaultOptions(): MetroChart {
+
+
+        // set static class property defaultOptions
+        let defaultOptions: DefaultOptions = {
+            'charge': 0,
+            'colors': [
+                {'name': 'red', 'hexcode': '#FF0000'},
+                {'name': 'olive', 'hexcode': '#008000'},
+                {'name': 'blue', 'hexcode': '#0080FF'},
+                {'name': 'orange', 'hexcode': '#FF8000'},
+                {'name': 'magenta', 'hexcode': '#FF0080'},
+                {'name': 'yellow', 'hexcode': '#FFee00'},
+                {'name': 'lime', 'hexcode': '#80DD00'},
+                {'name': 'purple', 'hexcode': '#b200ff'},
+                {'name': 'seagreen', 'hexcode': '#00DD80'},
+                {'name': 'dark gray', 'hexcode': '#888888'},
+                {'name': 'black', 'hexcode': '#000000'}
+            ],
+            'enableTimeAxis': true,
+            'gravity': 0.0005,
+            'linkDistance': 1,
+            'linkStrength': 0.0,
+            'stationShapeRadius': 7.0
+        };
+
+
+        // set the colors:
+        let colors: string[];
+        colors = [];
+        for (let color of defaultOptions.colors) {
+            colors.push(color.hexcode);
+        }
+        this.colors = colors;
+
+        // set the force directed graph parameters
+        this.forceCharge = defaultOptions.charge;
+        this.forceGravity = defaultOptions.gravity;
+        this.forceLinkDistance = defaultOptions.linkDistance;
+        this.forceLinkStrength = defaultOptions.linkStrength;
+
+        // define whether to enable the time axis
+        this.enableTimeAxis = defaultOptions.enableTimeAxis;
+
+        // set the radius of the station symbols
+        this.stationShapeRadius = defaultOptions.stationShapeRadius;
+
+        return this;
+    }
 
 
     loaddata() {
@@ -156,6 +213,7 @@ class MetroChart {
 
 
 
+
     calcStationShapeArc(fromy, r, topOrBottomStr): string {
 
         let iSection: number;
@@ -192,8 +250,7 @@ class MetroChart {
 
 
 
-
-     calcStationShape(node: Station): string {
+    calcStationShape(node: Station): string {
 
         // half the width of the entire station symbol
         let hw: number = this.stationShapeRadius;
@@ -208,7 +265,7 @@ class MetroChart {
                           'L ' + (-hw) + ' ' + ((node.nLines - 1) * this.stationShapeRadius) + ' ' +
                           'Z';
          return str;
-     } // end method calcStationShape()
+    } // end method calcStationShape()
 
 
 
@@ -220,9 +277,9 @@ class MetroChart {
         // half the height of the entire station symbol
         let hh: number = node.nLines * this.stationShapeRadius;
 
-        // if nodes have time labels, set x-position
-        if (typeof node.time === 'number') {
-            // calculate the fraction 
+        // if nodes have time labels and time axis is enabled, set x-position
+        if (typeof node.time === 'number' && this.enableTimeAxis === true) {
+            // calculate the fraction
             let f: number = (node.time - this.timeValueLeft) / (this.timeValueRight - this.timeValueLeft);
 
             // don't use the whole width, only 90%, leaving 5% on the left and right
@@ -253,6 +310,7 @@ class MetroChart {
         return 'translate(' + node.x + ',' + node.y + ')';
 
     }
+
 
 
 
@@ -323,6 +381,7 @@ class MetroChart {
         return stubOffset;
 
     }
+
 
 
 
@@ -416,6 +475,7 @@ class MetroChart {
 
 
 
+
     public getColor(uindex:number): string {
 
         let str:string;
@@ -430,6 +490,7 @@ class MetroChart {
         }
         return str;
     }
+
 
 
 
@@ -486,11 +547,21 @@ class MetroChart {
     }
 
 
+
+
     public set colors(colors: string[]) {
         this._colors = colors;
     }
     public get colors():string[] {
         return this._colors;
+    }
+
+
+    public set enableTimeAxis(enableTimeAxis: boolean) {
+        this._enableTimeAxis = enableTimeAxis;
+    }
+    public get enableTimeAxis():boolean {
+        return this._enableTimeAxis;
     }
 
 
