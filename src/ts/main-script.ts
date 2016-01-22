@@ -44,7 +44,7 @@ function doit(data: any) {
     spiral.data = data;
     spiral.render();
 
-    let showDataset: string = 'tintin';
+    let showDataset: string = (Math.random() < 0.5) ? 'amsterdam' : 'tintin';
 
     switch (showDataset) {
         case 'amsterdam': {
