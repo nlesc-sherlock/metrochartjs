@@ -13,20 +13,20 @@ interface Station extends d3.layout.force.Node {
 };
 
 
-/** Connection is basically a d3.layout.force.Link of Station
+/** MetroLine is basically a d3.layout.force.Link of Station
  * objects, except that it adds the 'line' property
  */
-interface Connection extends d3.layout.force.Link<Station> {
+interface MetroLine extends d3.layout.force.Link<Station> {
     line : string;
     uindex: number;
 }
 
-/** MetroChartData combines Station and Connection, and adds the optional
+/** MetroChartData combines Station and MetroLine, and adds the optional
  * properties 'source', 'stationlabel', and 'linelabel'.
  */
 interface MetroChartData {
     linelabel?    : string;
-    links         : Connection[];
+    links         : MetroLine[];
     nodes         : Station[];
     source?       : string;
     stationlabel? : string;
@@ -80,7 +80,7 @@ class MetroChart {
     public datasource: string;
 
     /**
-     * Identifier of the DOM element such as <code>'#metrochart'</code>, in
+     * Identifier of the DOM element such as <code>#metrochart</code>, in
      * which to draw the MetroChart.
      */
     public elem: string;
@@ -93,7 +93,7 @@ class MetroChart {
     /**
      * The height of the DOM element containing the MetroChart.
      */
-    public h: number;
+    private h: number;
 
     /**
      * When the data represents different entities than metrolines and stations
@@ -109,12 +109,12 @@ class MetroChart {
     /**
      *
      */
-    public links: Connection[];
+    private links: MetroLine[];
 
     /**
      *
      */
-    public nodes: Station[];
+    private nodes: Station[];
 
     /**
      * When the data represents different entities than metrolines and stations
@@ -156,7 +156,7 @@ class MetroChart {
     /**
      * The width of the DOM element containing the MetroChart.
      */
-    public w: number;
+    private w: number;
 
     /**
      *
@@ -345,10 +345,10 @@ class MetroChart {
      * Method to calculate the position of the lines connecting the stations.
      * The method takes into account how many lines there are at each station,
      * so the vertical offset can be calculated by <code>this.calcStubOffset()</code>.
-     * @param {Connection} link - The link between two Stations.
+     * @param {MetroLine} link - The link between two Stations.
      * @return {string} - The SVG path string describing the position of the line.
      */
-    private calcLinkShape(link: Connection): string {
+    private calcLinkShape(link: MetroLine): string {
         // determine the coordinates of the given link
 
         let str:string = '';
@@ -524,13 +524,13 @@ class MetroChart {
     /**
      * Method to calculate the vertical offset that indicates that there is more
      * than one line at a station.
-     * @param {Connection} link - The link object connecting two stations.
+     * @param {MetroLine} link - The link object connecting two stations.
      * @param {string} sourceOrTargetString - The stub's offset can be different
      * at the source than at the target nodes, this parameter indicates which we
      * are currently calculating.
      * @return {number} - The vertical offset in pixels
      */
-    private calcStubOffset(link: Connection, sourceOrTargetStr:string): number {
+    private calcStubOffset(link: MetroLine, sourceOrTargetStr:string): number {
         // a node can have multiple lines coming from it. The order is
         // determined by the current method
         let stubIndex: number;
@@ -631,10 +631,10 @@ class MetroChart {
         let link = vis.selectAll('.link')
             .data(this.links)
             .enter().append('path')
-                .attr('class', function(d:Connection) {return 'link' + ' ' + 'line' + d.uindex; } )
-                .attr('d', function(d:Connection) {return that.calcLinkShape(d); })
-                .style('stroke', function(d:Connection) {return that.getColor(d.uindex); })
-                .on('click', function(d:Connection) {console.log(that.linelabel + ' ' + d.line); })
+                .attr('class', function(d:MetroLine) {return 'link' + ' ' + 'line' + d.uindex; } )
+                .attr('d', function(d:MetroLine) {return that.calcLinkShape(d); })
+                .style('stroke', function(d:MetroLine) {return that.getColor(d.uindex); })
+                .on('click', function(d:MetroLine) {console.log(that.linelabel + ' ' + d.line); })
                 .on('mouseover', function() {
                     // somehow the 'this' object does not refer to the instance
                     // of MetroChart here, but to the event that generated the
@@ -666,7 +666,7 @@ class MetroChart {
 
             // for each link of this.links, recalculate the path connecting the stations (since
             // these were just changed)
-            link.attr('d', function(d:Connection) {return that.calcLinkShape(d); });
+            link.attr('d', function(d:MetroLine) {return that.calcLinkShape(d); });
         });
 
 
