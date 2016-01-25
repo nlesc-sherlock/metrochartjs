@@ -96,7 +96,7 @@ class MetroChart {
 
     // set static class property defaultOptions (for some reason, I can't have
     // separate declaration and initialization)
-    public static defaultOptions: Options = {
+    private static defaultOptions: Options = {
         'charge': 0,
         'colors': [
             {'name': 'red', 'hexcode': '#FF0000'},
@@ -157,11 +157,12 @@ class MetroChart {
 
 
 
+
     /**
      * @param {Options} options User supplied options that override the default
      *                          options from {@link MetroChart.defaultOptions}.
      */
-    applyDefaultOptions(options?:Options): MetroChart {
+    public applyDefaultOptions(options?:Options): MetroChart {
 
         // set the colors:
         let colors: string[];
@@ -241,6 +242,341 @@ class MetroChart {
 
 
         return this;
+    } // end method applyDefaultOptions()
+
+
+
+
+    private calcLinkShape(link: Connection): string {
+        // determine the coordinates of the given link
+
+        let str:string = '';
+
+        // draw straight lines between nodes
+
+        // The first time this method gets called, source and target are
+        // simply integer numbers, not objects with .x and .y properties.
+        // Therefore you need these two if-statements to make sure you don't
+        // generate any errors:
+        if (typeof link.source === 'object') {
+
+            // x-from
+            let xf: number = link.source.x;
+            // y-from
+            let yf: number = link.source.y + this.calcStubOffset(link, 'source');
+
+            str += 'M' + xf + ',' + yf + ' ';
+
+        } else {
+            // starting point of a temporary line (only displayed in the very first frame)
+            str += 'M0,0 ';
+        }
+        if (typeof(link.target) === 'object') {
+
+            // x-to
+            let xt: number = link.target.x;
+            // y-to
+            let yt: number = link.target.y + this.calcStubOffset(link, 'target');
+
+            str += 'L' + xt + ',' + yt;
+
+        } else {
+            // ending point of a temporary line (only displayed in the very first frame)
+            str += 'L10,10';
+        }
+
+        return str;
+
+    } // end method calcLinkShape()
+
+
+
+
+    /**
+     * Method that calculates the shape of the station symbol's top or bottom part.
+     *
+     * @param {number} fromy - The y-value of where the arc should start.
+     * @param {number} r - The radius of the arc.
+     * @param {string} topOrBottomString - whether the method is used to draw
+     *                                     the top part or the bottom part.
+     * @return {string} - String containing the SVG path 'd' data (for the part
+     * that describes the top or bottom arc).
+     */
+    private calcStationShapeArc(fromy: number, topOrBottomStr: string): string {
+
+        let iSection: number;
+        let nSections: number;
+        let outputStr;
+        let angle: number;
+        let dx: number;
+        let dy: number;
+
+        nSections = 8;
+        outputStr = '';
+
+        if (topOrBottomStr === 'top') {
+            for (iSection = 0; iSection <= nSections; iSection += 1) {
+                angle = (nSections - iSection) / nSections * Math.PI;
+                dx = Math.cos(angle) * this.stationShapeRadius;
+                dy = Math.sin(angle) * -this.stationShapeRadius;
+                outputStr += 'L ' + (dx) + ' ' + (fromy + dy) + ' ';
+            }
+            return outputStr;
+        } else if (topOrBottomStr === 'bottom') {
+            for (iSection = 0; iSection < nSections; iSection += 1) {
+                angle = (iSection) / nSections * Math.PI;
+                dx = Math.cos(angle) * this.stationShapeRadius;
+                dy = Math.sin(angle) * this.stationShapeRadius;
+                outputStr += 'L ' + (dx) + ' ' + (fromy + dy) + ' ';
+                }
+            return outputStr;
+        } else {
+            throw new MetroChartError(' in .calcStationShapeArc(): \'Fourth argument should be either \'top\' or \'bottom\'.\'');
+        }
+    } // end method calcStationShapeArc
+
+
+
+
+    /**
+     * Method that calculates the shape of the station symbol.
+     *
+     * @param {Station} node - The station for which to draw a symbol.
+     * @return {string} - String containing the SVG path 'd' data for the
+     * station symbol.
+     */
+    private calcStationShape(node: Station): string {
+
+        // half the width of the entire station symbol
+        let hw: number = this.stationShapeRadius;
+        // half the height of the entire station symbol
+        let hh: number = node.nLines * this.stationShapeRadius;
+
+        let str: string = 'M ' + (-hw) + ' 0 ' +
+                          'L ' + (-hw) + ' ' + ((node.nLines - 1) * -this.stationShapeRadius) + ' ' +
+                          this.calcStationShapeArc((node.nLines - 1) * -this.stationShapeRadius, 'top') +
+                          'L ' + (+hw) + ' ' + ((node.nLines - 1) * this.stationShapeRadius) + ' ' +
+                          this.calcStationShapeArc((node.nLines - 1) * this.stationShapeRadius, 'bottom') +
+                          'L ' + (-hw) + ' ' + ((node.nLines - 1) * this.stationShapeRadius) + ' ' +
+                          'Z';
+         return str;
+    } // end method calcStationShape()
+
+
+
+
+    /**
+     * Method that calculates the translation of the station symbol, while
+     * observing the bounding box set by the dimensions of the SVG area and the
+     * dimension of the station symbols.
+     *
+     * @param {Station} node - The station that needs to be translated.
+     * @return {string} - String containing the translate offsets.
+     */
+    private calcStationTranslate(node:Station): string {
+
+        // half the width of the entire station symbol
+        let hw: number = this.stationShapeRadius;
+        // half the height of the entire station symbol
+        let hh: number = node.nLines * this.stationShapeRadius;
+
+        // if nodes have time labels and time axis is enabled, set x-position
+        if (typeof node.time === 'number' && this.enableTimeAxis === true) {
+            // calculate the fraction
+            let f: number = (node.time - this.timeValueLeft) / (this.timeValueRight - this.timeValueLeft);
+
+            // don't use the whole width, only 90%, leaving 5% on the left and right
+            node.x = 0.05 * this.w + f * 0.90 * this.w;
+        }
+
+
+        // observe the bounding box edge on the right
+        if (node.x > this.w - hw) {
+            node.x = this.w - hw;
+        }
+
+        // observe the bounding box edge on the left
+        if (node.x < 0 + hw) {
+            node.x = 0 + hw;
+        }
+
+        // observe the bounding box edge on the top
+        if (node.y > this.h - hh) {
+            node.y = this.h - hh;
+        }
+
+        // observe the bounding box edge on the bottom
+        if (node.y < 0 + hh) {
+            node.y = 0 + hh;
+        }
+
+        return 'translate(' + node.x + ',' + node.y + ')';
+
+    }
+
+
+
+
+    private calcStubOffset(link, sourceOrTargetStr:string): number {
+        // a node can have multiple lines coming from it. The order is
+        // determined by the current method
+        let stubIndex: number;
+        let stubOffset: number;
+        let nLines: number;
+
+        if (sourceOrTargetStr === 'source') {
+            let linesAtSource = this.nodes[link.source.index].lines;
+            nLines = linesAtSource.length;
+            stubIndex = linesAtSource.indexOf(link.line);
+        } else if (sourceOrTargetStr === 'target') {
+            let linesAtTarget = this.nodes[link.target.index].lines;
+            nLines = linesAtTarget.length;
+            stubIndex = linesAtTarget.indexOf(link.line);
+        } else {
+            throw new MetroChartError(' in .calcStubOffset(): \'Input argument should be \'source\' or \'target\' .\'');
+        }
+        stubOffset = -1 * (nLines * this.stationShapeRadius - this.stationShapeRadius) + (stubIndex * 2 * this.stationShapeRadius);
+        return stubOffset;
+
+    }
+
+
+
+
+    private calcUniqueLines(): void {
+        // initialize the array that is going to hold the unique names of lines
+        this.ulinks = [];
+        // iterate over the links, whenever you see a previously unseen line name,
+        // add it to the list of strings in this.ulinks
+        for (let link of this.links) {
+            if (this.ulinks.indexOf(link.line) === -1 ) {
+                this.ulinks.push(link.line);
+            }
+        }
+        // sort the list of unique line names
+        this.ulinks.sort();
+        // assign the index of each link's line name to property .uindex
+        for (let link of this.links) {
+            link.uindex = this.ulinks.indexOf(link.line);
+        }
+    }
+
+
+
+
+    public drawForceDirectedGraph(): MetroChart {
+
+        // define onMouseOut as a local function to the drawForceDirectedGraph() method
+        let onMouseOut = function(eventsource) {
+            // Here, 'eventsource' refers to the line segment (path)
+            // that generated the event, not the instance of MetroChart!
+            let uindex: number = d3.select(eventsource).datum().uindex;
+            let classname = '.link.line' + uindex;
+            d3.selectAll(classname).style('stroke-width', '3px');
+        };
+
+        // define onMouseOver as a local function to the drawForceDirectedGraph() method
+        let onMouseOver = function(eventsource) {
+            // Here, 'eventsource' refers to the line segment (path)
+            // that generated the event, not the instance of MetroChart!
+            let uindex: number = d3.select(eventsource).datum().uindex;
+            let classname = '.link.line' + uindex;
+            d3.selectAll(classname).style('stroke-width', '5px');
+        };
+
+
+        // capture the 'this' object:
+        let that = this;
+
+        // if an metrochart-svg element exists, clear its contents:
+        d3.select('#metrochart-svg').remove();
+
+        // select the DOM element to draw in, and set its identifier, as well
+        // as its width and height
+        let vis = this.elemSelection.append('svg')
+            .attr('id', 'metrochart-svg')
+            .attr('width', this.w)
+            .attr('height', this.h);
+
+        // initialize the force layout, set its width and height, then update it with
+        // the nodes and links arrays (which initially are empty),
+        let force = d3.layout.force()
+            .size([this.w, this.h])
+            .nodes(this.nodes)
+            .links(this.links);
+
+        // set the directed-graph force parameters:
+        force.charge(this.charge);
+        force.gravity(this.gravity);
+        force.linkDistance(this.linkDistance);
+        force.linkStrength(this.linkStrength);
+
+        let link = vis.selectAll('.link')
+            .data(this.links)
+            .enter().append('path')
+                .attr('class', function(d:Connection) {return 'link' + ' ' + 'line' + d.uindex; } )
+                .attr('d', function(d:Connection) {return that.calcLinkShape(d); })
+                .style('stroke', function(d:Connection) {return that.getColor(d.uindex); })
+                .on('click', function(d:Connection) {console.log(that.linelabel + ' ' + d.line); })
+                .on('mouseover', function() {
+                    // somehow the 'this' object does not refer to the instance
+                    // of MetroChart here, but to the event that generated the
+                    // mouseover event, in this case the line segment.
+                    let eventsource = this;
+                    onMouseOver(eventsource); } )
+                .on('mouseout', function() {
+                    // somehow the 'this' object does not refer to the instance
+                    // of MetroChart here, but to the event that generated the
+                    // mouseout event, in this case the line segment.
+                    let eventsource = this;
+                    onMouseOut(eventsource);
+                });
+
+
+        let node = vis.selectAll('.node')
+            .data(this.nodes)
+            .enter().append('path')
+                .attr('class', 'node')
+                .attr('d', function(d:Station) {return that.calcStationShape(d); })
+                .on('click', function(d:Station) {console.log(that.stationlabel + ' ' + d.index + ': ' + d.name); })
+                .call(force.drag);
+
+        force.on('tick', function(e) {
+
+            // this is actually a loop in which the force-directing algorithm adjusts
+            // the values of node.x and node.y for all node of this.nodes.
+            node.attr('transform', function(d:Station) {return that.calcStationTranslate(d); });
+
+            // for each link of this.links, recalculate the path connecting the stations (since
+            // these were just changed)
+            link.attr('d', function(d:Connection) {return that.calcLinkShape(d); });
+        });
+
+
+        // Restart the layout.
+        force.start();
+
+        return this;
+
+
+    } // end method drawForceDirectedGraph()
+
+
+
+
+    public getColor(uindex:number): string {
+
+        let str:string;
+
+        if (typeof this.colors === 'undefined' || this.colors.length === 0) {
+            // in case there are no predefined colors, set all colors to 50% gray
+            str = '#808080';
+        } else {
+            let nColors:number = this.colors.length;
+            // use the modulo-nColors of the uindex value as index into the color table
+            str = this.colors[uindex % nColors];
+        }
+        return str;
     }
 
 
@@ -249,7 +585,7 @@ class MetroChart {
     /**
      * Method to load the data.
      */
-    loaddata() {
+    private loaddata() {
         // load data from local file
 
         // capture the 'this' object from the current context
@@ -314,341 +650,12 @@ class MetroChart {
         xmlHttp.send(null);
 
 
-    }
+    } // end method loaddata()
 
 
 
 
-    /**
-     * Method that calculates the shape of the station symbol's top or bottom part.
-     *
-     * @param {number} fromy - The y-value of where the arc should start.
-     * @param {number} r - The radius of the arc.
-     * @param {string} topOrBottomString - whether the method is used to draw
-     *                                     the top part or the bottom part.
-     * @return {string} - String containing the SVG path 'd' data (for the part
-     * that describes the top or bottom arc).
-     */
-    calcStationShapeArc(fromy: number, topOrBottomStr: string): string {
-
-        let iSection: number;
-        let nSections: number;
-        let outputStr;
-        let angle: number;
-        let dx: number;
-        let dy: number;
-
-        nSections = 8;
-        outputStr = '';
-
-        if (topOrBottomStr === 'top') {
-            for (iSection = 0; iSection <= nSections; iSection += 1) {
-                angle = (nSections - iSection) / nSections * Math.PI;
-                dx = Math.cos(angle) * this.stationShapeRadius;
-                dy = Math.sin(angle) * -this.stationShapeRadius;
-                outputStr += 'L ' + (dx) + ' ' + (fromy + dy) + ' ';
-            }
-            return outputStr;
-        } else if (topOrBottomStr === 'bottom') {
-            for (iSection = 0; iSection < nSections; iSection += 1) {
-                angle = (iSection) / nSections * Math.PI;
-                dx = Math.cos(angle) * this.stationShapeRadius;
-                dy = Math.sin(angle) * this.stationShapeRadius;
-                outputStr += 'L ' + (dx) + ' ' + (fromy + dy) + ' ';
-                }
-            return outputStr;
-        } else {
-            throw new MetroChartError(' in .calcStationShapeArc(): \'Fourth argument should be either \'top\' or \'bottom\'.\'');
-        }
-    } // end method calcStationShapeArc
-
-
-
-
-    /**
-     * Method that calculates the shape of the station symbol.
-     *
-     * @param {Station} node - The station for which to draw a symbol.
-     * @return {string} - String containing the SVG path 'd' data for the
-     * station symbol.
-     */
-    calcStationShape(node: Station): string {
-
-        // half the width of the entire station symbol
-        let hw: number = this.stationShapeRadius;
-        // half the height of the entire station symbol
-        let hh: number = node.nLines * this.stationShapeRadius;
-
-        let str: string = 'M ' + (-hw) + ' 0 ' +
-                          'L ' + (-hw) + ' ' + ((node.nLines - 1) * -this.stationShapeRadius) + ' ' +
-                          this.calcStationShapeArc((node.nLines - 1) * -this.stationShapeRadius, 'top') +
-                          'L ' + (+hw) + ' ' + ((node.nLines - 1) * this.stationShapeRadius) + ' ' +
-                          this.calcStationShapeArc((node.nLines - 1) * this.stationShapeRadius, 'bottom') +
-                          'L ' + (-hw) + ' ' + ((node.nLines - 1) * this.stationShapeRadius) + ' ' +
-                          'Z';
-         return str;
-    } // end method calcStationShape()
-
-
-
-
-    /**
-     * Method that calculates the translation of the station symbol, while
-     * observing the bounding box set by the dimensions of the SVG area and the
-     * dimension of the station symbols.
-     *
-     * @param {Station} node - The station that needs to be translated.
-     * @return {string} - String containing the translate offsets.
-     */
-    calcStationTranslate(node:Station): string {
-
-        // half the width of the entire station symbol
-        let hw: number = this.stationShapeRadius;
-        // half the height of the entire station symbol
-        let hh: number = node.nLines * this.stationShapeRadius;
-
-        // if nodes have time labels and time axis is enabled, set x-position
-        if (typeof node.time === 'number' && this.enableTimeAxis === true) {
-            // calculate the fraction
-            let f: number = (node.time - this.timeValueLeft) / (this.timeValueRight - this.timeValueLeft);
-
-            // don't use the whole width, only 90%, leaving 5% on the left and right
-            node.x = 0.05 * this.w + f * 0.90 * this.w;
-        }
-
-
-        // observe the bounding box edge on the right
-        if (node.x > this.w - hw) {
-            node.x = this.w - hw;
-        }
-
-        // observe the bounding box edge on the left
-        if (node.x < 0 + hw) {
-            node.x = 0 + hw;
-        }
-
-        // observe the bounding box edge on the top
-        if (node.y > this.h - hh) {
-            node.y = this.h - hh;
-        }
-
-        // observe the bounding box edge on the bottom
-        if (node.y < 0 + hh) {
-            node.y = 0 + hh;
-        }
-
-        return 'translate(' + node.x + ',' + node.y + ')';
-
-    }
-
-
-
-
-    calcLinkShape(link: Connection): string {
-        // determine the coordinates of the given link
-
-        let str:string = '';
-
-        // draw straight lines between nodes
-
-        // The first time this method gets called, source and target are
-        // simply integer numbers, not objects with .x and .y properties.
-        // Therefore you need these two if-statements to make sure you don't
-        // generate any errors:
-        if (typeof link.source === 'object') {
-
-            // x-from
-            let xf: number = link.source.x;
-            // y-from
-            let yf: number = link.source.y + this.calcStubOffset(link, 'source');
-
-            str += 'M' + xf + ',' + yf + ' ';
-
-        } else {
-            // starting point of a temporary line (only displayed in the very first frame)
-            str += 'M0,0 ';
-        }
-        if (typeof(link.target) === 'object') {
-
-            // x-to
-            let xt: number = link.target.x;
-            // y-to
-            let yt: number = link.target.y + this.calcStubOffset(link, 'target');
-
-            str += 'L' + xt + ',' + yt;
-
-        } else {
-            // ending point of a temporary line (only displayed in the very first frame)
-            str += 'L10,10';
-        }
-
-        return str;
-
-    } // end method calcLinkShape()
-
-
-
-
-    calcStubOffset(link, sourceOrTargetStr:string): number {
-        // a node can have multiple lines coming from it. The order is
-        // determined by the current method
-        let stubIndex: number;
-        let stubOffset: number;
-        let nLines: number;
-
-        if (sourceOrTargetStr === 'source') {
-            let linesAtSource = this.nodes[link.source.index].lines;
-            nLines = linesAtSource.length;
-            stubIndex = linesAtSource.indexOf(link.line);
-        } else if (sourceOrTargetStr === 'target') {
-            let linesAtTarget = this.nodes[link.target.index].lines;
-            nLines = linesAtTarget.length;
-            stubIndex = linesAtTarget.indexOf(link.line);
-        } else {
-            throw new MetroChartError(' in .calcStubOffset(): \'Input argument should be \'source\' or \'target\' .\'');
-        }
-        stubOffset = -1 * (nLines * this.stationShapeRadius - this.stationShapeRadius) + (stubIndex * 2 * this.stationShapeRadius);
-        return stubOffset;
-
-    }
-
-
-
-
-    calcUniqueLines(): void {
-        // initialize the array that is going to hold the unique names of lines
-        this.ulinks = [];
-        // iterate over the links, whenever you see a previously unseen line name,
-        // add it to the list of strings in this.ulinks
-        for (let link of this.links) {
-            if (this.ulinks.indexOf(link.line) === -1 ) {
-                this.ulinks.push(link.line);
-            }
-        }
-        // sort the list of unique line names
-        this.ulinks.sort();
-        // assign the index of each link's line name to property .uindex
-        for (let link of this.links) {
-            link.uindex = this.ulinks.indexOf(link.line);
-        }
-    }
-
-
-
-
-    drawForceDirectedGraph(): MetroChart {
-
-        // capture the 'this' object:
-        let that = this;
-
-        // if an metrochart-svg element exists, clear its contents:
-        d3.select('#metrochart-svg').remove();
-
-        // select the DOM element to draw in, and set its identifier, as well
-        // as its width and height
-        let vis = this.elemSelection.append('svg')
-            .attr('id', 'metrochart-svg')
-            .attr('width', this.w)
-            .attr('height', this.h);
-
-        // initialize the force layout, set its width and height, then update it with
-        // the nodes and links arrays (which initially are empty),
-        let force = d3.layout.force()
-            .size([this.w, this.h])
-            .nodes(this.nodes)
-            .links(this.links);
-
-        // set the directed-graph force parameters:
-        force.charge(this.charge);
-        force.gravity(this.gravity);
-        force.linkDistance(this.linkDistance);
-        force.linkStrength(this.linkStrength);
-
-
-        let link = vis.selectAll('.link')
-            .data(this.links)
-            .enter().append('path')
-                .attr('class', function(d:Connection) {return 'link' + ' ' + 'line' + d.uindex; } )
-                .attr('d', function(d:Connection) {return that.calcLinkShape(d); })
-                .style('stroke', function(d:Connection) {return that.getColor(d.uindex); })
-                .on('click', function(d:Connection) {console.log(that.linelabel + ' ' + d.line); })
-                .on('mouseover', function() {that.onMouseOver(this); } )
-                .on('mouseout', function() {that.onMouseOut(this); } );
-
-        let node = vis.selectAll('.node')
-            .data(this.nodes)
-            .enter().append('path')
-                .attr('class', 'node')
-                .attr('d', function(d:Station) {return that.calcStationShape(d); })
-                .on('click', function(d:Station) {console.log(that.stationlabel + ' ' + d.index + ': ' + d.name); })
-                .call(force.drag);
-
-        force.on('tick', function(e) {
-
-            // this is actually a loop in which the force-directing algorithm adjusts
-            // the values of node.x and node.y for all node of this.nodes.
-            node.attr('transform', function(d:Station) {return that.calcStationTranslate(d); });
-
-            // for each link of this.links, recalculate the path connecting the stations (since
-            // these were just changed)
-            link.attr('d', function(d:Connection) {return that.calcLinkShape(d); });
-        });
-
-
-        // Restart the layout.
-        force.start();
-
-        return this;
-
-
-    } // end method drawForceDirectedGraph()
-
-
-
-
-    public getColor(uindex:number): string {
-
-        let str:string;
-
-        if (typeof this.colors === 'undefined' || this.colors.length === 0) {
-            // in case there are no predefined colors, set all colors to 50% gray
-            str = '#808080';
-        } else {
-            let nColors:number = this.colors.length;
-            // use the modulo-nColors of the uindex value as index into the color table
-            str = this.colors[uindex % nColors];
-        }
-        return str;
-    }
-
-
-
-
-    private onMouseOver(eventSource) {
-
-        // Here, 'eventSource' refers to the line segment (path)
-        // that generated the event, not the instance of MetroChart!
-        let uindex: number = d3.select(eventSource).datum().uindex;
-        let classname = '.link.line' + uindex;
-        d3.selectAll(classname).style('stroke-width', '5px');
-    }
-
-
-
-
-    private onMouseOut(eventSource) {
-
-        // Here, 'eventSource' refers to the line segment (path)
-        // that generated the event, not the instance of MetroChart!
-        let uindex: number = d3.select(eventSource).datum().uindex;
-        let classname = '.link.line' + uindex;
-        d3.selectAll(classname).style('stroke-width', '3px');
-    }
-
-
-
-
-    verifyData(): MetroChart {
+    private verifyData(): MetroChart {
 
 
         // set the initial position on all nodes:
@@ -675,8 +682,7 @@ class MetroChart {
         return this;
     }
 
-
-
+    // getters and setters from here
 
     public set colors(colors: string[]) {
         this._colors = colors;
