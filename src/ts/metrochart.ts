@@ -83,12 +83,12 @@ class MetroChart {
      * Identifier of the DOM element such as <code>#metrochart</code>, in
      * which to draw the MetroChart.
      */
-    public elem: string;
+    private elem: string;
 
     /**
      * The D3 selection representation of <code>this.elem</code>.
      */
-    public elemSelection: d3.Selection<any>;
+    private elemSelection: d3.Selection<any>;
 
     /**
      * The height of the DOM element containing the MetroChart.
@@ -145,13 +145,13 @@ class MetroChart {
     /**
      * List of strings containing the unique metroline names.
      */
-    public ulinks: string[];
+    private ulinks: string[];
 
     /**
      * The URL of where the data is located. Data should be compliant with the
      * <code>MetroChartData</code> interface.
      */
-    public url: string;
+    private _url: string;
 
     /**
      * The width of the DOM element containing the MetroChart.
@@ -226,7 +226,7 @@ class MetroChart {
         this.elem = elem;
 
         // store the url to the data that was provided by the user
-        this.url = url;
+        this._url = url;
 
         // store the D3 selection of the element we want to draw in
         this.elemSelection = d3.select(this.elem);
@@ -708,7 +708,7 @@ class MetroChart {
 
 
     /**
-     * Method to load the data from <code>this.url</code> using an <code>XMLHttpRequest</code>.
+     * Method to load the data from <code>this._url</code> using an <code>XMLHttpRequest</code>.
      */
     private loaddata() {
         // load data from local file
@@ -756,7 +756,7 @@ class MetroChart {
                     that.datasource = data.source;
                 }
 
-                console.log('MetroChart: \'Done loading data from "' + that.url + '"\'');
+                console.log('MetroChart: \'Done loading data from "' + that._url + '"\'');
 
                 // determine the list of unique line names:
                 that.calcUniqueLines();
@@ -769,7 +769,7 @@ class MetroChart {
         };
 
         // make the actual request
-        xmlHttp.open('GET', this.url, true); // true for asynchronous
+        xmlHttp.open('GET', this._url, true); // true for asynchronous
 
         // not sure what this is...end the connection?
         xmlHttp.send(null);
@@ -879,6 +879,12 @@ class MetroChart {
     }
     public get linkStrength():number {
         return this._linkStrength;
+    }
+
+
+
+    public get url(): string {
+        return this._url;
     }
 
 
