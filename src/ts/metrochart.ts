@@ -73,26 +73,120 @@ class MetroChartError extends Error {
 class MetroChart {
 
 
-    public datasource         : string;
-    public elem               : string;
-    public elemSelection      : d3.Selection<any>;
-    public h                  : number;
-    public linelabel          : string;
-    public links              : Connection[];
-    public nodes              : Station[];
-    public stationlabel       : string;
-    public stationShapeRadius : number;
-    public timeValueLeft      : number;
-    public timeValueRight     : number;
-    public ulinks             : string[];
-    public url                : string;
-    public w                  : number;
-    private _colors           : string[];
-    private _charge           : number;
-    private _enableTimeAxis   : boolean;
-    private _gravity          : number;
-    private _linkDistance     : number;
-    private _linkStrength     : number;
+
+    /**
+     *
+     */
+    public datasource: string;
+
+    /**
+     * Identifier of the DOM element such as <code>'#metrochart'</code>, in
+     * which to draw the MetroChart.
+     */
+    public elem: string;
+
+    /**
+     * The D3 selection representation of <code>this.elem</code>.
+     */
+    public elemSelection: d3.Selection<any>;
+
+    /**
+     * The height of the DOM element containing the MetroChart.
+     */
+    public h: number;
+
+    /**
+     * When the data represents different entities than metrolines and stations
+     * this property may be used to define an alternative name to identify
+     * metrolines. Let's say your data represents the storyline of a comic book,
+     * then individual frames could be represented by a station, while the
+     * characters that occur in a frame could be represented by a line. In this
+     * case, <code>this.stationlabel</code> could be set to <code>'frame'</code>
+     * and <code>this.linelabel</code> could be set to <code>'character'</code>.
+     */
+    public linelabel: string;
+
+    /**
+     *
+     */
+    public links: Connection[];
+
+    /**
+     *
+     */
+    public nodes: Station[];
+
+    /**
+     * When the data represents different entities than metrolines and stations
+     * this property may be used to define an alternative name to identify
+     * stations. Let's say your data represents the storyline of a comic book,
+     * then individual frames could be represented by a station, while the
+     * characters that occur in a frame could be represented by a line. In this
+     * case, <code>this.stationlabel</code> could be set to <code>'frame'</code>
+     * and <code>this.linelabel</code> could be set to <code>'character'</code>.
+     */
+    public stationlabel: string;
+
+    /**
+     * Radius in pixels used in drawing the station symbols.
+     */
+    public stationShapeRadius: number;
+
+    /**
+     * The time value corresponding to the left-most pixel.
+     */
+    public timeValueLeft: number;
+
+    /**
+     * The time value corresponding to the right-most pixel.
+     */
+    public timeValueRight: number;
+
+    /**
+     * List of strings containing the unique metroline names.
+     */
+    public ulinks: string[];
+
+    /**
+     * The URL of where the data is located. Data should be compliant with the
+     * <code>MetroChartData</code> interface.
+     */
+    public url: string;
+
+    /**
+     * The width of the DOM element containing the MetroChart.
+     */
+    public w: number;
+
+    /**
+     *
+     */
+    private _colors: string[];
+
+    /**
+     *
+     */
+    private _charge: number;
+
+    /**
+     *
+     */
+    private _enableTimeAxis: boolean;
+
+    /**
+     *
+     */
+    private _gravity: number;
+
+    /**
+     *
+     */
+    private _linkDistance: number;
+
+    /**
+     *
+     */
+    private _linkStrength: number;
 
     // set static class property defaultOptions (for some reason, I can't have
     // separate declaration and initialization)
@@ -123,7 +217,7 @@ class MetroChart {
      * @param {string} elem The name of the DOM element in which you want to
      *                      draw the MetroChart.
      * @param {string} url The URL of the data file, which should be a JSON file
-     *                     formatted according to the (@link MetroChartData} interface.
+     *                     formatted according to the <code>MetroChartData</code> interface.
      * @param {Options} [options] Optional parameter containing the options.
      */
     constructor(elem: string, url:string, options?:Options) {
@@ -247,6 +341,13 @@ class MetroChart {
 
 
 
+    /**
+     * Method to calculate the position of the lines connecting the stations.
+     * The method takes into account how many lines there are at each station,
+     * so the vertical offset can be calculated by <code>this.calcStubOffset()</code>.
+     * @param {Connection} link - The link between two Stations.
+     * @return {string} - The SVG path string describing the position of the line.
+     */
     private calcLinkShape(link: Connection): string {
         // determine the coordinates of the given link
 
@@ -293,52 +394,6 @@ class MetroChart {
 
 
     /**
-     * Method that calculates the shape of the station symbol's top or bottom part.
-     *
-     * @param {number} fromy - The y-value of where the arc should start.
-     * @param {number} r - The radius of the arc.
-     * @param {string} topOrBottomString - whether the method is used to draw
-     *                                     the top part or the bottom part.
-     * @return {string} - String containing the SVG path 'd' data (for the part
-     * that describes the top or bottom arc).
-     */
-    private calcStationShapeArc(fromy: number, topOrBottomStr: string): string {
-
-        let iSection: number;
-        let nSections: number;
-        let outputStr;
-        let angle: number;
-        let dx: number;
-        let dy: number;
-
-        nSections = 8;
-        outputStr = '';
-
-        if (topOrBottomStr === 'top') {
-            for (iSection = 0; iSection <= nSections; iSection += 1) {
-                angle = (nSections - iSection) / nSections * Math.PI;
-                dx = Math.cos(angle) * this.stationShapeRadius;
-                dy = Math.sin(angle) * -this.stationShapeRadius;
-                outputStr += 'L ' + (dx) + ' ' + (fromy + dy) + ' ';
-            }
-            return outputStr;
-        } else if (topOrBottomStr === 'bottom') {
-            for (iSection = 0; iSection < nSections; iSection += 1) {
-                angle = (iSection) / nSections * Math.PI;
-                dx = Math.cos(angle) * this.stationShapeRadius;
-                dy = Math.sin(angle) * this.stationShapeRadius;
-                outputStr += 'L ' + (dx) + ' ' + (fromy + dy) + ' ';
-                }
-            return outputStr;
-        } else {
-            throw new MetroChartError(' in .calcStationShapeArc(): \'Fourth argument should be either \'top\' or \'bottom\'.\'');
-        }
-    } // end method calcStationShapeArc
-
-
-
-
-    /**
      * Method that calculates the shape of the station symbol.
      *
      * @param {Station} node - The station for which to draw a symbol.
@@ -347,6 +402,56 @@ class MetroChart {
      */
     private calcStationShape(node: Station): string {
 
+
+
+
+        /**
+         * Local function that calculates the shape of the station symbol's top or bottom part.
+         *
+         * @param {number} fromy - The y-value of where the arc should start.
+         * @param {number} r - The radius of the arc.
+         * @param {string} topOrBottomString - whether the method is used to draw
+         *                                     the top part or the bottom part.
+         * @return {string} - String containing the SVG path 'd' data (for the part
+         * that describes the top or bottom arc).
+         */
+        let calcStationShapeArc = function(fromy:number, r:number, topOrBottomStr:string): string {
+
+            let iSection: number;
+            let nSections: number;
+            let outputStr;
+            let angle: number;
+            let dx: number;
+            let dy: number;
+
+            nSections = 8;
+            outputStr = '';
+
+            if (topOrBottomStr === 'top') {
+                for (iSection = 0; iSection <= nSections; iSection += 1) {
+                    angle = (nSections - iSection) / nSections * Math.PI;
+                    dx = Math.cos(angle) * r;
+                    dy = Math.sin(angle) * -r;
+                    outputStr += 'L ' + (dx) + ' ' + (fromy + dy) + ' ';
+                }
+                return outputStr;
+            } else if (topOrBottomStr === 'bottom') {
+                for (iSection = 0; iSection < nSections; iSection += 1) {
+                    angle = (iSection) / nSections * Math.PI;
+                    dx = Math.cos(angle) * r;
+                    dy = Math.sin(angle) * r;
+                    outputStr += 'L ' + (dx) + ' ' + (fromy + dy) + ' ';
+                    }
+                return outputStr;
+            } else {
+                throw new MetroChartError(' in .calcStationShapeArc(): \'Fourth argument should be either \'top\' or \'bottom\'.\'');
+            }
+        }; // end local method calcStationShapeArc
+
+
+
+
+
         // half the width of the entire station symbol
         let hw: number = this.stationShapeRadius;
         // half the height of the entire station symbol
@@ -354,9 +459,9 @@ class MetroChart {
 
         let str: string = 'M ' + (-hw) + ' 0 ' +
                           'L ' + (-hw) + ' ' + ((node.nLines - 1) * -this.stationShapeRadius) + ' ' +
-                          this.calcStationShapeArc((node.nLines - 1) * -this.stationShapeRadius, 'top') +
+                          calcStationShapeArc((node.nLines - 1) * -this.stationShapeRadius, this.stationShapeRadius, 'top') +
                           'L ' + (+hw) + ' ' + ((node.nLines - 1) * this.stationShapeRadius) + ' ' +
-                          this.calcStationShapeArc((node.nLines - 1) * this.stationShapeRadius, 'bottom') +
+                          calcStationShapeArc((node.nLines - 1) * this.stationShapeRadius, this.stationShapeRadius, 'bottom') +
                           'L ' + (-hw) + ' ' + ((node.nLines - 1) * this.stationShapeRadius) + ' ' +
                           'Z';
          return str;
@@ -416,8 +521,16 @@ class MetroChart {
 
 
 
-
-    private calcStubOffset(link, sourceOrTargetStr:string): number {
+    /**
+     * Method to calculate the vertical offset that indicates that there is more
+     * than one line at a station.
+     * @param {Connection} link - The link object connecting two stations.
+     * @param {string} sourceOrTargetString - The stub's offset can be different
+     * at the source than at the target nodes, this parameter indicates which we
+     * are currently calculating.
+     * @return {number} - The vertical offset in pixels
+     */
+    private calcStubOffset(link: Connection, sourceOrTargetStr:string): number {
         // a node can have multiple lines coming from it. The order is
         // determined by the current method
         let stubIndex: number;
@@ -443,6 +556,9 @@ class MetroChart {
 
 
 
+    /**
+     * Method to calculate the set of unique line names, <code>this.ulinks</code>.
+     */
     private calcUniqueLines(): void {
         // initialize the array that is going to hold the unique names of lines
         this.ulinks = [];
@@ -462,8 +578,9 @@ class MetroChart {
     }
 
 
-
-
+    /**
+     * Draw/update force-directed metrochart graph using the current settings.
+     */
     public drawForceDirectedGraph(): MetroChart {
 
         // define onMouseOut as a local function to the drawForceDirectedGraph() method
@@ -563,7 +680,15 @@ class MetroChart {
 
 
 
-
+    /**
+     * Get the color of a line from <code>this.colors</code>, given its index
+     * <code>uindex</code> into <code>this.ulinks</code>. If <code>this.colors</code>
+     * is <code>undefined</code> or zero-length, return a color string representing
+     * 50% gray. If there are not enough colors in <code>this.colors</code>, use modulo
+     * math to determine the appropriate index into the color table.
+     * @param {number} uindex - Index into <code>this.ulinks</code>
+     * @return {string} The hexadecimal color string used for drawing <code>this.ulinks[uindex]</code>.
+     */
     public getColor(uindex:number): string {
 
         let str:string;
@@ -583,7 +708,7 @@ class MetroChart {
 
 
     /**
-     * Method to load the data.
+     * Method to load the data from <code>this.url</code> using an <code>XMLHttpRequest</code>.
      */
     private loaddata() {
         // load data from local file
@@ -654,7 +779,16 @@ class MetroChart {
 
 
 
-
+    /**
+     * Updates the data on the MetroChart object:
+     * <ul>
+     * <li>adds <code>this.nodes.x</code>, <code>this.nodes.y</code>,
+     * <code>this.nodes.nLines</code> for all nodes</li>
+     * <li>calculates minimum time value (<code>this.timeValueLeft</code>) and maximum time
+     * value (<code>this.timeValueRight</code>) if applicable</li>
+     * </ul>
+     * @return {MetroChart} - Returns the MetroChart object with updated data
+     */
     private verifyData(): MetroChart {
 
 
@@ -684,6 +818,9 @@ class MetroChart {
 
     // getters and setters from here
 
+    /**
+    * Sets the list of colors to be used for visualizing the lines.
+    */
     public set colors(colors: string[]) {
         this._colors = colors;
     }
@@ -691,7 +828,10 @@ class MetroChart {
         return this._colors;
     }
 
-
+    /**
+    * Defines whether or not to apply the time axis constraint in positioning
+    * the stations.
+    */
     public set enableTimeAxis(enableTimeAxis: boolean) {
         this._enableTimeAxis = enableTimeAxis;
     }
@@ -699,7 +839,9 @@ class MetroChart {
         return this._enableTimeAxis;
     }
 
-
+    /**
+    * Sets the force-directed graph's charge parameter.
+    */
     public set charge(charge: number) {
         this._charge = charge;
     }
@@ -708,6 +850,9 @@ class MetroChart {
     }
 
 
+    /**
+    * Sets the force-directed graph's link distance parameter.
+    */
     public set linkDistance(linkDistance: number) {
         this._linkDistance = linkDistance;
     }
@@ -716,6 +861,9 @@ class MetroChart {
     }
 
 
+    /**
+    * Sets the force-directed graph's gravity parameter.
+    */
     public set gravity(gravity: number) {
         this._gravity = gravity;
     }
@@ -723,7 +871,9 @@ class MetroChart {
         return this._gravity;
     }
 
-
+    /**
+    * Sets the force-directed graph's link strength parameter.
+    */
     public set linkStrength(linkStrength: number) {
         this._linkStrength = linkStrength;
     }
