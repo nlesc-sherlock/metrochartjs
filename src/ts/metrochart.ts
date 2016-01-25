@@ -1,5 +1,6 @@
 
 
+
 /**
  * Station is basically a d3.layout.force.Node with added properties 'name',
  * and 'lines', and optional property 'nLines'.
@@ -44,6 +45,27 @@ interface Options {
     linkStrength?      : number;
     stationShapeRadius?: number;
 }
+
+
+/*
+ * Not sure why this class works like it does
+ */
+class MetroChartError extends Error {
+
+    public message : string;
+    public name    : string;
+
+    constructor(message: string) {
+
+        // call the super class (Error)'s constructor:
+        super(message);
+
+        this.name = 'MetroChartError';
+        this.message = message;
+    }
+}
+
+
 
 /**
   This is the class MetroChart's tsdoc
@@ -118,8 +140,9 @@ class MetroChart {
         // store the width and height of the DOM element we want to draw in
         // (somehow typescript gives an error about getBoundingClientRect() but
         // it works in the browser (Google Chrome version 46.0.2490.71 (64-bit)))
-        this.w = this.elemSelection.node().getBoundingClientRect().width;
-        this.h = this.elemSelection.node().getBoundingClientRect().height;
+        let elemNoHash: string = elem.slice(1);
+        this.w = document.getElementById(elemNoHash).getBoundingClientRect().width;
+        this.h = document.getElementById(elemNoHash).getBoundingClientRect().height;
 
         if (typeof options === 'undefined') {
             this.applyDefaultOptions(MetroChart.defaultOptions);
@@ -294,6 +317,8 @@ class MetroChart {
     }
 
 
+
+
     /**
      * Method that calculates the shape of the station symbol's top or bottom part.
      *
@@ -333,7 +358,7 @@ class MetroChart {
                 }
             return outputStr;
         } else {
-            throw '\'Fourth argument should be either \'top\' or \'bottom\'.\'';
+            throw new MetroChartError(' in .calcStationShapeArc(): \'Fourth argument should be either \'top\' or \'bottom\'.\'');
         }
     } // end method calcStationShapeArc
 
@@ -480,7 +505,7 @@ class MetroChart {
             nLines = linesAtTarget.length;
             stubIndex = linesAtTarget.indexOf(link.line);
         } else {
-            throw '\'Input argument should be \'source\' or \'target\' .\'';
+            throw new MetroChartError(' in .calcStubOffset(): \'Input argument should be \'source\' or \'target\' .\'');
         }
         stubOffset = -1 * (nLines * this.stationShapeRadius - this.stationShapeRadius) + (stubIndex * 2 * this.stationShapeRadius);
         return stubOffset;
@@ -547,8 +572,8 @@ class MetroChart {
                 .attr('d', function(d:Connection) {return that.calcLinkShape(d); })
                 .style('stroke', function(d:Connection) {return that.getColor(d.uindex); })
                 .on('click', function(d:Connection) {console.log(that.linelabel + ' ' + d.line); })
-                .on('mouseover', this.onMouseOver)
-                .on('mouseout', this.onMouseOut);
+                .on('mouseover', function() {that.onMouseOver(this); } )
+                .on('mouseout', function() {that.onMouseOut(this); } );
 
         let node = vis.selectAll('.node')
             .data(this.nodes)
@@ -599,11 +624,10 @@ class MetroChart {
 
 
 
-    private onMouseOver() {
+    private onMouseOver(eventSource) {
 
-        // Here, 'this' apparently refers to the line segment (path)
+        // Here, 'eventSource' refers to the line segment (path)
         // that generated the event, not the instance of MetroChart!
-        let eventSource = this;
         let uindex: number = d3.select(eventSource).datum().uindex;
         let classname = '.link.line' + uindex;
         d3.selectAll(classname).style('stroke-width', '5px');
@@ -612,11 +636,10 @@ class MetroChart {
 
 
 
-    private onMouseOut() {
+    private onMouseOut(eventSource) {
 
-        // Here, 'this' apparently refers to the line segment (path)
+        // Here, 'eventSource' refers to the line segment (path)
         // that generated the event, not the instance of MetroChart!
-        let eventSource = this;
         let uindex: number = d3.select(eventSource).datum().uindex;
         let classname = '.link.line' + uindex;
         d3.selectAll(classname).style('stroke-width', '3px');
@@ -646,7 +669,7 @@ class MetroChart {
                     this.timeValueRight = node.time;
                 }
             } else {
-                throw 'MetroChart: \'node.time\'s type should be \'number\'.';
+                throw new MetroChartError(' in .verifyData(): \'node.time\'s type should be \'number\'.');
             }
         }
         return this;
@@ -701,7 +724,6 @@ class MetroChart {
     public get linkStrength():number {
         return this._linkStrength;
     }
-
 
 
 }
