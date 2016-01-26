@@ -1,9 +1,11 @@
 
 #metrochart {
     background-color: #ddd;
-    width: 1000px;
-    height: 800px;
+    width: 1400px;
+    height: 500px;
+    margin: 50px;
 }
+
 
 
 .node {
@@ -25,4 +27,22 @@
     fill: none;
 }
 
+.vline {
+    stroke: #444;
+    stroke-width: 2px;
+    stroke-dasharray: 10,0;
+    opacity: 0.1;
+}
 
+
+.vline:hover {
+    stroke-width: 3px;
+    opacity: 0.7;
+}
+
+
+.label {
+  fill: black;
+  font: 10px sans-serif;
+  text-anchor: middle;
+}

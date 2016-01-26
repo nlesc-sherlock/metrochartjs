@@ -32,6 +32,18 @@ interface Options {
      */
     gravity?: number;
     /**
+     * TODO
+     */
+    labelRotation?:number;
+    /**
+     * TODO
+     */
+    labelSpaceVert?:number;
+    /**
+     * TODO
+     */
+    padding?:{left:number, right:number};
+    /**
      * Defines the link distance parameter of the force-directed graph.
      */
     linkDistance?: number;

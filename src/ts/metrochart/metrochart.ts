@@ -50,6 +50,21 @@ class MetroChart {
     private h: number;
 
     /**
+     * TODO
+     */
+    private labelSpaceVert: number;
+
+    /**
+     * TODO
+     */
+    private labelRotation: number;
+
+    /**
+     * TODO
+     */
+    private padding: {left:number, right:number};
+
+    /**
      * When the data represents different entities than metrolines and stations
      * this property may be used to define an alternative name to identify
      * metrolines. Let's say your data represents the storyline of a comic book,
@@ -191,6 +206,18 @@ class MetroChart {
          */
         gravity: 0.0005,
         /**
+         * TODO
+         */
+        labelSpaceVert: 100,
+        /**
+         * TODO
+         */
+        labelRotation: -45,
+        /**
+         * TODO
+         */
+        padding: {left:50, right:50},
+        /**
          * See {@link Options.linkDistance}.
          */
         linkDistance: 1,
@@ -326,6 +353,34 @@ class MetroChart {
             this.stationShapeRadius = options.stationShapeRadius;
         }
 
+        // set the vertical space reserved for plotting the station labels
+        if (typeof options.labelSpaceVert === 'undefined') {
+            // use default
+            this.labelSpaceVert = MetroChart.defaultOptions.labelSpaceVert;
+        } else {
+            // use user supplied value
+            this.labelSpaceVert = options.labelSpaceVert;
+        }
+
+        // set the station label rotation
+        if (typeof options.labelRotation === 'undefined') {
+            // use default
+            this.labelRotation = MetroChart.defaultOptions.labelRotation;
+        } else {
+            // use user supplied value
+            this.labelRotation = options.labelRotation;
+        }
+
+        // set the MetroChart's internal spacing (padding)
+        if (typeof options.padding === 'undefined') {
+            // use default
+            this.padding = MetroChart.defaultOptions.padding;
+        } else {
+            // use user supplied value
+            this.padding = options.padding;
+        }
+
+
 
         return this;
     } // end method applyDefaultOptions()
@@ -381,6 +436,29 @@ class MetroChart {
         return str;
 
     } // end method calcLinkShape()
+
+
+
+
+    calcLabelTranslate(station: Station) {
+
+        let h:number = this.labelSpaceVert;
+        let yTop:number = 0 + h;
+        let yBottom:number = this.h - h;
+
+        let distToTop:number = station.y - yTop;
+        let distToBottom:number = yBottom - station.y;
+
+        // apply the bounding box
+        station = this.observeBoundingBox(station);
+
+        if (distToTop < distToBottom) {
+            return 'translate(' + station.x + ',' + (yTop - 10 - 15) + ') rotate(' + this.labelRotation + ')';
+        } else {
+            return 'translate(' + station.x + ',' + (yBottom + 10 + 15) + ') rotate(' + this.labelRotation + ')';
+        }
+    }
+
 
 
 
@@ -472,44 +550,22 @@ class MetroChart {
      */
     private calcStationTranslate(node:Station): string {
 
-        // half the width of the entire station symbol
-        let hw: number = this.stationShapeRadius;
-        // half the height of the entire station symbol
-        let hh: number = node.nLines * this.stationShapeRadius;
 
         // if nodes have time labels and time axis is enabled, set x-position
         if (typeof node.time === 'number' && this.enableTimeAxis === true) {
             // calculate the fraction
             let f: number = (node.time - this.timeValueLeft) / (this.timeValueRight - this.timeValueLeft);
 
-            // don't use the whole width, only 90%, leaving 5% on the left and right
-            node.x = 0.05 * this.w + f * 0.90 * this.w;
+            node.x = this.padding.left + f * (this.w - this.padding.right - this.padding.left);
         }
 
-
-        // observe the bounding box edge on the right
-        if (node.x > this.w - hw) {
-            node.x = this.w - hw;
-        }
-
-        // observe the bounding box edge on the left
-        if (node.x < 0 + hw) {
-            node.x = 0 + hw;
-        }
-
-        // observe the bounding box edge on the top
-        if (node.y > this.h - hh) {
-            node.y = this.h - hh;
-        }
-
-        // observe the bounding box edge on the bottom
-        if (node.y < 0 + hh) {
-            node.y = 0 + hh;
-        }
+        // apply the bounding box
+        node = this.observeBoundingBox(node);
 
         return 'translate(' + node.x + ',' + node.y + ')';
 
     }
+
 
 
 
@@ -570,6 +626,32 @@ class MetroChart {
     }
 
 
+
+
+    calcVerticalLine(station: Station) {
+
+        let h:number = this.labelSpaceVert;
+        let yTop:number = 0 + h;
+        let yBottom:number = this.h - h;
+
+        let distToTop:number = station.y - yTop;
+        let distToBottom:number = yBottom - station.y;
+
+        // apply the bounding box
+        station = this.observeBoundingBox(station);
+
+
+        if (distToTop < distToBottom) {
+            return 'M ' + station.x + ' ' + station.y + ' L ' + station.x + ',' + (yTop - 10);
+        } else {
+            return 'M ' + station.x + ' ' + station.y + ' L ' + station.x + ',' + (yBottom + 10);
+        }
+    }
+
+
+
+
+
     /**
      * Draw/update force-directed metrochart graph using the current settings.
      */
@@ -620,6 +702,11 @@ class MetroChart {
         force.linkDistance(this.linkDistance);
         force.linkStrength(this.linkStrength);
 
+        // In this next part, the order in which link, vline, node etc are
+        // initialized is significant for which object is drawn on top of which
+        // object
+
+        // initialize the links between stations
         let link = vis.selectAll('.link')
             .data(this.links)
             .enter().append('path')
@@ -641,14 +728,31 @@ class MetroChart {
                     onMouseOut(eventsource);
                 });
 
-
-        let node = vis.selectAll('.node')
+        // make a group of class nodegroup that will contain the station symbol,
+        // the vertical line, and the station label:
+        let nodeGroup = vis.selectAll('.node')
             .data(this.nodes)
-            .enter().append('path')
+            .enter().append('g')
+            .attr('class', 'nodegroup');
+
+        // label the nodes by adding their name as text
+        let label = nodeGroup.append('text')
+            .attr('class', 'label')
+            .attr('transform', 'translate(0,0) rotate(45)')
+            .text(function(d:Station) {return d.name; });
+
+        // draw a vertical line from each node to its corresponding label:
+        let vline = nodeGroup.append('path')
+            .attr('class', 'vline')
+            .attr('d', function(d:Station) {return that.calcVerticalLine(d); });
+
+        // draw the station symbol:
+        let node = nodeGroup.append('path')
                 .attr('class', 'node')
                 .attr('d', function(d:Station) {return that.calcStationShape(d); })
                 .on('click', function(d:Station) {console.log(that.stationlabel + ' ' + d.index + ': ' + d.name); })
                 .call(force.drag);
+
 
         force.on('tick', function(e) {
 
@@ -656,9 +760,15 @@ class MetroChart {
             // the values of node.x and node.y for all node of this.nodes.
             node.attr('transform', function(d:Station) {return that.calcStationTranslate(d); });
 
+            label.attr('transform', function(d:Station) {return that.calcLabelTranslate(d); });
+
+            vline.attr('d', function(d:Station) {return that.calcVerticalLine(d); });
+
             // for each link of this.links, recalculate the path connecting the stations (since
             // these were just changed)
             link.attr('d', function(d:MetroLine) {return that.calcLinkShape(d); });
+
+
         });
 
 
@@ -768,6 +878,41 @@ class MetroChart {
 
 
     } // end method loaddata()
+
+
+
+
+    private observeBoundingBox(node:Station):Station {
+
+        // half the width of the entire station symbol
+        let hw: number = this.stationShapeRadius;
+        // half the height of the entire station symbol
+        let hh: number = node.nLines * this.stationShapeRadius;
+
+        // observe the bounding box edge on the right
+        if (node.x > this.w - hw - this.padding.right) {
+            node.x = this.w - hw - this.padding.right;
+        }
+
+        // observe the bounding box edge on the left
+        if (node.x < 0 + hw + this.padding.left) {
+            node.x = 0 + hw + this.padding.left;
+        }
+
+        // observe the bounding box edge on the top
+        if (node.y > this.h - hh - this.labelSpaceVert) {
+            node.y = this.h - hh - this.labelSpaceVert;
+        }
+
+        // observe the bounding box edge on the bottom
+        if (node.y < 0 + hh + this.labelSpaceVert) {
+            node.y = 0 + hh + this.labelSpaceVert;
+        }
+
+        return node;
+
+    }
+
 
 
 
