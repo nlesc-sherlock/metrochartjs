@@ -67,15 +67,32 @@ class MetroChartError extends Error {
 
 
 
+
 /**
-  This is the class MetroChart's tsdoc
-*/
+ * <p>
+ * A MetroChart is a force-directed graph. Being a graph, it is made up of nodes
+ * and links. The nodes represent stations (see interface {@link Station}) while
+ * the links represent metrolines (see interface {@link MetroLine}).
+ * </p>
+ *
+ * <p>
+ * The data may include an attribute <code>time</code> on each node. The property
+ * may be used to order nodes along the horizontal axis (by setting
+ * <code>this.enableTimeAxis</code> to <code>true</code>). This is convenient
+ * for visualizing certain types of data, such as narratives in stories or plays
+ * (which character occurs together with which other characters in any given
+ * scene, with nodes representing scenes and links representing characters).
+ * </p>
+ */
 class MetroChart {
 
 
 
     /**
-     *
+     * The JSON data may include an optional <code>source</code> property (see
+     * interface {@link MetroChartData}). Property <code>this.datasource</code>
+     * stores the data source, or if the data source is omitted from the JSON,
+     * <code>this.datasource</code> is set to <code>'unknown'</code>.
      */
     public datasource: string;
 
@@ -830,7 +847,7 @@ class MetroChart {
 
     /**
     * Defines whether or not to apply the time axis constraint in positioning
-    * the stations.
+    * the stations horizontally.
     */
     public set enableTimeAxis(enableTimeAxis: boolean) {
         this._enableTimeAxis = enableTimeAxis;
@@ -882,7 +899,9 @@ class MetroChart {
     }
 
 
-
+    /**
+    * Gets the url of where the data was loaded from.
+    */
     public get url(): string {
         return this._url;
     }
