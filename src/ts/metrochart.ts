@@ -2,34 +2,89 @@
 
 
 /**
- * Station is basically a d3.layout.force.Node with added properties 'name',
- * and 'lines', and optional property 'nLines'.
+ * Station is basically a <code>d3.layout.force.Node</code> with added properties:
+ * <ol>
+ * <li><code>name</code></li>
+ * <li><code>lines</code></li>
+ * <li><code>nLines</code></li>
+ * <li><code>time</code></li>
+ * </ol>
  */
 interface Station extends d3.layout.force.Node {
-    lines   : string[];
-    name    : string;
-    nLines? : number;
-    time?   : number;
+    /**
+    * The list of metrolines that stop at this station.
+    */
+    lines: string[];
+    /**
+    * The name of this station.
+    */
+    name: string;
+    /**
+     * The total number of metrolines that stop at this station.
+     * {@link MetroChart.verifyData}() (re)calculates this value once the data
+     * is loaded.
+     */
+    nLines?: number;
+    /**
+     * Property to help position Stations along the horizontal axis (if
+     * {@link MetroChart}'s <code>_enableTimeAxis</code> property <code>=== true</code>).
+     */
+    time?: number;
 };
 
 
-/** MetroLine is basically a d3.layout.force.Link of Station
- * objects, except that it adds the 'line' property
+
+
+
+/**
+ * MetroLine is basically a <code>d3.layout.force.Link</code> between two
+ * {@link Station} objects, except that it adds the <code>line</code> and
+ * <code>uindex</code> properties.
  */
 interface MetroLine extends d3.layout.force.Link<Station> {
+    /**
+     * Name of the metroline.
+     */
     line : string;
+    /**
+     * Index of this station into a list of unique station names (the list is
+     * calculated by {@link MetroChart.calcUniqueLines}() and the result is
+     * stored in {@link MetroChart}'s <code>.ulinks</code> property).
+     */
     uindex: number;
 }
 
-/** MetroChartData combines Station and MetroLine, and adds the optional
- * properties 'source', 'stationlabel', and 'linelabel'.
+/**
+ * MetroChartData combines a list of {@link Station}s with a list of
+ * {@link MetroLine}s, and adds the optional properties <code>source</code>,
+ * <code>stationlabel</code>, and <code>linelabel</code>.
  */
 interface MetroChartData {
-    linelabel?    : string;
-    links         : MetroLine[];
-    nodes         : Station[];
-    source?       : string;
-    stationlabel? : string;
+    /**
+     * By default the links are labeled as 'metrolines', but depending on the
+     * nature of the data, it can be convenient to label the links in accordance
+     * with the entity they represent. This property stores that entity name.
+     */
+    linelabel?: string;
+    /**
+     * The list of {@link MetroLine}s, where each element in the list connects
+     * one {@link Station} to another.
+     */
+    links: MetroLine[];
+    /**
+     * The list of {@link Station}s.
+     */
+    nodes: Station[];
+    /**
+     * A description of where the data comes from.
+     */
+    source?: string;
+    /**
+     * By default the nodes are labeled as 'station', but depending on the
+     * nature of the data, it can be convenient to label the nodes in accordance
+     * with the entity they represent. This property stores that entity name.
+     */
+    stationlabel?: string;
 }
 
 
@@ -37,18 +92,53 @@ interface MetroChartData {
  * Options defines the options
  */
 interface Options {
-    colors?            : {name:string, hexcode:string}[];
-    charge?            : number;
-    enableTimeAxis?    : boolean;
-    gravity?           : number;
-    linkDistance?      : number;
-    linkStrength?      : number;
+    /**
+     * <p>
+     * The colors defined by <code>colors</code> specify the colors with which
+     * to draw metrolines. Each color must be an Object literal with properties
+     * <code>name</code> (a descriptive name of the color, such as 'dark blue'
+     * or 'seagreen') and <code>hexcode</code> (the hexadecimal representation
+     * of a color in <code>#RRGGBB</code>).
+     * </p>
+     * <p>
+     * If no colors are specified, the default metroline colors from
+     * {@link MetroChart.defaultOptions.colors} are used. In any case, if there
+     * are more unique metrolines than colors, modulo math is used to wrap the
+     * colors.
+     * </p>
+     */
+    colors?: {name:string, hexcode:string}[];
+    /**
+     * Defines the charge parameter of the force-directed graph.
+     */
+    charge?: number;
+    /**
+     * Whether or not to use an additional constraint in positioning the
+     * stations along the x-axis.
+     */
+    enableTimeAxis?: boolean;
+    /**
+     * Defines the gravity parameter of the force-directed graph.
+     */
+    gravity?: number;
+    /**
+     * Defines the link distance parameter of the force-directed graph.
+     */
+    linkDistance?: number;
+    /**
+     * Defines the link strength parameter of the force-directed graph.
+     */
+    linkStrength?: number;
+    /**
+     * Defines the radius to be used for drawing the symbol representing
+     * stations.
+     */
     stationShapeRadius?: number;
 }
 
 
 /*
- * Not sure why this class works like it does
+ * Not sure why the {@link MetroChartError} class works like it does
  */
 class MetroChartError extends Error {
 
@@ -124,12 +214,13 @@ class MetroChart {
     public linelabel: string;
 
     /**
-     *
+     * The list of links/metrolines, pointing to the indices of two nodes/
+     * stations.
      */
     private links: MetroLine[];
 
     /**
-     *
+     * The list of stations.
      */
     private nodes: Station[];
 
@@ -166,7 +257,7 @@ class MetroChart {
 
     /**
      * The URL of where the data is located. Data should be compliant with the
-     * <code>MetroChartData</code> interface.
+     * {@link MetroChartData} interface.
      */
     private _url: string;
 
@@ -176,57 +267,94 @@ class MetroChart {
     private w: number;
 
     /**
-     *
+     * See {@link Options.colors}.
      */
     private _colors: string[];
 
     /**
-     *
+     * Defines the charge parameter of the force-directed graph.
      */
     private _charge: number;
 
     /**
-     *
+     * See {@link Options.enableTimeAxis}.
      */
     private _enableTimeAxis: boolean;
 
     /**
-     *
+     * Defines the gravity parameter of the force-directed graph.
      */
     private _gravity: number;
 
     /**
-     *
+     * Defines the link distance parameter of the force-directed graph.
      */
     private _linkDistance: number;
 
     /**
-     *
+     * Defines the link strength parameter of the force-directed graph.
      */
     private _linkStrength: number;
 
-    // set static class property defaultOptions (for some reason, I can't have
-    // separate declaration and initialization)
+    // (for some reason, I can't have separate declaration and initialization)
+
+    /**
+     * See {@link Options}.
+     */
     private static defaultOptions: Options = {
-        'charge': 0,
-        'colors': [
-            {'name': 'red', 'hexcode': '#FF0000'},
-            {'name': 'olive', 'hexcode': '#008000'},
-            {'name': 'blue', 'hexcode': '#0080FF'},
-            {'name': 'orange', 'hexcode': '#FF8000'},
-            {'name': 'magenta', 'hexcode': '#FF0080'},
-            {'name': 'yellow', 'hexcode': '#FFee00'},
-            {'name': 'lime', 'hexcode': '#80DD00'},
-            {'name': 'purple', 'hexcode': '#b200ff'},
-            {'name': 'seagreen', 'hexcode': '#00DD80'},
-            {'name': 'dark gray', 'hexcode': '#888888'},
-            {'name': 'black', 'hexcode': '#000000'}
+        /**
+         * See {@link Options.charge}.
+         */
+        charge: 0,
+        /**
+         * See {@link Options.colors}. Here are the default colors:
+         * <table>
+         *    <tr><td>1.</td><td bgcolor="#FF0000"></td><td>red</td></tr>
+         *    <tr><td>2.</td><td bgcolor="#008000"></td><td>olive</td></tr>
+         *    <tr><td>3.</td><td bgcolor="#0080FF"></td><td>blue</td></tr>
+         *    <tr><td>4.</td><td bgcolor="#FF8000"></td><td>orange</td></tr>
+         *    <tr><td>5.</td><td bgcolor="#FF0080"></td><td>magenta</td></tr>
+         *    <tr><td>6.</td><td bgcolor="#FFee00"></td><td>yellow</td></tr>
+         *    <tr><td>7.</td><td bgcolor="#80DD00"></td><td>lime</td></tr>
+         *    <tr><td>8.</td><td bgcolor="#b200ff"></td><td>purple</td></tr>
+         *    <tr><td>9.</td><td bgcolor="#00DD80"></td><td>seagreen</td></tr>
+         *    <tr><td>10.</td><td bgcolor="#888888"></td><td>dark gray</td></tr>
+         *    <tr><td>11.</td><td bgcolor="#000000"></td><td>black</td></tr>
+         * </table>
+         */
+        colors: [
+            {name: 'red',       hexcode: '#FF0000'},
+            {name: 'olive',     hexcode: '#008000'},
+            {name: 'blue',      hexcode: '#0080FF'},
+            {name: 'orange',    hexcode: '#FF8000'},
+            {name: 'magenta',   hexcode: '#FF0080'},
+            {name: 'yellow',    hexcode: '#FFee00'},
+            {name: 'lime',      hexcode: '#80DD00'},
+            {name: 'purple',    hexcode: '#b200ff'},
+            {name: 'seagreen',  hexcode: '#00DD80'},
+            {name: 'dark gray', hexcode: '#888888'},
+            {name: 'black',     hexcode: '#000000'}
         ],
-        'enableTimeAxis': true,
-        'gravity': 0.0005,
-        'linkDistance': 1,
-        'linkStrength': 0.0,
-        'stationShapeRadius': 7.0
+        /**
+         * See {@link Options.enableTimeAxis}.
+         */
+        enableTimeAxis: true,
+        /**
+         * See {@link Options.gravity}.
+         */
+        gravity: 0.0005,
+        /**
+         * See {@link Options.linkDistance}.
+         */
+        linkDistance: 1,
+        /**
+         * See {@link Options.linkStrength}.
+         */
+        linkStrength: 0.0,
+        /**
+         * See {@link Options.stationShapeRadius}.
+         */
+        stationShapeRadius: 7.0
     };
 
     /**
