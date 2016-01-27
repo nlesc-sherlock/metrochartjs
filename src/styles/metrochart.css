@@ -1,7 +1,7 @@
 
 #metrochart {
     background-color: #3f5851;
-    width: 1400px;
+    width: 1600px;
     height: 800px;
     margin: 50px;
 }
@@ -36,20 +36,21 @@
 
 .vline {
     stroke: #bbb;
-    stroke-width: 1px;
-    stroke-dasharray: 10,0;
+    stroke-width: 0.5px;
+    stroke-dasharray: 5,1;
 }
 
 
 .vline.highlight {
     stroke: #000;
+    stroke-width: 1.5px;
     stroke-dasharray: 5,5;
 }
 
 
 .label {
     fill: #a5b3af;
-    font: 12px sans-serif;
+    font: 14px sans-serif;
     alignment-baseline: middle;
     /* text-anchor vlaue is set by javascript */
 }
@@ -58,6 +59,8 @@
 .label.highlight {
     fill: #000;
     border-width: medium;
+    background-color: #F00;
+    font-weight: bold;
     /* text-anchor value is set by javascript */
 }
 

@@ -662,8 +662,6 @@ class MetroChart {
      */
     public drawForceDirectedGraph(): MetroChart {
 
-
-
         // define onMouseOutNodeGroup as a local function to the drawForceDirectedGraph() method
         let onMouseOutNodeGroup = function(eventsource) {
             //  Note the d3 selector magic that is applied here. I get the
@@ -672,7 +670,9 @@ class MetroChart {
             //  I set myself when I created the child objects). On that
             //  selection, I remove the class 'highlight' which was set by
             //  onMouseOver() using d3's classed method:
-            d3.select(eventsource).selectAll('.nodegroup-child').classed('highlight', false);
+            let children = d3.select(eventsource).selectAll('.nodegroup-child');
+            // remove class 'highlight' from all children:
+            children.classed('highlight', false);
         };
 
         // define onMouseOverNodeGroup as a local function to the drawForceDirectedGraph() method
@@ -682,7 +682,19 @@ class MetroChart {
             //  selection I subselect everything of class 'nodegroup-child' (which
             //  I set myself when I created the child objects). On that
             //  selection, I add a class using d3's classed method:
-            d3.select(eventsource).selectAll('.nodegroup-child').classed('highlight', true);
+            let children = d3.select(eventsource).selectAll('.nodegroup-child');
+            // add the class 'highlight' to all children, so that the element
+            // can be styled using CSS
+            children.classed('highlight', true);
+
+            // bring the svg group that generated the event to the foreground by
+            // re-ordering the '.nodegroup-parent' svg groups
+            d3.selectAll('.nodegroup-parent').each(function(){
+                if (this === eventsource) {
+                    this.parentNode.appendChild(this);
+                };
+            });
+
         };
 
         // define onMouseOutMetroLine as a local function to the drawForceDirectedGraph() method
