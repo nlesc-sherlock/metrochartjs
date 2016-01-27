@@ -1,0 +1,43 @@
+{
+    "links":
+    [
+        {
+            "source": 0,
+            "target": 1,
+            "line": 1
+        },
+        {
+            "source": 2,
+            "target": 3,
+            "line": 2
+        }
+    ],
+    "nodes":
+    [
+        {
+            "index": 0,
+            "name": "A",
+            "lines": [1],
+            "time": 0
+        },
+        {
+            "index": 1,
+            "name": "B",
+            "lines": [1],
+            "time": 100
+        },
+        {
+            "index": 2,
+            "name": "C",
+            "lines": [2],
+            "time": 0
+        },
+        {
+            "index": 3,
+            "name": "D",
+            "lines": [2],
+            "time": 100
+        }
+    ],
+    "stationlabel": "node"
+}
