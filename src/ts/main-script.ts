@@ -51,8 +51,8 @@ function doit(data: any) {
                 let options: Options = {
                     enableTimeAxis: false,
                     charge: -5,
-                    linkStrength: 1.0,
-                    linkDistance: 30,
+                    linkStrength: 0.5,
+                    linkDistance: 50,
                     gravity: 0.0005,
                     colors: [
                         {name:'green', hexcode: '#008000'},
@@ -81,7 +81,7 @@ function doit(data: any) {
 let dataloader: DataLoader = new DataLoader();
 
 // configure the dataloader
-dataloader.limit = 5000;
+dataloader.limit = 1000;
 
 // set the offset to a large value to get to the more recent records (the
 // results are sorted by increasing date); the more recent records are more
