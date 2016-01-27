@@ -1,6 +1,6 @@
 
 #metrochart {
-    background-color: #ddd;
+    background-color: #3f5851;
     width: 1400px;
     height: 500px;
     margin: 50px;
@@ -15,19 +15,20 @@
 }
 
 .node {
-    fill: #f8f8f8;
-    stroke: #111;
+    fill: #ddd;
+    stroke: #222;
     stroke-width: 2px;
 }
 
 .node.highlight {
     fill: #fff;
     stroke: #000;
+    stroke-width: 3px;
 }
 
 .vline {
     stroke: #bbb;
-    stroke-width: 2px;
+    stroke-width: 1px;
     stroke-dasharray: 10,0;
 }
 
@@ -38,12 +39,14 @@
 
 
 .label {
-    fill: #bbb;
-    font: 14px sans-serif;
-    text-anchor: middle;
+    fill: #a5b3af;
+    font: 12px sans-serif;
+    alignment-baseline: middle;
+    /* text-anchor vlaue is set by javascript */
 }
 
 .label.highlight {
     fill: #000;
     border-width: medium;
+    /* text-anchor value is set by javascript */
 }
