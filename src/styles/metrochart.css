@@ -7,19 +7,6 @@
 }
 
 
-
-.node {
-    fill: #f8f8f8;
-    stroke: #111;
-    stroke-width: 2px;
-}
-
-.node:hover {
-    fill: #d8d8d8;
-    stroke: #000;
-    stroke-width: 3px;
-}
-
 .link {
     stroke: #777;
     stroke-width: 3px;
@@ -27,22 +14,36 @@
     fill: none;
 }
 
-.vline {
-    stroke: #444;
+.node {
+    fill: #f8f8f8;
+    stroke: #111;
     stroke-width: 2px;
-    stroke-dasharray: 10,0;
-    opacity: 0.1;
 }
 
+.node.highlight {
+    fill: #fff;
+    stroke: #000;
+}
 
-.vline:hover {
-    stroke-width: 3px;
-    opacity: 0.7;
+.vline {
+    stroke: #bbb;
+    stroke-width: 2px;
+    stroke-dasharray: 10,0;
+}
+
+.vline.highlight {
+    stroke: #000;
+    stroke-dasharray: 5,5;
 }
 
 
 .label {
-  fill: black;
-  font: 10px sans-serif;
-  text-anchor: middle;
+    fill: #bbb;
+    font: 14px sans-serif;
+    text-anchor: middle;
+}
+
+.label.highlight {
+    fill: #000;
+    border-width: medium;
 }

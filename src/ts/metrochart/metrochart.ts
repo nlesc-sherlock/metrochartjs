@@ -32,38 +32,36 @@ class MetroChart {
      * <code>this.datasource</code> is set to <code>'unknown'</code>.
      */
     public datasource: string;
-
     /**
      * Identifier of the DOM element such as <code>#metrochart</code>, in
      * which to draw the MetroChart.
      */
     private elem: string;
-
     /**
      * The D3 selection representation of <code>this.elem</code>.
      */
     private elemSelection: d3.Selection<any>;
-
     /**
      * The height of the DOM element containing the MetroChart.
      */
     private h: number;
-
     /**
-     * TODO
+     * When the graph is visualized, station names can be displayed in a
+     * reserved area at the top of the visualization as well as at the bottom.
+     * This property sets the height of these reserved areas.
      */
     private labelSpaceVert: number;
-
     /**
-     * TODO
+     * Defines the rotation of the station labels
      */
     private labelRotation: number;
-
     /**
-     * TODO
+     * The graph is padded to avoid having elements very close to the left-side
+     * and right-side edges of the visualization, or even falling off of it.
+     * This property defines how much padding there is (in pixels). Note that
+     * the bounding box takes into account the padding value.
      */
     private padding: {left:number, right:number};
-
     /**
      * When the data represents different entities than metrolines and stations
      * this property may be used to define an alternative name to identify
@@ -74,18 +72,15 @@ class MetroChart {
      * and <code>this.linelabel</code> could be set to <code>'character'</code>.
      */
     public linelabel: string;
-
     /**
      * The list of links/metrolines, pointing to the indices of two nodes/
      * stations.
      */
     private links: MetroLine[];
-
     /**
      * The list of stations.
      */
     private nodes: Station[];
-
     /**
      * When the data represents different entities than metrolines and stations
      * this property may be used to define an alternative name to identify
@@ -96,70 +91,55 @@ class MetroChart {
      * and <code>this.linelabel</code> could be set to <code>'character'</code>.
      */
     public stationlabel: string;
-
     /**
      * Radius in pixels used in drawing the station symbols.
      */
     public stationShapeRadius: number;
-
     /**
      * The time value corresponding to the left-most pixel.
      */
     public timeValueLeft: number;
-
     /**
      * The time value corresponding to the right-most pixel.
      */
     public timeValueRight: number;
-
     /**
      * List of strings containing the unique metroline names.
      */
     private ulinks: string[];
-
     /**
      * The URL of where the data is located. Data should be compliant with the
      * {@link MetroChartData} interface.
      */
     private _url: string;
-
     /**
      * The width of the DOM element containing the MetroChart.
      */
     private w: number;
-
     /**
      * See {@link Options.colors}.
      */
     private _colors: string[];
-
     /**
      * Defines the charge parameter of the force-directed graph.
      */
     private _charge: number;
-
     /**
      * See {@link Options.enableTimeAxis}.
      */
     private _enableTimeAxis: boolean;
-
     /**
      * Defines the gravity parameter of the force-directed graph.
      */
     private _gravity: number;
-
     /**
      * Defines the link distance parameter of the force-directed graph.
      */
     private _linkDistance: number;
-
     /**
      * Defines the link strength parameter of the force-directed graph.
      */
     private _linkStrength: number;
-
-    // (for some reason, I can't have separate declaration and initialization)
-
     /**
      * See {@link Options}.
      */
@@ -206,15 +186,15 @@ class MetroChart {
          */
         gravity: 0.0005,
         /**
-         * TODO
+         * See {@link Options.labelSpaceVert}.
          */
         labelSpaceVert: 100,
         /**
-         * TODO
+         * See {@link Options.labelRotation}.
          */
         labelRotation: -45,
         /**
-         * TODO
+         * See {@link Options.padding}.
          */
         padding: {left:50, right:50},
         /**
@@ -657,22 +637,27 @@ class MetroChart {
      */
     public drawForceDirectedGraph(): MetroChart {
 
+
+
         // define onMouseOut as a local function to the drawForceDirectedGraph() method
         let onMouseOut = function(eventsource) {
-            // Here, 'eventsource' refers to the line segment (path)
-            // that generated the event, not the instance of MetroChart!
-            let uindex: number = d3.select(eventsource).datum().uindex;
-            let classname = '.link.line' + uindex;
-            d3.selectAll(classname).style('stroke-width', '3px');
+            //  Note the d3 selector magic that is applied here. I get the
+            //  source of the event, which is an svg group, and on that
+            //  selection I subselect everything of class 'nodegroup-child' (which
+            //  I set myself when I created the child objects). On that
+            //  selection, I remove the class 'highlight' which was set by
+            //  onMouseOver() using d3's classed method:
+            d3.select(eventsource).selectAll('.nodegroup-child').classed('highlight', false);
         };
 
         // define onMouseOver as a local function to the drawForceDirectedGraph() method
         let onMouseOver = function(eventsource) {
-            // Here, 'eventsource' refers to the line segment (path)
-            // that generated the event, not the instance of MetroChart!
-            let uindex: number = d3.select(eventsource).datum().uindex;
-            let classname = '.link.line' + uindex;
-            d3.selectAll(classname).style('stroke-width', '5px');
+            //  Note the d3 selector magic that is applied here. I get the
+            //  source of the event, which is an svg group, and on that
+            //  selection I subselect everything of class 'nodegroup-child' (which
+            //  I set myself when I created the child objects). On that
+            //  selection, I add a class using d3's classed method:
+            d3.select(eventsource).selectAll('.nodegroup-child').classed('highlight', true);
         };
 
 
@@ -713,42 +698,42 @@ class MetroChart {
                 .attr('class', function(d:MetroLine) {return 'link' + ' ' + 'line' + d.uindex; } )
                 .attr('d', function(d:MetroLine) {return that.calcLinkShape(d); })
                 .style('stroke', function(d:MetroLine) {return that.getColor(d.uindex); })
-                .on('click', function(d:MetroLine) {console.log(that.linelabel + ' ' + d.line); })
-                .on('mouseover', function() {
-                    // somehow the 'this' object does not refer to the instance
-                    // of MetroChart here, but to the event that generated the
-                    // mouseover event, in this case the line segment.
-                    let eventsource = this;
-                    onMouseOver(eventsource); } )
-                .on('mouseout', function() {
-                    // somehow the 'this' object does not refer to the instance
-                    // of MetroChart here, but to the event that generated the
-                    // mouseout event, in this case the line segment.
-                    let eventsource = this;
-                    onMouseOut(eventsource);
-                });
+                .on('click', function(d:MetroLine) {console.log(that.linelabel + ' ' + d.line); });
 
         // make a group of class nodegroup that will contain the station symbol,
         // the vertical line, and the station label:
         let nodeGroup = vis.selectAll('.node')
             .data(this.nodes)
             .enter().append('g')
-            .attr('class', 'nodegroup');
+            .attr('class', 'nodegroup-parent')
+            .on('mouseover', function() {
+                // somehow the 'this' object does not refer to the instance
+                // of MetroChart here, but to the event that generated the
+                // mouseover event, in this case the line segment.
+                let eventsource = this;
+                onMouseOver(eventsource); } )
+            .on('mouseout', function() {
+                // somehow the 'this' object does not refer to the instance
+                // of MetroChart here, but to the event that generated the
+                // mouseout event, in this case the line segment.
+                let eventsource = this;
+                onMouseOut(eventsource);
+            });
 
         // label the nodes by adding their name as text
         let label = nodeGroup.append('text')
-            .attr('class', 'label')
+            .attr('class', 'label nodegroup-child')
             .attr('transform', 'translate(0,0) rotate(45)')
             .text(function(d:Station) {return d.name; });
 
         // draw a vertical line from each node to its corresponding label:
         let vline = nodeGroup.append('path')
-            .attr('class', 'vline')
+            .attr('class', 'vline nodegroup-child')
             .attr('d', function(d:Station) {return that.calcVerticalLine(d); });
 
         // draw the station symbol:
         let node = nodeGroup.append('path')
-                .attr('class', 'node')
+                .attr('class', 'node nodegroup-child')
                 .attr('d', function(d:Station) {return that.calcStationShape(d); })
                 .on('click', function(d:Station) {console.log(that.stationlabel + ' ' + d.index + ': ' + d.name); })
                 .call(force.drag);
