@@ -32,15 +32,19 @@ interface Options {
      */
     gravity?: number;
     /**
-     * TODO
+     * Defines the rotation of the station labels
      */
     labelRotation?:number;
     /**
-     * TODO
+     * When the graph is visualized, station names can be displayed in a
+     * reserved area at the top of the visualization as well as at the bottom.
+     * This property sets the height of these reserved areas.
      */
     labelSpaceVert?:number;
     /**
-     * TODO
+     * The graph is padded to avoid having elements very close to the left-side
+     * and right-side edges of the visualization, or even falling off of it.
+     * This property defines how much padding there is (in pixels).
      */
     padding?:{left:number, right:number};
     /**
