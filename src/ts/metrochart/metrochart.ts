@@ -188,7 +188,7 @@ class MetroChart {
         /**
          * See {@link Options.labelSpaceVert}.
          */
-        labelSpaceVert: 100,
+        labelSpaceVert: 130,
         /**
          * See {@link Options.labelRotation}.
          */
@@ -420,22 +420,42 @@ class MetroChart {
 
 
 
-    calcLabelTranslate(station: Station) {
+    calcLabelTopOrBottom(station: Station):string {
 
-        let h:number = this.labelSpaceVert;
-        let yTop:number = 0 + h;
-        let yBottom:number = this.h - h;
+        let yTop:number = 0 + this.labelSpaceVert;
+        let yBottom:number = this.h - this.labelSpaceVert;
 
         let distToTop:number = station.y - yTop;
         let distToBottom:number = yBottom - station.y;
 
+        if (distToTop < distToBottom) {
+            return 'top';
+        } else {
+            return 'bottom';
+        }
+    }
+
+
+
+
+    calcLabelTranslate(station: Station) {
+
+        let yTop:number = 0 + this.labelSpaceVert;
+        let yBottom:number = this.h - this.labelSpaceVert;
+
+
         // apply the bounding box
         station = this.observeBoundingBox(station);
 
-        if (distToTop < distToBottom) {
+        let topOrBottom:string = this.calcLabelTopOrBottom(station);
+
+
+        if (topOrBottom === 'top') {
             return 'translate(' + station.x + ',' + (yTop - 10 - 15) + ') rotate(' + this.labelRotation + ')';
-        } else {
+        } else if (topOrBottom === 'bottom') {
             return 'translate(' + station.x + ',' + (yBottom + 10 + 15) + ') rotate(' + this.labelRotation + ')';
+        } else {
+            throw new MetroChartError('This should not happen.');
         }
     }
 
@@ -620,11 +640,16 @@ class MetroChart {
         // apply the bounding box
         station = this.observeBoundingBox(station);
 
+        let halfStationHeight: number = station.nLines * this.stationShapeRadius;
+
+        let buffer: number = 30;
 
         if (distToTop < distToBottom) {
-            return 'M ' + station.x + ' ' + station.y + ' L ' + station.x + ',' + (yTop - 10);
+            return 'M ' + station.x + ' ' + (station.y - halfStationHeight - 5) + ' ' +
+                   'L ' + station.x + ',' + (yTop - buffer + 15);
         } else {
-            return 'M ' + station.x + ' ' + station.y + ' L ' + station.x + ',' + (yBottom + 10);
+            return 'M ' + station.x + ' ' + (station.y + halfStationHeight + 5) + ' ' +
+                   'L ' + station.x + ',' + (yBottom + buffer - 15);
         }
     }
 
@@ -745,7 +770,17 @@ class MetroChart {
             // the values of node.x and node.y for all node of this.nodes.
             node.attr('transform', function(d:Station) {return that.calcStationTranslate(d); });
 
-            label.attr('transform', function(d:Station) {return that.calcLabelTranslate(d); });
+            label.attr('transform', function(d:Station) {return that.calcLabelTranslate(d); })
+                .style('text-anchor', function(d:Station) {
+                    let topOrBottom:string = that.calcLabelTopOrBottom(d);
+                    if (topOrBottom === 'top') {
+                        return 'start';
+                    } else if (topOrBottom === 'bottom') {
+                        return 'end';
+                    } else {
+                        throw new MetroChartError('This should not happen.');
+                    }
+                });
 
             vline.attr('d', function(d:Station) {return that.calcVerticalLine(d); });
 
