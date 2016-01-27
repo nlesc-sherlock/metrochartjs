@@ -664,8 +664,8 @@ class MetroChart {
 
 
 
-        // define onMouseOut as a local function to the drawForceDirectedGraph() method
-        let onMouseOut = function(eventsource) {
+        // define onMouseOutNodeGroup as a local function to the drawForceDirectedGraph() method
+        let onMouseOutNodeGroup = function(eventsource) {
             //  Note the d3 selector magic that is applied here. I get the
             //  source of the event, which is an svg group, and on that
             //  selection I subselect everything of class 'nodegroup-child' (which
@@ -675,8 +675,8 @@ class MetroChart {
             d3.select(eventsource).selectAll('.nodegroup-child').classed('highlight', false);
         };
 
-        // define onMouseOver as a local function to the drawForceDirectedGraph() method
-        let onMouseOver = function(eventsource) {
+        // define onMouseOverNodeGroup as a local function to the drawForceDirectedGraph() method
+        let onMouseOverNodeGroup = function(eventsource) {
             //  Note the d3 selector magic that is applied here. I get the
             //  source of the event, which is an svg group, and on that
             //  selection I subselect everything of class 'nodegroup-child' (which
@@ -684,6 +684,27 @@ class MetroChart {
             //  selection, I add a class using d3's classed method:
             d3.select(eventsource).selectAll('.nodegroup-child').classed('highlight', true);
         };
+
+        // define onMouseOutMetroLine as a local function to the drawForceDirectedGraph() method
+        let onMouseOutMetroLine = function(eventsource) {
+            // Here, 'eventsource' refers to the line segment (path)
+            // that generated the event, not the instance of MetroChart!
+            let uindex: number = d3.select(eventsource).datum().uindex;
+            let classname = '.link.line' + uindex;
+            d3.selectAll(classname).classed('highlight', false);
+        };
+
+        // define onMouseOverMetroLine as a local function to the drawForceDirectedGraph() method
+        let onMouseOverMetroLine = function(eventsource) {
+            // Here, 'eventsource' refers to the line segment (path)
+            // that generated the event, not the instance of MetroChart!
+            let uindex: number = d3.select(eventsource).datum().uindex;
+            let classname = '.link.line' + uindex;
+            d3.selectAll(classname).classed('highlight', true);
+        };
+
+
+
 
 
         // capture the 'this' object:
@@ -723,7 +744,21 @@ class MetroChart {
                 .attr('class', function(d:MetroLine) {return 'link' + ' ' + 'line' + d.uindex; } )
                 .attr('d', function(d:MetroLine) {return that.calcLinkShape(d); })
                 .style('stroke', function(d:MetroLine) {return that.getColor(d.uindex); })
-                .on('click', function(d:MetroLine) {console.log(that.linelabel + ' ' + d.line); });
+                .on('click', function(d:MetroLine) {console.log(that.linelabel + ' ' + d.line); })
+                .on('mouseover', function() {
+                    // somehow the 'this' object does not refer to the instance
+                    // of MetroChart here, but to the event that generated the
+                    // mouseover event, in this case the line segment.
+                    let eventsource = this;
+                    onMouseOverMetroLine(eventsource); } )
+                .on('mouseout', function() {
+                    // somehow the 'this' object does not refer to the instance
+                    // of MetroChart here, but to the event that generated the
+                    // mouseout event, in this case the line segment.
+                    let eventsource = this;
+                    onMouseOutMetroLine(eventsource);
+                });
+
 
         // make a group of class nodegroup that will contain the station symbol,
         // the vertical line, and the station label:
@@ -734,15 +769,15 @@ class MetroChart {
             .on('mouseover', function() {
                 // somehow the 'this' object does not refer to the instance
                 // of MetroChart here, but to the event that generated the
-                // mouseover event, in this case the line segment.
+                // mouseover event, in this case the svg group element.
                 let eventsource = this;
-                onMouseOver(eventsource); } )
+                onMouseOverNodeGroup(eventsource); } )
             .on('mouseout', function() {
                 // somehow the 'this' object does not refer to the instance
                 // of MetroChart here, but to the event that generated the
-                // mouseout event, in this case the line segment.
+                // mouseout event, in this case the svg group element.
                 let eventsource = this;
-                onMouseOut(eventsource);
+                onMouseOutNodeGroup(eventsource);
             });
 
         // label the nodes by adding their name as text
