@@ -73,6 +73,9 @@ function doit(data: any) {
                 metrochart = new MetroChart('#metrochart', '/data/tintin-the-black-island.json', options);
             }
             break;
+        case 'simultaneous': {
+                metrochart = new MetroChart('#metrochart', '/data/simultaneous-events.json');
+            }
     }
 }
 
