@@ -1,7 +1,7 @@
 {
-  "name": "chicago",
+  "name": "metrochart",
   "version": "1.0.0",
-  "description": "This repository visualizes the City of Chicago police data set using web-based tools such as JavaScript, TypeScript, Gulp and Node.js",
+  "description": "This repository creates a metrochart visualization using web technologies such as JavaScript, TypeScript, Gulp and Node.js",
   "main": "index.js",
   "scripts": {
     "deploy": "npm install --production && bower install",
@@ -10,16 +10,13 @@
     "test": "gulp test"
   },
   "keywords": [
-    "typescript",
-    "chicago",
-    "police",
-    "crime"
+    "typescript"
   ],
-  "author": "Johan Hidding, Mateusz Kuzak, Jurriaan H. Spaaks",
+  "author": "Jurriaan H. Spaaks",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nlesc-sherlock/chicago.git"
+    "url": "https://github.com/jspaaks/metrochart.git"
   },
   "devDependencies": {
     "browser-sync": "^2.10.0",

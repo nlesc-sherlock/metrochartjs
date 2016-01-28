@@ -1,20 +1,18 @@
 {
-  "name": "chicago",
-  "description": "chicago timeline visualisation",
+  "name": "metrochart",
+  "description": "metrochart directed graph visualisation",
   "main": "index.js",
   "authors": [
     "Jurriaan H. Spaaks",
-    "Johan Hidding",
-    "Mateusz Kuzak"
   ],
   "license": "Apache-2.0",
   "keywords": [
     "gulp",
     "typescript",
-    "police",
-    "chicago"
+    "metro"
+    "visualization"
   ],
-  "homepage": "https://github.com/nlesc-sherlock/chicago",
+  "homepage": "https://github.com/jspaaks/metrochart",
   "moduleType": [],
   "private": true,
   "ignore": [
@@ -26,8 +24,5 @@
   ],
   "dependencies": {
     "d3": "~3.5.10",
-    "leaflet": "~0.7.7",
-    "moment": "~2.10.6",
-    "moment-timezone": "~0.4.1"
   }
 }

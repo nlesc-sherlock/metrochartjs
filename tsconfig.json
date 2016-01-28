@@ -6,17 +6,10 @@
         "noImplicitAny": false,
         "removeComments": true,
         "noLib": false,
-        "out": "build/js/chicago.js"
+        "out": "build/js/metrochart.js"
     },
     "files": [
-        "src/ts/crossfilter.ts",
-        "src/ts/dataloader.ts",
-        "src/ts/histogram.ts",
         "src/ts/main-script.ts",
-        "src/ts/map.ts",
-        "src/ts/metrochart/metrochart.ts",
-        "src/ts/punchcard.ts",
-        "src/ts/spiral.ts",
-        "src/ts/timeline.ts"
+        "src/ts/metrochart/metrochart.ts"
     ]
 }
