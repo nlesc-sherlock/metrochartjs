@@ -1,53 +1,45 @@
-[![devDependency Status](https://david-dm.org/nlesc-sherlock/chicago/dev-status.svg)](https://david-dm.org/nlesc-sherlock/chicago#info=devDependencies)
-
 
 **Usage (Linux Ubuntu)**
 
-```sh
-# use package manager to install git
+```bash
+# install version management git (needs root)
 sudo apt-get install git
 
-# make a local copy of this repository
-git clone https://github.com/nlesc-sherlock/chicago.git
+# get a copy of the repository
+git clone https://github.com/jspaaks/metrochart.git
 
-# change into chigaco directory
-cd chicago
+# change into the directory
+cd metrochart
 
-# install nvm somehow, e.g. following these instructions: 
-# (http://www.liquidweb.com/kb/how-to-install-nvm-node-version-manager-for-node-js-on-ubuntu-14-04-lts/
+# don't do sudo apt-get install npm but instead do (as root)
+sudo apt-get install nodejs
 
-# install and start using the latest stable version of node.js
-nvm install stable
+# we'll need to compile some stuff later, so install g++ (needs root)
+sudo apt-get install g++
 
-# the npm install is local to the terminal it was installed in
-
-# verify what version of node you are running:
-nvm current
-
-# check available version of npm with 
-nvm ls
-
-# you can also check the version of nvm itself, using 
-nvm --version
-
-# let the recently loaded node package manager install the project's dependencies as 
-# specified in package.json:
+# let node install packages from package.json
 npm install
 
-# need bower as well
-npm install bower
+# globally install bower (needs root)
+sudo npm install --global bower
 
-# during the previous step, the build automation tool 'gulp' was installed locally.
-# We also need to install it globally however, using
-npm install --global gulp
+# let bower install packages from bower.json
+bower install
 
-# we'll also need a global install of typescript
-npm install --global typescript
+# globally install typescript and tsd (needs root)
+sudo npm install --global typescript
+sudo npm install --global tsd
 
-# run npm install, bower install, tsd install through one command
-npm run deploy-dev
+# let tsd generate the typing information from tsd.json
+tsd install
 
-# build and serve the build directory with
+# install the documentation generation tool
+npm install gulp-typedoc
+
+# install the build automation tool (needs root)
+sudo npm install --global gulp
+
+# transpile the typescript, make the library, serve at localhost:3000
 gulp dev-watch
 
 # after running a gulp dev-watch, open up a browser and navigate 
