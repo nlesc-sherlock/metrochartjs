@@ -55,7 +55,7 @@ gulp.task('tsdoc', function() {
 
 
 
-// concatenate css files
+// concatenate css and copy the result to build/
 gulp.task('css',
     'Concatenates css files',
     function() {
@@ -67,11 +67,21 @@ gulp.task('css',
 
 
 
-// copy html and css files to build
+// copy html files to build/
 gulp.task('html',
     'Copies html to build directory',
     function() {
         gulp.src('./src/*.html').pipe(gulp.dest('./build/'))
+    });
+
+
+
+
+// copy html files to build/
+gulp.task('data',
+    'Copies the test data to build/ directory',
+    function() {
+        gulp.src('./data/*.json').pipe(gulp.dest('./build/data/'))
     });
 
 
@@ -87,7 +97,7 @@ gulp.task('clean',
 
 
 gulp.task('build',
-    'Populate build/ directory', ['ts', 'tslint', 'css', 'html']);
+    'Populate build/ directory', ['ts', 'tslint', 'css', 'html', 'data']);
 
 
 
