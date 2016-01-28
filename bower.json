@@ -3,16 +3,16 @@
   "description": "metrochart directed graph visualisation",
   "main": "index.js",
   "authors": [
-    "Jurriaan H. Spaaks",
+    "Jurriaan H. Spaaks"
   ],
   "license": "Apache-2.0",
   "keywords": [
     "gulp",
     "typescript",
-    "metro"
+    "metro",
     "visualization"
   ],
-  "homepage": "https://github.com/jspaaks/metrochart",
+  "homepage": "https://github.com/jspaaks/metrochart.git",
   "moduleType": [],
   "private": true,
   "ignore": [
@@ -23,6 +23,6 @@
     "tests"
   ],
   "dependencies": {
-    "d3": "~3.5.10",
+    "d3": "~3.5.10"
   }
 }

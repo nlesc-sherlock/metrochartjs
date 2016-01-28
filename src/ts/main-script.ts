@@ -1,9 +1,18 @@
 let metrochart: MetroChart;
 
 
-let showDataset: string = (Math.random() < 0.99) ? 'amsterdam' : 'tintin';
 
-switch (showDataset) {
+
+let datasetNames = [
+    'tintin',
+    'amsterdam',
+    'simultaneous-events'
+];
+let randomIndex = Math.floor(Math.random() * datasetNames.length);
+let showDataSet: string = datasetNames[randomIndex];
+
+
+switch (showDataSet) {
     case 'amsterdam': {
             let options: Options = {
                 enableTimeAxis: false,
@@ -30,7 +39,12 @@ switch (showDataset) {
             metrochart = new MetroChart('#metrochart', '/data/tintin-the-black-island.json', options);
         }
         break;
-    case 'simultaneous': {
-            metrochart = new MetroChart('#metrochart', '/data/simultaneous-events.json');
+    case 'simultaneous-events': {
+            let options: Options = {
+                charge: -100,
+                stationShapeRadius: 10,
+                gravity: 0.005
+            };
+            metrochart = new MetroChart('#metrochart', '/data/simultaneous-events.json', options);
         }
 }
