@@ -3,12 +3,6 @@
   "version": "1.0.0",
   "description": "This repository creates a metrochart visualization using web technologies such as JavaScript, TypeScript, Gulp and Node.js",
   "main": "index.js",
-  "scripts": {
-    "deploy": "npm install --production && bower install",
-    "deploy-dev": "npm install && bower install && tsd install",
-    "dev-watch": "gulp dev-watch",
-    "test": "gulp test"
-  },
   "keywords": [
     "typescript"
   ],
