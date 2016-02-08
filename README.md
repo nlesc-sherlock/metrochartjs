@@ -1,7 +1,10 @@
+
+# Live demo
+
 See the **live demo** [here](http://jspaaks.github.io/metrochart/)!
 
 
-**Usage (Linux Ubuntu)**
+# Usage (Linux Ubuntu)
 
 ```bash
 # install version management git (needs root)
