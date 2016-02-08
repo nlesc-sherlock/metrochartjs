@@ -1,7 +1,7 @@
 
 # Live demo
 
-See the **live demo** [here](http://jspaaks.github.io/metrochart/)!
+See the live demo [here](http://jspaaks.github.io/metrochart/)!
 
 
 # Usage (Linux Ubuntu)
