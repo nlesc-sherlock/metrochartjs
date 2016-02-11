@@ -1,5 +1,5 @@
 
-///<reference path="../../../typings/tsd.d.ts" />
+///<reference path="../../typings/tsd.d.ts" />
 ///<reference path="metrochartdata.ts" />
 ///<reference path="metrocharterror.ts" />
 ///<reference path="metroline.ts" />

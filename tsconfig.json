@@ -9,7 +9,7 @@
         "out": "build/js/metrochart.js"
     },
     "files": [
-        "src/ts/metrochart/metrochart.ts",
+        "src/ts/metrochart.ts",
         "src/ts/main-script.ts"
     ]
 }

@@ -1,6 +1,6 @@
 {
   "name": "metrochart",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "This repository creates a metrochart visualization using web technologies such as JavaScript, TypeScript, Gulp and Node.js",
   "main": "index.js",
   "keywords": [
