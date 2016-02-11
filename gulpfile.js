@@ -179,7 +179,7 @@ gulp.task('tsdoc',
         return gulp.src(['src/**/*.ts']).pipe(typedoc({
                 module: 'commonjs',
                 target: 'es5',
-                out: 'build/tsdoc/',
+                out: './build/tsdoc',
                 name: packageinfo.name + ' v' + packageinfo.version
             }));
     }
