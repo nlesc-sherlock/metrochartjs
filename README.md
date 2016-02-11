@@ -48,12 +48,19 @@ tsd install
 # transpile the TypeScript to make a build
 gulp clean && gulp build
 
+# generate the TypDoc documentation
+gulp tsdoc
+
 # change into the build/ directory, and serve the webapp from there using python's
 # SimpleHttpServer on port 8089
 cd build
 python -m SimpleHTTPServer 8089
 
 # Use your browser to go to http://localhost:8089 to see the webapp being served
+# Use your browser to go to http://localhost:8089/tsdoc to see the TypeDoc
+
+
+
 
 ```
 
