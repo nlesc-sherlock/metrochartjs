@@ -21,10 +21,17 @@ cd ${THE_PUBLISH_DIR}
 git clone ${THE_REPOSITORY_URL}
 
 # Change into the subdirectory
-cd `ls -1`
+THE_REPOSITORY_NAME=`ls -1`
+cd ${THE_REPOSITORY_NAME}
 
 # Checkout the gh-pages branch
 git checkout gh-pages
+
+# remove all the stuff that's there from git's index
+git rm -rf --cached .
+
+# also remove the actual files and directories
+rm -rf ../${THE_REPOSITORY_NAME}/*
 
 # Copy the original's /publish/ directory's contents to this directory
 cp -r ${THE_ORIGINAL_DIR}/publish/* .
