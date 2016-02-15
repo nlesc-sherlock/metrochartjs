@@ -4,9 +4,25 @@
 # docker build -t image-metrochart .
 ## Then run the docker container using this command:
 # docker run -p 5001:5000 --name magnificent-metrochart image-metrochart
-# Now you should be able to open a browser (on the host) and navigate to
-# http://localhost:5001 and see the webapp being served.
-
+##
+## Now you should be able to open a browser (on the host) and navigate to
+## http://localhost:5001 and see the webapp being served.
+##
+## When you're done, run
+# docker stop magnificent-metrochart
+## (you may have to start a new terminal for that)
+##
+## Check what containers you have:
+# docker ps -a
+##
+## Removing a container goes as follows:
+# docker rm magnificent-metrochart
+##
+## Check what images you have with:
+# docker images
+##
+## Removing the image goes like this:
+# docker rmi metrochart-image
 
 
 # start from ubuntu 14.04 (download from dockerhub)
