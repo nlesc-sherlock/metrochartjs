@@ -152,6 +152,10 @@ gulp.task('publish',
 
         gulp.start('clean-publish');
 
+        // create a .nojekyll file in the root of the repo to avoid errors
+        // see https://github.com/blog/572-bypassing-jekyll-on-github-pages
+        gulp.start('nojekyll');
+
         gulp.src(['./build/**/*']).pipe(gulp.dest('./publish/'));
 
     }
@@ -178,7 +182,7 @@ gulp.task('nojekyll',
     'Copies the .nojekyll file to the build/ directory',
     function(callbackWhenDone) {
 
-        gulp.src('./.nojekyll').pipe(gulp.dest('./build/'));
+        gulp.src('./.nojekyll').pipe(gulp.dest('./publish/'));
 
         callbackWhenDone();
 
@@ -192,10 +196,6 @@ gulp.task('nojekyll',
 gulp.task('tsdoc',
     'Generate the TypeDoc documentation',
     function() {
-
-        // create a .nojekyll file in the root of the repo to avoid errors
-        // see https://github.com/blog/572-bypassing-jekyll-on-github-pages
-        gulp.start('nojekyll');
 
         return gulp.src(['src/**/*.ts']).pipe(typedoc({
                 module: 'commonjs',
