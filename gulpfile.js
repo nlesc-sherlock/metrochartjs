@@ -77,7 +77,7 @@ gulp.task('css',
     function(callbackWhenDone) {
         gulp.src('src/**/*.css')
             .pipe(concatCss('bundle.css'))
-            .pipe(gulp.dest('build/styles/'));
+            .pipe(gulp.dest('build/demo/styles/'));
 
         callbackWhenDone();
     }
@@ -91,7 +91,7 @@ gulp.task('html',
     'Copies html to build directory',
     function(callbackWhenDone) {
 
-        gulp.src('./src/*.html').pipe(gulp.dest('./build/'))
+        gulp.src('./src/*.html').pipe(gulp.dest('./build/demo'))
 
         callbackWhenDone();
     }
@@ -100,12 +100,12 @@ gulp.task('html',
 
 
 
-// copy data files to build/metrochart
+// copy data files to build/demo
 gulp.task('data',
-    'Copies the test data to build/metrochart/data/ directory',
+    'Copies the test data to build/demo/data/ directory',
     function(callbackWhenDone) {
 
-        gulp.src('./data/*.json').pipe(gulp.dest('./build/metrochart/data/'));
+        gulp.src('./data/*.json').pipe(gulp.dest('./build/demo/data/'));
 
         callbackWhenDone();
 

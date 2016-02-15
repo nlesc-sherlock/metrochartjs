@@ -11,10 +11,6 @@ let datasetNames = [
 let randomIndex = Math.floor(Math.random() * datasetNames.length);
 let showDataSet: string = datasetNames[randomIndex];
 
-// I'm including this, otherwise the hosting on jspaaks.github.io/metrochart 
-// won't not work
-let reponame:string = 'metrochart';
-
 switch (showDataSet) {
     case 'amsterdam': {
             let options: Options = {
@@ -31,7 +27,7 @@ switch (showDataSet) {
                 ],
                 stationShapeRadius: 5
             };
-            metrochart = new MetroChart('#metrochart', '/' + reponame + '/data/metrolines-amsterdam.json', options);
+            metrochart = new MetroChart('#metrochart', window.location.href + '/data/metrolines-amsterdam.json', options);
         }
         break;
     case 'tintin': {
@@ -39,7 +35,7 @@ switch (showDataSet) {
                 charge: 0,
                 linkStrength: 0.0
             };
-            metrochart = new MetroChart('#metrochart', '/' + reponame + '/data/tintin-the-black-island.json', options);
+            metrochart = new MetroChart('#metrochart', window.location.href + '/data/tintin-the-black-island.json', options);
         }
         break;
     case 'simultaneous-events': {
@@ -48,6 +44,6 @@ switch (showDataSet) {
                 stationShapeRadius: 10,
                 gravity: 0.005
             };
-            metrochart = new MetroChart('#metrochart', '/' + reponame + '/data/simultaneous-events.json', options);
+            metrochart = new MetroChart('#metrochart', window.location.href + '/data/simultaneous-events.json', options);
         }
 }
