@@ -36,6 +36,9 @@ rm -rf ../${THE_REPOSITORY_NAME}/*
 # Copy the original's /publish/ directory's contents to this directory
 cp -r ${THE_ORIGINAL_DIR}/publish/* .
 
+# Copy the .nojekyll file to avoid confusing Github's Jekyll
+cp ${THE_ORIGINAL_DIR}/publish/.nojekyll .
+
 # Add all the new files to git's index...
 git add .
 
