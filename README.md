@@ -1,7 +1,11 @@
 
 # Live demo
 
-See the live demo [here](http://jspaaks.github.io/metrochart/)!
+See the live demo [here](http://jspaaks.github.io/metrochart/demo/).
+
+# Documentation
+
+The TypeDoc is [here](http://jspaaks.github.io/metrochart/tsdoc/).
 
 
 # Usage (Linux Ubuntu)
