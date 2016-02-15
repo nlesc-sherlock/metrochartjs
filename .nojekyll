@@ -1,0 +1,5 @@
+# githbu.io uses Jekyll but it interferes (is confused by) the many TypeDoc-generated 
+# files that start with an underscore. The current file is used to tell github.io 
+# to completely bypass all Jekyll processing.
+#
+# see https://github.com/blog/572-bypassing-jekyll-on-github-pages

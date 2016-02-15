@@ -172,10 +172,31 @@ gulp.task('clean',
 
 
 
+// copy .nojekyll files to build/ in order to be able to use the tsdoc from
+// github.io (see https://github.com/blog/572-bypassing-jekyll-on-github-pages)
+gulp.task('nojekyll',
+    'Copies the .nojekyll file to the build/ directory',
+    function(callbackWhenDone) {
+
+        gulp.src('./.nojekyll').pipe(gulp.dest('./build/'));
+
+        callbackWhenDone();
+
+    }
+);
+
+
+
+
 // generate documentation
 gulp.task('tsdoc',
     'Generate the TypeDoc documentation',
     function() {
+
+        // create a .nojekyll file in the root of the repo to avoid errors
+        // see https://github.com/blog/572-bypassing-jekyll-on-github-pages
+        gulp.start('nojekyll');
+
         return gulp.src(['src/**/*.ts']).pipe(typedoc({
                 module: 'commonjs',
                 target: 'es5',
