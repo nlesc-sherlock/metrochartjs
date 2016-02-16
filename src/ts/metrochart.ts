@@ -54,7 +54,7 @@ class MetroChart {
      */
     private labelSpaceVert: number;
     /**
-     * Defines the rotation of the station labels
+     * Defines the rotation of the station labels.
      */
     private labelRotation: number;
     /**
@@ -214,12 +214,15 @@ class MetroChart {
     };
 
     /**
-     * Create a new MetroChart instance
+     * Create a new MetroChart instance.
      * @param {string} elem The name of the DOM element in which you want to
-     *                      draw the MetroChart.
+     * draw the MetroChart.
+     *
      * @param {string} url The URL of the data file, which should be a JSON file
-     *                     formatted according to the <code>MetroChartData</code> interface.
+     * formatted according to the <code>MetroChartData</code> interface.
+     *
      * @param {Options} [options] Optional parameter containing the options.
+     *
      */
     constructor(elem: string, url:string, options?:Options) {
 
@@ -255,7 +258,8 @@ class MetroChart {
 
     /**
      * @param {Options} options User supplied options that override the default
-     *                          options from {@link MetroChart.defaultOptions}.
+     * options from {@link MetroChart.defaultOptions}.
+     *
      */
     public applyDefaultOptions(options?:Options): MetroChart {
 
@@ -374,8 +378,11 @@ class MetroChart {
      * Method to calculate the position of the lines connecting the stations.
      * The method takes into account how many lines there are at each station,
      * so the vertical offset can be calculated by <code>this.calcStubOffset()</code>.
-     * @param {MetroLine} link - The link between two Stations.
-     * @return {string} - The SVG path string describing the position of the line.
+     *
+     * @param {MetroLine} link The link between two Stations.
+     *
+     * @return {string} The SVG path string describing the position of the line.
+     *
      */
     private calcLinkShape(link: MetroLine): string {
         // determine the coordinates of the given link
@@ -421,7 +428,20 @@ class MetroChart {
 
 
 
-
+    /**
+     * When drawing the vertical line from station to label, you need to know
+     * whether to draw to the bottom reserved area or the top reserved area.
+     * This method determines whether the bottom reserved area or the top
+     * reserved area is closest to the position of the station. This is then
+     * used in drawing the station-to-label vertical line, as well as in
+     * calculating the position of the station labels.
+     *
+     * @param  {Station} station The station for which we want to determine
+     * which is closer --the top reserved area or the bottom one.
+     *
+     * @return {string} Either <code>'top'</code> or <code>'bottom'</code>.
+     *
+     */
     calcLabelTopOrBottom(station: Station):string {
 
         let yTop:number = 0 + this.labelSpaceVert;
@@ -439,7 +459,26 @@ class MetroChart {
 
 
 
-
+    /**
+     * The stations are labeled with their names. These labels are drawn in
+     * one of two reserved plotting areas, one near the bottom of the graph and
+     * one near the top. This method determines which is closer, and the returns
+     * the translation needed for the label to be correctly placed, i.e.
+     * horizontally aligned with the position of the station, and vertically
+     * aligned so it falls in either the bottom or the top reserved area. The
+     * translation also includes a rotation, which can be set through
+     * MetroChart's options (see {@link Options.labelRotation}).
+     *
+     * @param  {Station} station The station for which you want to draw a
+     * label.
+     *
+     * @return {[type]} The translation that must be applied to position the
+     * label such that it is horizontally aligned with the position of the
+     * station proper, and vertically aligned with the bottom or top reserved
+     * area. The translation also includes a rotation, which can be set through
+     * MetroChart's options (see {@link Options.labelRotation}).
+     *
+     */
     calcLabelTranslate(station: Station) {
 
         let yTop:number = 0 + this.labelSpaceVert;
@@ -468,8 +507,9 @@ class MetroChart {
     /**
      * Method that calculates the shape of the station symbol.
      *
-     * @param {Station} node - The station for which to draw a symbol.
-     * @return {string} - String containing the SVG path 'd' data for the
+     * @param {Station} node The station for which to draw a symbol.
+     *
+     * @return {string} String containing the SVG path 'd' data for the
      * station symbol.
      */
     private calcStationShape(node: Station): string {
@@ -478,14 +518,19 @@ class MetroChart {
 
 
         /**
-         * Local function that calculates the shape of the station symbol's top or bottom part.
+         * Local function that calculates the shape of the station symbol's top
+         * or bottom part.
          *
-         * @param {number} fromy - The y-value of where the arc should start.
-         * @param {number} r - The radius of the arc.
-         * @param {string} topOrBottomString - whether the method is used to draw
-         *                                     the top part or the bottom part.
-         * @return {string} - String containing the SVG path 'd' data (for the part
-         * that describes the top or bottom arc).
+         * @param {number} fromy The y-value of where the arc should start.
+         *
+         * @param {number} r The radius of the arc.
+         *
+         * @param {string} topOrBottomString Whether the method is used to draw
+         * the top part or the bottom part.
+         *
+         * @return {string} String containing the SVG path 'd' data (for the
+         * part that describes the top or bottom arc).
+         *
          */
         let calcStationShapeArc = function(fromy:number, r:number, topOrBottomStr:string): string {
 
@@ -547,8 +592,10 @@ class MetroChart {
      * observing the bounding box set by the dimensions of the SVG area and the
      * dimension of the station symbols.
      *
-     * @param {Station} node - The station that needs to be translated.
-     * @return {string} - String containing the translate offsets.
+     * @param {Station} node The station that needs to be translated.
+     *
+     * @return {string} String containing the translate offsets.
+     *
      */
     private calcStationTranslate(node:Station): string {
 
@@ -574,11 +621,15 @@ class MetroChart {
     /**
      * Method to calculate the vertical offset that indicates that there is more
      * than one line at a station.
-     * @param {MetroLine} link - The link object connecting two stations.
-     * @param {string} sourceOrTargetString - The stub's offset can be different
+     *
+     * @param {MetroLine} link The link object connecting two stations.
+     *
+     * @param {string} sourceOrTargetString The stub's offset can be different
      * at the source than at the target nodes, this parameter indicates which we
      * are currently calculating.
-     * @return {number} - The vertical offset in pixels
+     *
+     * @return {number} The vertical offset in pixels.
+     *
      */
     private calcStubOffset(link: MetroLine, sourceOrTargetStr:string): number {
         // a node can have multiple lines coming from it. The order is
@@ -596,7 +647,8 @@ class MetroChart {
             nLines = linesAtTarget.length;
             stubIndex = linesAtTarget.indexOf(link.line);
         } else {
-            throw new MetroChartError(' in .calcStubOffset(): \'Input argument should be \'source\' or \'target\' .\'');
+            throw new MetroChartError(' in .calcStubOffset(): \'Input argument sh' +
+                                      'ould be \'source\' or \'target\' .\'');
         }
         stubOffset = -1 * (nLines * this.stationShapeRadius - this.stationShapeRadius) + (stubIndex * 2 * this.stationShapeRadius);
         return stubOffset;
@@ -628,9 +680,19 @@ class MetroChart {
     }
 
 
-
-
-    calcVerticalLine(station: Station) {
+    /**
+     * The svg drawing area has two reserved areas, one at the top and one at
+     * the bottom. These area are reserved for labels containing the station
+     * names. This method draws a line between the a node of the graph and the
+     * station label proper.
+     *
+     * @param  {Station} station The node for which line must be drawn to its
+     * label.
+     *
+     * @return {string} The SVG path "d" string data.
+     *
+     */
+    calcVerticalLine(station: Station): string {
 
         let h:number = this.labelSpaceVert;
         let yTop:number = 0 + h;
@@ -815,10 +877,15 @@ class MetroChart {
 
         force.on('tick', function(e) {
 
-            // this is actually a loop in which the force-directing algorithm adjusts
-            // the values of node.x and node.y for all node of this.nodes.
+            // This is actually a loop in which the force-directing algorithm
+            // adjusts the values of node.x and node.y for all node of
+            // this.nodes. Since you want to have a consistent visualization,
+            // you need to make sure that the other components (i.e. the
+            // metrolines, the station-to-label lines, and the labels) move with
+            // the moving nodes.
             node.attr('transform', function(d:Station) {return that.calcStationTranslate(d); });
 
+            // update the position of the station labels
             label.attr('transform', function(d:Station) {return that.calcLabelTranslate(d); })
                 .style('text-anchor', function(d:Station) {
                     let topOrBottom:string = that.calcLabelTopOrBottom(d);
@@ -831,6 +898,8 @@ class MetroChart {
                     }
                 });
 
+
+            // update the position of the station-to-label vertical lines
             vline.attr('d', function(d:Station) {return that.calcVerticalLine(d); });
 
             // for each link of this.links, recalculate the path connecting the stations (since
@@ -853,12 +922,17 @@ class MetroChart {
 
     /**
      * Get the color of a line from <code>this.colors</code>, given its index
-     * <code>uindex</code> into <code>this.ulinks</code>. If <code>this.colors</code>
-     * is <code>undefined</code> or zero-length, return a color string representing
-     * 50% gray. If there are not enough colors in <code>this.colors</code>, use modulo
-     * math to determine the appropriate index into the color table.
-     * @param {number} uindex - Index into <code>this.ulinks</code>
-     * @return {string} The hexadecimal color string used for drawing <code>this.ulinks[uindex]</code>.
+     * <code>uindex</code> into <code>this.ulinks</code>. If
+     * <code>this.colors</code> is <code>undefined</code> or zero-length, return
+     * a color string representing 50% gray. If there are not enough colors in
+     * <code>this.colors</code>, use modulo math to determine the appropriate
+     * index into the color table.
+     *
+     * @param {number} uindex Index into <code>this.ulinks</code>
+     *
+     * @return {string} The hexadecimal color string used for drawing
+     * <code>this.ulinks[uindex]</code>.
+     *
      */
     public getColor(uindex:number): string {
 
@@ -949,8 +1023,20 @@ class MetroChart {
     } // end method loaddata()
 
 
-
-
+    /**
+     * The graph has nodes of different sizes, depending on how many
+     * metrolines stop at that station. However, you still want the entire
+     * station symbol to remain inside the box defined by the svg drawing area.
+     * This function makes sure that each station remains inside that bounding
+     * box.
+     *
+     * @param {Station} node The station for which the bounding box must be
+     * observed.
+     *
+     * @return {Station} The station with updated .x and .y properties such
+     * that the entire station symbol falls within the bounding box.
+     *
+     */
     private observeBoundingBox(node:Station):Station {
 
         // half the width of the entire station symbol
@@ -990,10 +1076,11 @@ class MetroChart {
      * <ul>
      * <li>adds <code>this.nodes.x</code>, <code>this.nodes.y</code>,
      * <code>this.nodes.nLines</code> for all nodes</li>
-     * <li>calculates minimum time value (<code>this.timeValueLeft</code>) and maximum time
-     * value (<code>this.timeValueRight</code>) if applicable</li>
+     * <li>calculates minimum time value (<code>this.timeValueLeft</code>) and
+     * maximum time value (<code>this.timeValueRight</code>) if applicable</li>
      * </ul>
-     * @return {MetroChart} - Returns the MetroChart object with updated data
+     *
+     * @return {MetroChart} Returns the MetroChart object with updated data
      */
     private verifyData(): MetroChart {
 
