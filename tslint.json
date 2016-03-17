@@ -23,7 +23,6 @@
     "no-duplicate-variable": true,
     "no-empty": true,
     "no-eval": true,
-    "no-imports": true,
     "no-string-literal": false,
     "trailing-comma": true,
     "no-trailing-whitespace": true,
