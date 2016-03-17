@@ -25,7 +25,7 @@
     "no-eval": true,
     "no-imports": true,
     "no-string-literal": false,
-    "no-trailing-comma": true,
+    "trailing-comma": true,
     "no-trailing-whitespace": true,
     "no-unused-variable": false,
     "no-unreachable": true,
