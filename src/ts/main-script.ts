@@ -5,14 +5,13 @@ let metrochart: MetroChart;
 
 let datasetNames = [
     'tintin',
-    'amsterdam',
-    'simultaneous-events'
+    'metrolines'
 ];
 let randomIndex = Math.floor(Math.random() * datasetNames.length);
 let showDataSet: string = datasetNames[randomIndex];
 
 switch (showDataSet) {
-    case 'amsterdam': {
+    case 'metrolines': {
             let options: Options = {
                 enableTimeAxis: false,
                 charge: -5,
@@ -27,7 +26,7 @@ switch (showDataSet) {
                 ],
                 stationShapeRadius: 5
             };
-            metrochart = new MetroChart('#metrochart', window.location.href + '/data/metrolines-amsterdam.json', options);
+            metrochart = new MetroChart('#metrochart', window.location.href + '/data/metrolines.json', options);
         }
         break;
     case 'tintin': {
@@ -36,14 +35,5 @@ switch (showDataSet) {
                 linkStrength: 0.0
             };
             metrochart = new MetroChart('#metrochart', window.location.href + '/data/tintin-the-black-island.json', options);
-        }
-        break;
-    case 'simultaneous-events': {
-            let options: Options = {
-                charge: -100,
-                stationShapeRadius: 10,
-                gravity: 0.005
-            };
-            metrochart = new MetroChart('#metrochart', window.location.href + '/data/simultaneous-events.json', options);
         }
 }

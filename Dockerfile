@@ -8,6 +8,10 @@
 ## Now you should be able to open a browser (on the host) and navigate to
 ## http://localhost:5001 and see the webapp being served.
 ##
+## You can put in your own data by copying a file with your data into the
+## container, as follows:
+## docker cp <yourdatafile> magnificent-metrochart:/metrochart/build/demo/data/metrolines.json
+##
 ## When you're done, run
 # docker stop magnificent-metrochart
 ## (you may have to start a new terminal for that)
