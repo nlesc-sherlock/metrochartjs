@@ -40,11 +40,11 @@ RUN apt-get install -y git
 # get a copy of the repository
 RUN git clone https://github.com/jspaaks/metrochart.git
 
-# Be explicit about which branch we're using
-RUN git checkout master
-
 # change into the directory
 WORKDIR /metrochart
+
+# Be explicit about which branch we're using
+RUN git checkout master
 
 # install curl
 RUN apt-get install -y curl
