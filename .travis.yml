@@ -19,5 +19,3 @@ before_script:
   - npm run deploy-dev
 
 script: gulp eslint tslint beautify-js ts concat-css copy-build
-
-
