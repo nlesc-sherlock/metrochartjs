@@ -17,4 +17,4 @@ before_script:
   - npm install --global gulp
   - npm run deploy-dev
 
-script: gulp eslint tslint beautify-js ts concat-css copy-build
+script:  gulp eslint tslint beautify-js ts concat-css copy-build
