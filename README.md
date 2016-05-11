@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/nlesc-sherlock/metrochartjs.svg?branch=master)](https://travis-ci.org/nlesc-sherlock/metrochartjs)
 
 # Live demo
 
@@ -70,4 +71,3 @@ python -m SimpleHTTPServer 8089
 
 
 ```
-
