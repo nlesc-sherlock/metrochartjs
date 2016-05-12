@@ -1,3 +1,5 @@
+///<reference path="../../typings/main/ambient/d3/index.d.ts" />
+
 /**
  * Station is basically a <code>d3.layout.force.Node</code> with added properties:
  * <ol>

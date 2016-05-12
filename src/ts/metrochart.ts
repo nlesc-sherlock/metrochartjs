@@ -1,5 +1,4 @@
-
-///<reference path="../../typings/tsd.d.ts" />
+///<reference path="../../typings/main/ambient/d3/index.d.ts" />
 ///<reference path="metrochartdata.ts" />
 ///<reference path="metrocharterror.ts" />
 ///<reference path="metroline.ts" />
@@ -1184,10 +1183,3 @@ class MetroChart {
 
 
 }
-
-
-
-
-
-
-

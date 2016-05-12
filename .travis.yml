@@ -11,10 +11,7 @@ addons:
       - g++-4.8
 
 before_script:
-  - npm install --global typescript
-  - npm install --global tsd
-  - npm install --global tslint
-  - npm install --global gulp
+  - npm install --global typescript typings tslint gulp
   - npm run deploy-dev
 
 script:  gulp build tsdoc

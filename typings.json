@@ -1,0 +1,7 @@
+{
+  "name": "metrochart",
+  "version": false,
+  "ambientDependencies": {
+    "d3": "github:DefinitelyTyped/DefinitelyTyped/d3/d3.d.ts#fc341765ebbb04b7109981a25dced01f488f4d94"
+  }
+}
