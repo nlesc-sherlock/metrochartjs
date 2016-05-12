@@ -6,10 +6,9 @@
         "noImplicitAny": false,
         "removeComments": true,
         "noLib": false,
-        "out": "build/demo/js/metrochart.js"
+        "outDir": "build/test/js/"
     },
-    "files": [
-        "src/ts/metrochart.ts",
-        "src/ts/main-script.ts"
+    "filesGlob": [
+        "src/test/*.test.ts",
     ]
 }

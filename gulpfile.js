@@ -17,7 +17,9 @@ var ts = require('gulp-typescript');
 var concatCss = require('gulp-concat-css');
 var typedoc = require("gulp-typedoc");
 var packageinfo = require('./package.json');
-
+var tape = require('gulp-tape');
+var tapcolorize = require('tap-colorize');
+var tapspec = require('tap-spec');
 
 
 
@@ -208,4 +210,26 @@ gulp.task('tsdoc',
 
 
 
+var tsProjectTests = ts.createProject('src/test/tsconfig.json')
 
+// compile typescript
+gulp.task('build-tests', ['ts'],
+    function() {
+        'Compiles typescript to javascript according to tsconfig.json'
+        var tsResult = tsProjectTests.src()
+            .pipe(sourcemaps.init())
+            .pipe(ts(tsProjectTests));
+
+        return tsResult.js
+            .pipe(sourcemaps.write())
+            .pipe(gulp.dest("./build/test"));
+    });
+
+gulp.task('test', ['build-tests'],
+    function() {
+      'Runs tests'
+      return gulp.src('build/test/**/*.test.js')
+          .pipe(tape({
+              reporter: tapcolorize().pipe(tapspec())
+          }));
+    });
