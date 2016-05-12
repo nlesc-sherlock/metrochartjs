@@ -14,4 +14,4 @@ before_script:
   - npm install --global typescript typings tslint gulp
   - npm run deploy-dev
 
-script:  gulp build tsdoc test
+script: gulp build test publish

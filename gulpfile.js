@@ -25,52 +25,14 @@ var tapspec = require('tap-spec');
 
 // remove the build directory and its contents
 gulp.task('clean-build',
-    'Remove the ./build directory and its contents',
     function() {
+        'Remove the ./build directory and its contents'
         return del.sync([
             // delete everything under ./build/ as well as the directory itself
             './build',
         ]);
     }
 );
-
-
-
-
-// transpile typescript into javascript
-var tsProject = ts.createProject('tsconfig.json');
-gulp.task('ts',
-    'Transpile typescript into javascript according to tsconfig.json',
-    function(callbackWhenDone) {
-        var tsResult = tsProject.src()
-            .pipe(sourcemaps.init())
-            .pipe(ts(tsProject));
-
-        tsResult.js
-            .pipe(sourcemaps.write())
-            .pipe(gulp.dest("./"));
-
-        callbackWhenDone();
-    }
-);
-
-
-
-
-gulp.task('tslint',
-    'Lints typescript with tslint according to configuration from tslint.json',
-    function(callbackWhenDone) {
-
-        gulp.src('src/**/*.ts')
-            .pipe(tslint())
-            .pipe(tslint.report('verbose'));
-
-        callbackWhenDone();
-    }
-);
-
-
-
 
 
 // concatenate css and copy the result to build/
@@ -86,8 +48,6 @@ gulp.task('css',
 );
 
 
-
-
 // copy html files to build/
 gulp.task('html',
     'Copies html to build directory',
@@ -98,8 +58,6 @@ gulp.task('html',
         callbackWhenDone();
     }
 );
-
-
 
 
 // copy data files to build/demo
@@ -115,89 +73,41 @@ gulp.task('data',
 );
 
 
-
-
-gulp.task('build',
-    'Populate ./build/ directory',
-    function(){
-        gulp.start('clean-build');
-        gulp.start('ts');
-        gulp.start('tslint');
-        gulp.start('css');
-        gulp.start('html');
-        gulp.start('data');
-    }
-);
-
-
-
-
-// remove the publish directory and its contents
-gulp.task('clean-publish',
-    'Remove the ./publish directory and its contents',
-    function() {
-        return del.sync([
-            // delete everything under ./publish/ as well as the directory itself
-            './publish',
-        ]);
-    }
-);
-
-
-
-
-// copy the files from build/ to directory publish/, so that it can be published
-// on gh-pages
-gulp.task('publish',
-    'Copies the finished product from build/ to publish/ so that it can be published on gh-pages',
-    function() {
-
-        gulp.start('clean-publish');
-
-        // create a .nojekyll file in the root of the repo to avoid errors
-        // see https://github.com/blog/572-bypassing-jekyll-on-github-pages
-        gulp.start('nojekyll');
-
-        gulp.src(['./build/**/*']).pipe(gulp.dest('./publish/'));
-
-    }
-);
-
-
-
-
-gulp.task('clean',
-    'Remove ./build/ and ./publish/ directories',
+gulp.task('tslint',
+    'Lints typescript with tslint according to configuration from tslint.json',
     function(callbackWhenDone) {
-        gulp.start('clean-build');
-        gulp.start('clean-publish');
+
+        gulp.src('src/**/*.ts')
+            .pipe(tslint())
+            .pipe(tslint.report('verbose'));
+
         callbackWhenDone();
     }
 );
 
 
-
-
-// copy .nojekyll files to build/ in order to be able to use the tsdoc from
-// github.io (see https://github.com/blog/572-bypassing-jekyll-on-github-pages)
-gulp.task('nojekyll',
-    'Copies the .nojekyll file to the build/ directory',
+// transpile typescript into javascript
+var tsProject = ts.createProject('tsconfig.json');
+gulp.task('ts', ['tslint'],
     function(callbackWhenDone) {
+        'Transpile typescript into javascript according to tsconfig.json'
+        var tsResult = tsProject.src()
+            .pipe(sourcemaps.init())
+            .pipe(ts(tsProject));
 
-        gulp.src('./.nojekyll').pipe(gulp.dest('./publish/'));
+        tsResult.js
+            .pipe(sourcemaps.write())
+            .pipe(gulp.dest("./"));
 
         callbackWhenDone();
-
     }
 );
-
-
 
 
 // generate documentation
 gulp.task('tsdoc',
-    'Generate the TypeDoc documentation',
     function() {
+        'Generate the TypeDoc documentation'
 
         return gulp.src(['src/**/*.ts']).pipe(typedoc({
                 module: 'commonjs',
@@ -207,6 +117,12 @@ gulp.task('tsdoc',
             }));
     }
 );
+
+
+// Populate ./build/ directory
+gulp.task('build', ['ts', 'css', 'html', 'data']);
+
+
 
 
 
@@ -225,6 +141,7 @@ gulp.task('build-tests', ['ts'],
             .pipe(gulp.dest("./build/test"));
     });
 
+
 gulp.task('test', ['build-tests'],
     function() {
       'Runs tests'
@@ -233,3 +150,47 @@ gulp.task('test', ['build-tests'],
               reporter: tapcolorize().pipe(tapspec())
           }));
     });
+
+
+
+
+
+// remove the publish directory and its contents
+gulp.task('clean-publish',
+    'Remove the ./publish directory and its contents',
+    function() {
+        return del.sync([
+            // delete everything under ./publish/ as well as the directory itself
+            './publish',
+        ]);
+    }
+);
+
+
+// copy .nojekyll files to build/ in order to be able to use the tsdoc from
+// github.io (see https://github.com/blog/572-bypassing-jekyll-on-github-pages)
+gulp.task('nojekyll',
+    function(callbackWhenDone) {
+        'Copies the .nojekyll file to the publish/ directory'
+
+        gulp.src('./.nojekyll').pipe(gulp.dest('./publish/'));
+
+        callbackWhenDone();
+
+    }
+);
+
+
+// copy the files from build/ to directory publish/, so that it can be published
+// on gh-pages
+gulp.task('publish', ['build', 'nojekyll'],
+    function() {
+        'Copies the finished product from build/ to publish/ so that it can be published on gh-pages'
+        gulp.src(['./build/demo/**/*']).pipe(gulp.dest('./publish/demo/'));
+    }
+);
+
+
+
+// Remove ./build/ and ./publish/ directories
+gulp.task('clean', ['clean-build', 'clean-publish']);

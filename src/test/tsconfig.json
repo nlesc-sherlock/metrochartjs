@@ -9,6 +9,6 @@
         "outDir": "build/test/js/"
     },
     "filesGlob": [
-        "src/test/*.test.ts",
+        "src/test/*.test.ts"
     ]
 }
