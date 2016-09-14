@@ -1,3 +1,5 @@
+
+import {Station} from './station';
 /**
  * MetroLine is basically a <code>d3.layout.force.Link</code> between two
  * {@link Station} objects, except that it adds the <code>line</code> and
