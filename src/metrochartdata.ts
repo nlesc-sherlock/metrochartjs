@@ -1,9 +1,13 @@
+
+import {MetroLine} from './metroline';
+import {Station} from './station';
+
 /**
  * MetroChartData combines a list of {@link Station}s with a list of
  * {@link MetroLine}s, and adds the optional properties <code>source</code>,
  * <code>stationlabel</code>, and <code>linelabel</code>.
  */
-interface MetroChartData {
+export interface MetroChartData {
     /**
      * By default the links are labeled as 'metrolines', but depending on the
      * nature of the data, it can be convenient to label the links in accordance

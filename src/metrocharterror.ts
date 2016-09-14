@@ -1,7 +1,7 @@
 /*
  * Not sure why the {@link MetroChartError} class works like it does
  */
-class MetroChartError extends Error {
+export class MetroChartError extends Error {
 
     public message : string;
     public name    : string;

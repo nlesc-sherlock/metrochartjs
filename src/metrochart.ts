@@ -1,10 +1,12 @@
-///<reference path="../../typings/main/ambient/d3/index.d.ts" />
-///<reference path="metrochartdata.ts" />
-///<reference path="metrocharterror.ts" />
-///<reference path="metroline.ts" />
-///<reference path="options.ts" />
-///<reference path="station.ts" />
 
+import {MetroChartData} from './metrochartdata';
+import {MetroChartError} from './metrocharterror';
+import {MetroLine} from './metroline';
+import {Options} from './options';
+import {Station} from './station';
+
+
+import 'd3';
 
 /**
  * <p>
@@ -22,7 +24,7 @@
  * scene, with nodes representing scenes and links representing characters).
  * </p>
  */
-class MetroChart {
+export class MetroChart {
 
 
 

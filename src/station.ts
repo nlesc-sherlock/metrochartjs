@@ -1,4 +1,5 @@
-///<reference path="../../typings/main/ambient/d3/index.d.ts" />
+
+import 'd3';
 
 /**
  * Station is basically a <code>d3.layout.force.Node</code> with added properties:
@@ -9,7 +10,7 @@
  * <li><code>time</code></li>
  * </ol>
  */
-interface Station extends d3.layout.force.Node {
+export interface Station extends d3.layout.force.Node {
     /**
     * The list of metrolines that stop at this station.
     */

@@ -1,7 +1,7 @@
 /**
  * Options defines the options
  */
-interface Options {
+export interface Options {
     /**
      * <p>
      * The colors defined by <code>colors</code> specify the colors with which

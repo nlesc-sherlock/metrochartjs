@@ -3,7 +3,7 @@
  * {@link Station} objects, except that it adds the <code>line</code> and
  * <code>uindex</code> properties.
  */
-interface MetroLine extends d3.layout.force.Link<Station> {
+export interface MetroLine extends d3.layout.force.Link<Station> {
     /**
      * Name of the metroline.
      */
