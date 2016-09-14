@@ -1,10 +1,7 @@
 {
-  "name": "metrochart",
+  "name": "metrochartjs",
   "version": false,
-  "ambientDependencies": {
-    "d3": "github:DefinitelyTyped/DefinitelyTyped/d3/d3.d.ts#fc341765ebbb04b7109981a25dced01f488f4d94",
-    "node": "registry:dt/node#4.0.0+20160509154515",
-    "tape": "registry:dt/tape#4.2.2+20160317120654"
-  },
-  "dependencies": {}
+  "globalDependencies": {
+    "d3": "github:DefinitelyTyped/DefinitelyTyped/d3/d3.d.ts#aefd8146158b9f17c9eb79bbf158e6d8d3c2a87b"
+  }
 }
