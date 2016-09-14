@@ -537,7 +537,7 @@ export class MetroChart {
 
             let iSection: number;
             let nSections: number;
-            let outputStr;
+            let outputStr:string;
             let angle: number;
             let dx: number;
             let dy: number;
@@ -728,7 +728,7 @@ export class MetroChart {
     public drawForceDirectedGraph(): MetroChart {
 
         // define onMouseOutNodeGroup as a local function to the drawForceDirectedGraph() method
-        let onMouseOutNodeGroup = function(eventsource) {
+        let onMouseOutNodeGroup = function(eventsource:any) {
             //  Note the d3 selector magic that is applied here. I get the
             //  source of the event, which is an svg group, and on that
             //  selection I subselect everything of class 'nodegroup-child' (which
@@ -741,7 +741,7 @@ export class MetroChart {
         };
 
         // define onMouseOverNodeGroup as a local function to the drawForceDirectedGraph() method
-        let onMouseOverNodeGroup = function(eventsource) {
+        let onMouseOverNodeGroup = function(eventsource:any) {
             //  Note the d3 selector magic that is applied here. I get the
             //  source of the event, which is an svg group, and on that
             //  selection I subselect everything of class 'nodegroup-child' (which
@@ -763,7 +763,7 @@ export class MetroChart {
         };
 
         // define onMouseOutMetroLine as a local function to the drawForceDirectedGraph() method
-        let onMouseOutMetroLine = function(eventsource) {
+        let onMouseOutMetroLine = function(eventsource:any) {
             // Here, 'eventsource' refers to the line segment (path)
             // that generated the event, not the instance of MetroChart!
             let uindex: number = d3.select(eventsource).datum().uindex;
@@ -772,7 +772,7 @@ export class MetroChart {
         };
 
         // define onMouseOverMetroLine as a local function to the drawForceDirectedGraph() method
-        let onMouseOverMetroLine = function(eventsource) {
+        let onMouseOverMetroLine = function(eventsource:any) {
             // Here, 'eventsource' refers to the line segment (path)
             // that generated the event, not the instance of MetroChart!
             let uindex: number = d3.select(eventsource).datum().uindex;
