@@ -7,12 +7,7 @@
         "sourceMap": true
     },
     "files": [
-        "src/metrochart.ts",
-        "src/metrochartdata.ts",
-        "src/metrocharterror.ts",
-        "src/metroline.ts",
-        "src/options.ts",
-        "src/station.ts",
+        "src/main.ts",
         "typings/index.d.ts"
     ],
     "exclude": ["sites"]
