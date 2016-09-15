@@ -1,0 +1,1803 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>MetroChart | metrochartjs</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script src="../assets/js/modernizr.js"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">metrochartjs</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="../modules/_metrochart_.html">&quot;metrochart&quot;</a>
+				</li>
+				<li>
+					<a href="_metrochart_.metrochart.html">MetroChart</a>
+				</li>
+			</ul>
+			<h1>Class MetroChart</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>
+							A MetroChart is a force-directed graph. Being a graph, it is made up of nodes
+							and links. The nodes represent stations (see interface <a href="../interfaces/_station_.station.html">Station</a>) while
+							the links represent metrolines (see interface <a href="../interfaces/_metroline_.metroline.html">MetroLine</a>).
+						</p>
+					</div>
+					<p>
+						The data may include an attribute <code>time</code> on each node. The property
+						may be used to order nodes along the horizontal axis (by setting
+						<code>this.enableTimeAxis</code> to <code>true</code>). This is convenient
+						for visualizing certain types of data, such as narratives in stories or plays
+						(which character occurs together with which other characters in any given
+						scene, with nodes representing scenes and links representing characters).
+					</p>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">MetroChart</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section tsd-is-external">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-external"><a href="_metrochart_.metrochart.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-external">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_metrochart_.metrochart.html#_charge" class="tsd-kind-icon">_charge</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_metrochart_.metrochart.html#_colors" class="tsd-kind-icon">_colors</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_metrochart_.metrochart.html#_enabletimeaxis" class="tsd-kind-icon">_enable<wbr>Time<wbr>Axis</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_metrochart_.metrochart.html#_gravity" class="tsd-kind-icon">_gravity</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_metrochart_.metrochart.html#_linkdistance" class="tsd-kind-icon">_link<wbr>Distance</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_metrochart_.metrochart.html#_linkstrength" class="tsd-kind-icon">_link<wbr>Strength</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_metrochart_.metrochart.html#_url" class="tsd-kind-icon">_url</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="_metrochart_.metrochart.html#datasource" class="tsd-kind-icon">datasource</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_metrochart_.metrochart.html#elem" class="tsd-kind-icon">elem</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_metrochart_.metrochart.html#elemselection" class="tsd-kind-icon">elem<wbr>Selection</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_metrochart_.metrochart.html#h" class="tsd-kind-icon">h</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_metrochart_.metrochart.html#labelrotation" class="tsd-kind-icon">label<wbr>Rotation</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_metrochart_.metrochart.html#labelspacevert" class="tsd-kind-icon">label<wbr>Space<wbr>Vert</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="_metrochart_.metrochart.html#linelabel" class="tsd-kind-icon">linelabel</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_metrochart_.metrochart.html#links" class="tsd-kind-icon">links</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_metrochart_.metrochart.html#nodes" class="tsd-kind-icon">nodes</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_metrochart_.metrochart.html#padding" class="tsd-kind-icon">padding</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="_metrochart_.metrochart.html#stationshaperadius" class="tsd-kind-icon">station<wbr>Shape<wbr>Radius</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="_metrochart_.metrochart.html#stationlabel" class="tsd-kind-icon">stationlabel</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="_metrochart_.metrochart.html#timevalueleft" class="tsd-kind-icon">time<wbr>Value<wbr>Left</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="_metrochart_.metrochart.html#timevalueright" class="tsd-kind-icon">time<wbr>Value<wbr>Right</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_metrochart_.metrochart.html#ulinks" class="tsd-kind-icon">ulinks</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_metrochart_.metrochart.html#w" class="tsd-kind-icon">w</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-external">
+							<h3>Accessors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-external"><a href="_metrochart_.metrochart.html#charge" class="tsd-kind-icon">charge</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-external"><a href="_metrochart_.metrochart.html#colors" class="tsd-kind-icon">colors</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-external"><a href="_metrochart_.metrochart.html#enabletimeaxis" class="tsd-kind-icon">enable<wbr>Time<wbr>Axis</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-external"><a href="_metrochart_.metrochart.html#gravity" class="tsd-kind-icon">gravity</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-external"><a href="_metrochart_.metrochart.html#linkdistance" class="tsd-kind-icon">link<wbr>Distance</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-external"><a href="_metrochart_.metrochart.html#linkstrength" class="tsd-kind-icon">link<wbr>Strength</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-external"><a href="_metrochart_.metrochart.html#url" class="tsd-kind-icon">url</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-external">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="_metrochart_.metrochart.html#applydefaultoptions" class="tsd-kind-icon">apply<wbr>Default<wbr>Options</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="_metrochart_.metrochart.html#calclabeltoporbottom" class="tsd-kind-icon">calc<wbr>Label<wbr>Top<wbr>OrBottom</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="_metrochart_.metrochart.html#calclabeltranslate" class="tsd-kind-icon">calc<wbr>Label<wbr>Translate</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_metrochart_.metrochart.html#calclinkshape" class="tsd-kind-icon">calc<wbr>Link<wbr>Shape</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_metrochart_.metrochart.html#calcstationshape" class="tsd-kind-icon">calc<wbr>Station<wbr>Shape</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_metrochart_.metrochart.html#calcstationtranslate" class="tsd-kind-icon">calc<wbr>Station<wbr>Translate</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_metrochart_.metrochart.html#calcstuboffset" class="tsd-kind-icon">calc<wbr>Stub<wbr>Offset</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_metrochart_.metrochart.html#calcuniquelines" class="tsd-kind-icon">calc<wbr>Unique<wbr>Lines</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="_metrochart_.metrochart.html#calcverticalline" class="tsd-kind-icon">calc<wbr>Vertical<wbr>Line</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="_metrochart_.metrochart.html#drawforcedirectedgraph" class="tsd-kind-icon">draw<wbr>Force<wbr>Directed<wbr>Graph</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="_metrochart_.metrochart.html#getcolor" class="tsd-kind-icon">get<wbr>Color</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_metrochart_.metrochart.html#loaddata" class="tsd-kind-icon">loaddata</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_metrochart_.metrochart.html#observeboundingbox" class="tsd-kind-icon">observe<wbr>Bounding<wbr>Box</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="_metrochart_.metrochart.html#verifydata" class="tsd-kind-icon">verify<wbr>Data</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-private tsd-is-private-protected tsd-is-external">
+							<h3>Object literals</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-object-literal tsd-parent-kind-class tsd-is-private tsd-is-static tsd-is-external"><a href="_metrochart_.metrochart.html#defaultoptions" class="tsd-kind-icon">default<wbr>Options</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-external">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Metro<wbr>Chart<span class="tsd-signature-symbol">(</span>elem<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_options_.options.html" class="tsd-signature-type">Options</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_metrochart_.metrochart.html" class="tsd-signature-type">MetroChart</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L215">metrochart.ts:215</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Create a new MetroChart instance.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>elem: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>The name of the DOM element in which you want to
+											draw the MetroChart.</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5>url: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>The URL of the data file, which should be a JSON file
+											formatted according to the <code>MetroChartData</code> interface.</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/_options_.options.html" class="tsd-signature-type">Options</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_metrochart_.metrochart.html" class="tsd-signature-type">MetroChart</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-external">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="_charge" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _charge</h3>
+					<div class="tsd-signature tsd-kind-icon">_charge<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L129">metrochart.ts:129</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Defines the charge parameter of the force-directed graph.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="_colors" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _colors</h3>
+					<div class="tsd-signature tsd-kind-icon">_colors<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L125">metrochart.ts:125</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>See <a href="../interfaces/_options_.options.html#colors">Options.colors</a>.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="_enabletimeaxis" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _enable<wbr>Time<wbr>Axis</h3>
+					<div class="tsd-signature tsd-kind-icon">_enable<wbr>Time<wbr>Axis<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L133">metrochart.ts:133</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>See <a href="../interfaces/_options_.options.html#enabletimeaxis">Options.enableTimeAxis</a>.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="_gravity" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _gravity</h3>
+					<div class="tsd-signature tsd-kind-icon">_gravity<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L137">metrochart.ts:137</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Defines the gravity parameter of the force-directed graph.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="_linkdistance" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _link<wbr>Distance</h3>
+					<div class="tsd-signature tsd-kind-icon">_link<wbr>Distance<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L141">metrochart.ts:141</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Defines the link distance parameter of the force-directed graph.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="_linkstrength" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _link<wbr>Strength</h3>
+					<div class="tsd-signature tsd-kind-icon">_link<wbr>Strength<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L145">metrochart.ts:145</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Defines the link strength parameter of the force-directed graph.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="_url" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _url</h3>
+					<div class="tsd-signature tsd-kind-icon">_url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L117">metrochart.ts:117</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The URL of where the data is located. Data should be compliant with the
+							<a href="../interfaces/_metrochartdata_.metrochartdata.html">MetroChartData</a> interface.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
+					<a name="datasource" class="tsd-anchor"></a>
+					<h3>datasource</h3>
+					<div class="tsd-signature tsd-kind-icon">datasource<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L37">metrochart.ts:37</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The JSON data may include an optional <code>source</code> property (see
+								interface <a href="../interfaces/_metrochartdata_.metrochartdata.html">MetroChartData</a>). Property <code>this.datasource</code>
+								stores the data source, or if the data source is omitted from the JSON,
+							<code>this.datasource</code> is set to <code>&#39;unknown&#39;</code>.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="elem" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> elem</h3>
+					<div class="tsd-signature tsd-kind-icon">elem<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L42">metrochart.ts:42</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Identifier of the DOM element such as <code>#metrochart</code>, in
+							which to draw the MetroChart.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="elemselection" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> elem<wbr>Selection</h3>
+					<div class="tsd-signature tsd-kind-icon">elem<wbr>Selection<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Selection</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L46">metrochart.ts:46</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The D3 selection representation of <code>this.elem</code>.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="h" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> h</h3>
+					<div class="tsd-signature tsd-kind-icon">h<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L50">metrochart.ts:50</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The height of the DOM element containing the MetroChart.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="labelrotation" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> label<wbr>Rotation</h3>
+					<div class="tsd-signature tsd-kind-icon">label<wbr>Rotation<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L60">metrochart.ts:60</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Defines the rotation of the station labels.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="labelspacevert" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> label<wbr>Space<wbr>Vert</h3>
+					<div class="tsd-signature tsd-kind-icon">label<wbr>Space<wbr>Vert<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L56">metrochart.ts:56</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>When the graph is visualized, station names can be displayed in a
+								reserved area at the top of the visualization as well as at the bottom.
+							This property sets the height of these reserved areas.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
+					<a name="linelabel" class="tsd-anchor"></a>
+					<h3>linelabel</h3>
+					<div class="tsd-signature tsd-kind-icon">linelabel<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L77">metrochart.ts:77</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>When the data represents different entities than metrolines and stations
+								this property may be used to define an alternative name to identify
+								metrolines. Let&#39;s say your data represents the storyline of a comic book,
+								then individual frames could be represented by a station, while the
+								characters that occur in a frame could be represented by a line. In this
+								case, <code>this.stationlabel</code> could be set to <code>&#39;frame&#39;</code>
+							and <code>this.linelabel</code> could be set to <code>&#39;character&#39;</code>.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="links" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> links</h3>
+					<div class="tsd-signature tsd-kind-icon">links<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_metroline_.metroline.html" class="tsd-signature-type">MetroLine</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L82">metrochart.ts:82</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The list of links/metrolines, pointing to the indices of two nodes/
+							stations.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="nodes" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> nodes</h3>
+					<div class="tsd-signature tsd-kind-icon">nodes<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_station_.station.html" class="tsd-signature-type">Station</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L86">metrochart.ts:86</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The list of stations.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="padding" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> padding</h3>
+					<div class="tsd-signature tsd-kind-icon">padding<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L67">metrochart.ts:67</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The graph is padded to avoid having elements very close to the left-side
+								and right-side edges of the visualization, or even falling off of it.
+								This property defines how much padding there is (in pixels). Note that
+							the bounding box takes into account the padding value.</p>
+						</div>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5>left<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>right<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
+					<a name="stationshaperadius" class="tsd-anchor"></a>
+					<h3>station<wbr>Shape<wbr>Radius</h3>
+					<div class="tsd-signature tsd-kind-icon">station<wbr>Shape<wbr>Radius<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L100">metrochart.ts:100</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Radius in pixels used in drawing the station symbols.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
+					<a name="stationlabel" class="tsd-anchor"></a>
+					<h3>stationlabel</h3>
+					<div class="tsd-signature tsd-kind-icon">stationlabel<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L96">metrochart.ts:96</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>When the data represents different entities than metrolines and stations
+								this property may be used to define an alternative name to identify
+								stations. Let&#39;s say your data represents the storyline of a comic book,
+								then individual frames could be represented by a station, while the
+								characters that occur in a frame could be represented by a line. In this
+								case, <code>this.stationlabel</code> could be set to <code>&#39;frame&#39;</code>
+							and <code>this.linelabel</code> could be set to <code>&#39;character&#39;</code>.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
+					<a name="timevalueleft" class="tsd-anchor"></a>
+					<h3>time<wbr>Value<wbr>Left</h3>
+					<div class="tsd-signature tsd-kind-icon">time<wbr>Value<wbr>Left<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L104">metrochart.ts:104</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The time value corresponding to the left-most pixel.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
+					<a name="timevalueright" class="tsd-anchor"></a>
+					<h3>time<wbr>Value<wbr>Right</h3>
+					<div class="tsd-signature tsd-kind-icon">time<wbr>Value<wbr>Right<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L108">metrochart.ts:108</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The time value corresponding to the right-most pixel.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="ulinks" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> ulinks</h3>
+					<div class="tsd-signature tsd-kind-icon">ulinks<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L112">metrochart.ts:112</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>List of strings containing the unique metroline names.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="w" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> w</h3>
+					<div class="tsd-signature tsd-kind-icon">w<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L121">metrochart.ts:121</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The width of the DOM element containing the MetroChart.</p>
+						</div>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-external">
+				<h2>Accessors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+					<a name="charge" class="tsd-anchor"></a>
+					<h3>charge</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> charge<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> charge<span class="tsd-signature-symbol">(</span>charge<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L1142">metrochart.ts:1142</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the force-directed graph&#39;s charge parameter.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L1139">metrochart.ts:1139</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the force-directed graph&#39;s charge parameter.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>charge: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+					<a name="colors" class="tsd-anchor"></a>
+					<h3>colors</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> colors<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> colors<span class="tsd-signature-symbol">(</span>colors<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L1121">metrochart.ts:1121</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the list of colors to be used for visualizing the lines.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L1118">metrochart.ts:1118</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the list of colors to be used for visualizing the lines.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>colors: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+					<a name="enabletimeaxis" class="tsd-anchor"></a>
+					<h3>enable<wbr>Time<wbr>Axis</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> enableTimeAxis<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> enableTimeAxis<span class="tsd-signature-symbol">(</span>enableTimeAxis<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L1132">metrochart.ts:1132</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Defines whether or not to apply the time axis constraint in positioning
+									the stations horizontally.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L1129">metrochart.ts:1129</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Defines whether or not to apply the time axis constraint in positioning
+									the stations horizontally.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>enableTimeAxis: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+					<a name="gravity" class="tsd-anchor"></a>
+					<h3>gravity</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> gravity<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> gravity<span class="tsd-signature-symbol">(</span>gravity<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L1164">metrochart.ts:1164</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the force-directed graph&#39;s gravity parameter.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L1161">metrochart.ts:1161</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the force-directed graph&#39;s gravity parameter.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>gravity: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+					<a name="linkdistance" class="tsd-anchor"></a>
+					<h3>link<wbr>Distance</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> linkDistance<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> linkDistance<span class="tsd-signature-symbol">(</span>linkDistance<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L1153">metrochart.ts:1153</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the force-directed graph&#39;s link distance parameter.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L1150">metrochart.ts:1150</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the force-directed graph&#39;s link distance parameter.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>linkDistance: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+					<a name="linkstrength" class="tsd-anchor"></a>
+					<h3>link<wbr>Strength</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> linkStrength<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> linkStrength<span class="tsd-signature-symbol">(</span>linkStrength<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L1174">metrochart.ts:1174</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the force-directed graph&#39;s link strength parameter.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L1171">metrochart.ts:1171</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the force-directed graph&#39;s link strength parameter.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>linkStrength: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-external">
+					<a name="url" class="tsd-anchor"></a>
+					<h3>url</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> url<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L1182">metrochart.ts:1182</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets the url of where the data was loaded from.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-external">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="applydefaultoptions" class="tsd-anchor"></a>
+					<h3>apply<wbr>Default<wbr>Options</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">apply<wbr>Default<wbr>Options<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_options_.options.html" class="tsd-signature-type">Options</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_metrochart_.metrochart.html" class="tsd-signature-type">MetroChart</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L265">metrochart.ts:265</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/_options_.options.html" class="tsd-signature-type">Options</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>User supplied options that override the default
+										options from <a href="_metrochart_.metrochart.html#defaultoptions">MetroChart.defaultOptions</a>.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_metrochart_.metrochart.html" class="tsd-signature-type">MetroChart</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="calclabeltoporbottom" class="tsd-anchor"></a>
+					<h3>calc<wbr>Label<wbr>Top<wbr>OrBottom</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">calc<wbr>Label<wbr>Top<wbr>OrBottom<span class="tsd-signature-symbol">(</span>station<span class="tsd-signature-symbol">: </span><a href="../interfaces/_station_.station.html" class="tsd-signature-type">Station</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L446">metrochart.ts:446</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>When drawing the vertical line from station to label, you need to know
+										whether to draw to the bottom reserved area or the top reserved area.
+										This method determines whether the bottom reserved area or the top
+										reserved area is closest to the position of the station. This is then
+										used in drawing the station-to-label vertical line, as well as in
+									calculating the position of the station labels.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>station: <a href="../interfaces/_station_.station.html" class="tsd-signature-type">Station</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The station for which we want to determine
+										which is closer --the top reserved area or the bottom one.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>Either <code>&#39;top&#39;</code> or <code>&#39;bottom&#39;</code>.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="calclabeltranslate" class="tsd-anchor"></a>
+					<h3>calc<wbr>Label<wbr>Translate</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">calc<wbr>Label<wbr>Translate<span class="tsd-signature-symbol">(</span>station<span class="tsd-signature-symbol">: </span><a href="../interfaces/_station_.station.html" class="tsd-signature-type">Station</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L483">metrochart.ts:483</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The stations are labeled with their names. These labels are drawn in
+										one of two reserved plotting areas, one near the bottom of the graph and
+										one near the top. This method determines which is closer, and the returns
+										the translation needed for the label to be correctly placed, i.e.
+										horizontally aligned with the position of the station, and vertically
+										aligned so it falls in either the bottom or the top reserved area. The
+										translation also includes a rotation, which can be set through
+									MetroChart&#39;s options (see <a href="../interfaces/_options_.options.html#labelrotation">Options.labelRotation</a>).</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>station: <a href="../interfaces/_station_.station.html" class="tsd-signature-type">Station</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The station for which you want to draw a
+										label.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>The translation that must be applied to position the
+								label such that it is horizontally aligned with the position of the
+								station proper, and vertically aligned with the bottom or top reserved
+								area. The translation also includes a rotation, which can be set through
+							MetroChart&#39;s options (see <a href="../interfaces/_options_.options.html#labelrotation">Options.labelRotation</a>).</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="calclinkshape" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> calc<wbr>Link<wbr>Shape</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">calc<wbr>Link<wbr>Shape<span class="tsd-signature-symbol">(</span>link<span class="tsd-signature-symbol">: </span><a href="../interfaces/_metroline_.metroline.html" class="tsd-signature-type">MetroLine</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L388">metrochart.ts:388</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Method to calculate the position of the lines connecting the stations.
+										The method takes into account how many lines there are at each station,
+									so the vertical offset can be calculated by <code>this.calcStubOffset()</code>.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>link: <a href="../interfaces/_metroline_.metroline.html" class="tsd-signature-type">MetroLine</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The link between two Stations.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>The SVG path string describing the position of the line.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="calcstationshape" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> calc<wbr>Station<wbr>Shape</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">calc<wbr>Station<wbr>Shape<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="../interfaces/_station_.station.html" class="tsd-signature-type">Station</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L516">metrochart.ts:516</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Method that calculates the shape of the station symbol.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="../interfaces/_station_.station.html" class="tsd-signature-type">Station</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The station for which to draw a symbol.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>String containing the SVG path &#39;d&#39; data for the
+							station symbol.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="calcstationtranslate" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> calc<wbr>Station<wbr>Translate</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">calc<wbr>Station<wbr>Translate<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="../interfaces/_station_.station.html" class="tsd-signature-type">Station</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L601">metrochart.ts:601</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Method that calculates the translation of the station symbol, while
+										observing the bounding box set by the dimensions of the SVG area and the
+									dimension of the station symbols.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="../interfaces/_station_.station.html" class="tsd-signature-type">Station</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The station that needs to be translated.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>String containing the translate offsets.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="calcstuboffset" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> calc<wbr>Stub<wbr>Offset</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">calc<wbr>Stub<wbr>Offset<span class="tsd-signature-symbol">(</span>link<span class="tsd-signature-symbol">: </span><a href="../interfaces/_metroline_.metroline.html" class="tsd-signature-type">MetroLine</a>, sourceOrTargetStr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L635">metrochart.ts:635</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Method to calculate the vertical offset that indicates that there is more
+									than one line at a station.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>link: <a href="../interfaces/_metroline_.metroline.html" class="tsd-signature-type">MetroLine</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The link object connecting two stations.</p>
+									</div>
+								</li>
+								<li>
+									<h5>sourceOrTargetStr: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<p>The vertical offset in pixels.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="calcuniquelines" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> calc<wbr>Unique<wbr>Lines</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">calc<wbr>Unique<wbr>Lines<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L665">metrochart.ts:665</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Method to calculate the set of unique line names, <code>this.ulinks</code>.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="calcverticalline" class="tsd-anchor"></a>
+					<h3>calc<wbr>Vertical<wbr>Line</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">calc<wbr>Vertical<wbr>Line<span class="tsd-signature-symbol">(</span>station<span class="tsd-signature-symbol">: </span><a href="../interfaces/_station_.station.html" class="tsd-signature-type">Station</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L696">metrochart.ts:696</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The svg drawing area has two reserved areas, one at the top and one at
+										the bottom. These area are reserved for labels containing the station
+										names. This method draws a line between the a node of the graph and the
+									station label proper.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>station: <a href="../interfaces/_station_.station.html" class="tsd-signature-type">Station</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The node for which line must be drawn to its
+										label.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>The SVG path &quot;d&quot; string data.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="drawforcedirectedgraph" class="tsd-anchor"></a>
+					<h3>draw<wbr>Force<wbr>Directed<wbr>Graph</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">draw<wbr>Force<wbr>Directed<wbr>Graph<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_metrochart_.metrochart.html" class="tsd-signature-type">MetroChart</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L728">metrochart.ts:728</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Draw/update force-directed metrochart graph using the current settings.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="_metrochart_.metrochart.html" class="tsd-signature-type">MetroChart</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="getcolor" class="tsd-anchor"></a>
+					<h3>get<wbr>Color</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Color<span class="tsd-signature-symbol">(</span>uindex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L938">metrochart.ts:938</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get the color of a line from <code>this.colors</code>, given its index
+										<code>uindex</code> into <code>this.ulinks</code>. If
+										<code>this.colors</code> is <code>undefined</code> or zero-length, return
+										a color string representing 50% gray. If there are not enough colors in
+										<code>this.colors</code>, use modulo math to determine the appropriate
+									index into the color table.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>uindex: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Index into <code>this.ulinks</code></p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>The hexadecimal color string used for drawing
+							<code>this.ulinks[uindex]</code>.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="loaddata" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> loaddata</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">loaddata<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L959">metrochart.ts:959</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Method to load the data from <code>this._url</code> using an <code>XMLHttpRequest</code>.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="observeboundingbox" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> observe<wbr>Bounding<wbr>Box</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">observe<wbr>Bounding<wbr>Box<span class="tsd-signature-symbol">(</span>node<span class="tsd-signature-symbol">: </span><a href="../interfaces/_station_.station.html" class="tsd-signature-type">Station</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_station_.station.html" class="tsd-signature-type">Station</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L1041">metrochart.ts:1041</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The graph has nodes of different sizes, depending on how many
+										metrolines stop at that station. However, you still want the entire
+										station symbol to remain inside the box defined by the svg drawing area.
+										This function makes sure that each station remains inside that bounding
+									box.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>node: <a href="../interfaces/_station_.station.html" class="tsd-signature-type">Station</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The station for which the bounding box must be
+										observed.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_station_.station.html" class="tsd-signature-type">Station</a></h4>
+							<p>The station with updated .x and .y properties such
+							that the entire station symbol falls within the bounding box.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="verifydata" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> verify<wbr>Data</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">verify<wbr>Data<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_metrochart_.metrochart.html" class="tsd-signature-type">MetroChart</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L1086">metrochart.ts:1086</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Updates the data on the MetroChart object:</p>
+									<ul>
+										<li>adds <code>this.nodes.x</code>, <code>this.nodes.y</code>,
+										<code>this.nodes.nLines</code> for all nodes</li>
+										<li>calculates minimum time value (<code>this.timeValueLeft</code>) and
+										maximum time value (<code>this.timeValueRight</code>) if applicable</li>
+									</ul>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="_metrochart_.metrochart.html" class="tsd-signature-type">MetroChart</a></h4>
+							<p>Returns the MetroChart object with updated data</p>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected tsd-is-external">
+				<h2>Object literals</h2>
+				<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-class tsd-is-private tsd-is-static tsd-is-external">
+					<a name="defaultoptions" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> default<wbr>Options</h3>
+					<div class="tsd-signature tsd-kind-icon">default<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L149">metrochart.ts:149</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>See <a href="../interfaces/_options_.options.html">Options</a>.</p>
+						</div>
+					</div>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
+						<a name="defaultoptions.charge-1" class="tsd-anchor"></a>
+						<h3>charge</h3>
+						<div class="tsd-signature tsd-kind-icon">charge<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L153">metrochart.ts:153</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>See <a href="../interfaces/_options_.options.html#charge">Options.charge</a>.</p>
+							</div>
+						</div>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
+						<a name="defaultoptions.colors-1" class="tsd-anchor"></a>
+						<h3>colors</h3>
+						<div class="tsd-signature tsd-kind-icon">colors<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;[{name: &#x27;red&#x27;,       hexcode: &#x27;#FF0000&#x27;},{name: &#x27;olive&#x27;,     hexcode: &#x27;#008000&#x27;},{name: &#x27;blue&#x27;,      hexcode: &#x27;#0080FF&#x27;},{name: &#x27;orange&#x27;,    hexcode: &#x27;#FF8000&#x27;},{name: &#x27;magenta&#x27;,   hexcode: &#x27;#FF0080&#x27;},{name: &#x27;yellow&#x27;,    hexcode: &#x27;#FFee00&#x27;},{name: &#x27;lime&#x27;,      hexcode: &#x27;#80DD00&#x27;},{name: &#x27;purple&#x27;,    hexcode: &#x27;#b200ff&#x27;},{name: &#x27;seagreen&#x27;,  hexcode: &#x27;#00DD80&#x27;},{name: &#x27;dark gray&#x27;, hexcode: &#x27;#888888&#x27;},{name: &#x27;black&#x27;,     hexcode: &#x27;#000000&#x27;}]</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L170">metrochart.ts:170</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>See <a href="../interfaces/_options_.options.html#colors">Options.colors</a>. Here are the default colors:</p>
+								<table>
+									<tr><td>1.</td><td bgcolor="#FF0000"></td><td>red</td></tr>
+									<tr><td>2.</td><td bgcolor="#008000"></td><td>olive</td></tr>
+									<tr><td>3.</td><td bgcolor="#0080FF"></td><td>blue</td></tr>
+									<tr><td>4.</td><td bgcolor="#FF8000"></td><td>orange</td></tr>
+									<tr><td>5.</td><td bgcolor="#FF0080"></td><td>magenta</td></tr>
+									<tr><td>6.</td><td bgcolor="#FFee00"></td><td>yellow</td></tr>
+									<tr><td>7.</td><td bgcolor="#80DD00"></td><td>lime</td></tr>
+									<tr><td>8.</td><td bgcolor="#b200ff"></td><td>purple</td></tr>
+									<tr><td>9.</td><td bgcolor="#00DD80"></td><td>seagreen</td></tr>
+									<tr><td>10.</td><td bgcolor="#888888"></td><td>dark gray</td></tr>
+									<tr><td>11.</td><td bgcolor="#000000"></td><td>black</td></tr>
+								</table>
+							</div>
+						</div>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
+						<a name="defaultoptions.enabletimeaxis-1" class="tsd-anchor"></a>
+						<h3>enable<wbr>Time<wbr>Axis</h3>
+						<div class="tsd-signature tsd-kind-icon">enable<wbr>Time<wbr>Axis<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L186">metrochart.ts:186</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>See <a href="../interfaces/_options_.options.html#enabletimeaxis">Options.enableTimeAxis</a>.</p>
+							</div>
+						</div>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
+						<a name="defaultoptions.gravity-1" class="tsd-anchor"></a>
+						<h3>gravity</h3>
+						<div class="tsd-signature tsd-kind-icon">gravity<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0.0005</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L190">metrochart.ts:190</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>See <a href="../interfaces/_options_.options.html#gravity">Options.gravity</a>.</p>
+							</div>
+						</div>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
+						<a name="defaultoptions.labelrotation-1" class="tsd-anchor"></a>
+						<h3>label<wbr>Rotation</h3>
+						<div class="tsd-signature tsd-kind-icon">label<wbr>Rotation<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;-45</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L198">metrochart.ts:198</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>See <a href="../interfaces/_options_.options.html#labelrotation">Options.labelRotation</a>.</p>
+							</div>
+						</div>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
+						<a name="defaultoptions.labelspacevert-1" class="tsd-anchor"></a>
+						<h3>label<wbr>Space<wbr>Vert</h3>
+						<div class="tsd-signature tsd-kind-icon">label<wbr>Space<wbr>Vert<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;130</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L194">metrochart.ts:194</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>See <a href="../interfaces/_options_.options.html#labelspacevert">Options.labelSpaceVert</a>.</p>
+							</div>
+						</div>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
+						<a name="defaultoptions.linkdistance-1" class="tsd-anchor"></a>
+						<h3>link<wbr>Distance</h3>
+						<div class="tsd-signature tsd-kind-icon">link<wbr>Distance<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L206">metrochart.ts:206</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>See <a href="../interfaces/_options_.options.html#linkdistance">Options.linkDistance</a>.</p>
+							</div>
+						</div>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
+						<a name="defaultoptions.linkstrength-1" class="tsd-anchor"></a>
+						<h3>link<wbr>Strength</h3>
+						<div class="tsd-signature tsd-kind-icon">link<wbr>Strength<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L210">metrochart.ts:210</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>See <a href="../interfaces/_options_.options.html#linkstrength">Options.linkStrength</a>.</p>
+							</div>
+						</div>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
+						<a name="defaultoptions.stationshaperadius-1" class="tsd-anchor"></a>
+						<h3>station<wbr>Shape<wbr>Radius</h3>
+						<div class="tsd-signature tsd-kind-icon">station<wbr>Shape<wbr>Radius<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;7</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L214">metrochart.ts:214</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>See <a href="../interfaces/_options_.options.html#stationshaperadius">Options.stationShapeRadius</a>.</p>
+							</div>
+						</div>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-object-literal tsd-is-external">
+						<a name="defaultoptions.padding-1" class="tsd-anchor"></a>
+						<h3>padding</h3>
+						<div class="tsd-signature tsd-kind-icon">padding<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L202">metrochart.ts:202</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>See <a href="../interfaces/_options_.options.html#padding">Options.padding</a>.</p>
+							</div>
+						</div>
+						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
+							<a name="defaultoptions.padding-1.left-1" class="tsd-anchor"></a>
+							<h3>left</h3>
+							<div class="tsd-signature tsd-kind-icon">left<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;50</span></div>
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L202">metrochart.ts:202</a></li>
+								</ul>
+							</aside>
+						</section>
+						<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-external">
+							<a name="defaultoptions.padding-1.right-1" class="tsd-anchor"></a>
+							<h3>right</h3>
+							<div class="tsd-signature tsd-kind-icon">right<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;50</span></div>
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/nlesc-sherlock/metrochartjs/blob/a9ffe2b/src/metrochart.ts#L202">metrochart.ts:202</a></li>
+								</ul>
+							</aside>
+						</section>
+					</section>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="label tsd-is-external">
+						<span>Internals</span>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_main_.html">"main"</a>
+					</li>
+					<li class="label tsd-is-external">
+						<span>Externals</span>
+					</li>
+					<li class="current tsd-kind-external-module tsd-is-external">
+						<a href="../modules/_metrochart_.html">"metrochart"</a>
+					</li>
+					<li class=" tsd-kind-external-module tsd-is-external">
+						<a href="../modules/_metrochartdata_.html">"metrochartdata"</a>
+					</li>
+					<li class=" tsd-kind-external-module tsd-is-external">
+						<a href="../modules/_metrocharterror_.html">"metrocharterror"</a>
+					</li>
+					<li class=" tsd-kind-external-module tsd-is-external">
+						<a href="../modules/_metroline_.html">"metroline"</a>
+					</li>
+					<li class=" tsd-kind-external-module tsd-is-external">
+						<a href="../modules/_options_.html">"options"</a>
+					</li>
+					<li class=" tsd-kind-external-module tsd-is-external">
+						<a href="../modules/_station_.html">"station"</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-external-module tsd-is-external">
+						<a href="_metrochart_.metrochart.html" class="tsd-kind-icon">Metro<wbr>Chart</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
+								<a href="_metrochart_.metrochart.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="_metrochart_.metrochart.html#_charge" class="tsd-kind-icon">_charge</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="_metrochart_.metrochart.html#_colors" class="tsd-kind-icon">_colors</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="_metrochart_.metrochart.html#_enabletimeaxis" class="tsd-kind-icon">_enable<wbr>Time<wbr>Axis</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="_metrochart_.metrochart.html#_gravity" class="tsd-kind-icon">_gravity</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="_metrochart_.metrochart.html#_linkdistance" class="tsd-kind-icon">_link<wbr>Distance</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="_metrochart_.metrochart.html#_linkstrength" class="tsd-kind-icon">_link<wbr>Strength</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="_metrochart_.metrochart.html#_url" class="tsd-kind-icon">_url</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
+								<a href="_metrochart_.metrochart.html#datasource" class="tsd-kind-icon">datasource</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="_metrochart_.metrochart.html#elem" class="tsd-kind-icon">elem</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="_metrochart_.metrochart.html#elemselection" class="tsd-kind-icon">elem<wbr>Selection</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="_metrochart_.metrochart.html#h" class="tsd-kind-icon">h</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="_metrochart_.metrochart.html#labelrotation" class="tsd-kind-icon">label<wbr>Rotation</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="_metrochart_.metrochart.html#labelspacevert" class="tsd-kind-icon">label<wbr>Space<wbr>Vert</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
+								<a href="_metrochart_.metrochart.html#linelabel" class="tsd-kind-icon">linelabel</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="_metrochart_.metrochart.html#links" class="tsd-kind-icon">links</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="_metrochart_.metrochart.html#nodes" class="tsd-kind-icon">nodes</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="_metrochart_.metrochart.html#padding" class="tsd-kind-icon">padding</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
+								<a href="_metrochart_.metrochart.html#stationshaperadius" class="tsd-kind-icon">station<wbr>Shape<wbr>Radius</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
+								<a href="_metrochart_.metrochart.html#stationlabel" class="tsd-kind-icon">stationlabel</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
+								<a href="_metrochart_.metrochart.html#timevalueleft" class="tsd-kind-icon">time<wbr>Value<wbr>Left</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
+								<a href="_metrochart_.metrochart.html#timevalueright" class="tsd-kind-icon">time<wbr>Value<wbr>Right</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="_metrochart_.metrochart.html#ulinks" class="tsd-kind-icon">ulinks</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="_metrochart_.metrochart.html#w" class="tsd-kind-icon">w</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+								<a href="_metrochart_.metrochart.html#charge" class="tsd-kind-icon">charge</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+								<a href="_metrochart_.metrochart.html#colors" class="tsd-kind-icon">colors</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+								<a href="_metrochart_.metrochart.html#enabletimeaxis" class="tsd-kind-icon">enable<wbr>Time<wbr>Axis</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+								<a href="_metrochart_.metrochart.html#gravity" class="tsd-kind-icon">gravity</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+								<a href="_metrochart_.metrochart.html#linkdistance" class="tsd-kind-icon">link<wbr>Distance</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+								<a href="_metrochart_.metrochart.html#linkstrength" class="tsd-kind-icon">link<wbr>Strength</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-external">
+								<a href="_metrochart_.metrochart.html#url" class="tsd-kind-icon">url</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="_metrochart_.metrochart.html#applydefaultoptions" class="tsd-kind-icon">apply<wbr>Default<wbr>Options</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="_metrochart_.metrochart.html#calclabeltoporbottom" class="tsd-kind-icon">calc<wbr>Label<wbr>Top<wbr>OrBottom</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="_metrochart_.metrochart.html#calclabeltranslate" class="tsd-kind-icon">calc<wbr>Label<wbr>Translate</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="_metrochart_.metrochart.html#calclinkshape" class="tsd-kind-icon">calc<wbr>Link<wbr>Shape</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="_metrochart_.metrochart.html#calcstationshape" class="tsd-kind-icon">calc<wbr>Station<wbr>Shape</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="_metrochart_.metrochart.html#calcstationtranslate" class="tsd-kind-icon">calc<wbr>Station<wbr>Translate</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="_metrochart_.metrochart.html#calcstuboffset" class="tsd-kind-icon">calc<wbr>Stub<wbr>Offset</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="_metrochart_.metrochart.html#calcuniquelines" class="tsd-kind-icon">calc<wbr>Unique<wbr>Lines</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="_metrochart_.metrochart.html#calcverticalline" class="tsd-kind-icon">calc<wbr>Vertical<wbr>Line</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="_metrochart_.metrochart.html#drawforcedirectedgraph" class="tsd-kind-icon">draw<wbr>Force<wbr>Directed<wbr>Graph</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="_metrochart_.metrochart.html#getcolor" class="tsd-kind-icon">get<wbr>Color</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="_metrochart_.metrochart.html#loaddata" class="tsd-kind-icon">loaddata</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="_metrochart_.metrochart.html#observeboundingbox" class="tsd-kind-icon">observe<wbr>Bounding<wbr>Box</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="_metrochart_.metrochart.html#verifydata" class="tsd-kind-icon">verify<wbr>Data</a>
+							</li>
+							<li class=" tsd-kind-object-literal tsd-parent-kind-class tsd-is-private tsd-is-static tsd-is-external">
+								<a href="_metrochart_.metrochart.html#defaultoptions" class="tsd-kind-icon">default<wbr>Options</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.io" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

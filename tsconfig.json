@@ -2,14 +2,13 @@
     "compilerOptions": {
         "target": "es5",
         "module": "commonjs",
-        "declaration": false,
-        "noImplicitAny": false,
-        "removeComments": true,
-        "noLib": false,
-        "out": "build/demo/js/metrochart.js"
+        "noImplicitAny": true,
+        "outDir": "build",
+        "sourceMap": true
     },
     "files": [
-        "src/ts/metrochart.ts",
-        "src/ts/main-script.ts"
-    ]
+        "src/main.ts",
+        "typings/index.d.ts"
+    ],
+    "exclude": ["sites"]
 }
