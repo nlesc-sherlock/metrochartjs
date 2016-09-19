@@ -36,14 +36,14 @@ export class MetroChart {
      */
     public datasource: string;
     /**
-     * Identifier of the DOM element such as <code>#metrochart</code>, in
+     * Identifier of the DOM element such as <code>metrochart</code>, in
      * which to draw the MetroChart.
      */
     private elem: string;
     /**
-     * The D3 selection representation of <code>this.elem</code>.
+     *
      */
-    private elemSelection: d3.Selection<any>;
+    private elemid: HTMLElement;
     /**
      * The height of the DOM element containing the MetroChart.
      */
@@ -233,15 +233,11 @@ export class MetroChart {
         // store the url to the data that was provided by the user
         this._url = url;
 
-        // store the D3 selection of the element we want to draw in
-        this.elemSelection = d3.select(this.elem);
+        //
+        this.elemid = document.getElementById(this.elem);
 
         // store the width and height of the DOM element we want to draw in
-        // (somehow typescript gives an error about getBoundingClientRect() but
-        // it works in the browser (Google Chrome version 46.0.2490.71 (64-bit)))
-        let elemNoHash: string = elem.slice(1);
-        this.w = document.getElementById(elemNoHash).getBoundingClientRect().width;
-        this.h = document.getElementById(elemNoHash).getBoundingClientRect().height;
+        this.updateWidthHeight();
 
         if (typeof options === 'undefined') {
             this.applyDefaultOptions(MetroChart.defaultOptions);
@@ -252,8 +248,29 @@ export class MetroChart {
         // load the data (internally defers to this.drawForceDirectedGraph() )
         this.loaddata();
 
+        // beware: JavaScript magic happens here
+        let that:MetroChart = this;
+        window.addEventListener('resize', function() {
+            that.onResize();
+        });
+
+
     } // end method constructor()
 
+
+
+    public draw() {
+
+        // get the current width and height
+        this.updateWidthHeight();
+        // determine the list of unique line names:
+        this.calcUniqueLines();
+        // verify the data and add some properties:
+        this.verifyData();
+        // draw the force directed graph:
+        this.drawForceDirectedGraph();
+
+    }
 
 
 
@@ -781,19 +798,12 @@ export class MetroChart {
         };
 
 
-
-
-
         // capture the 'this' object:
         let that = this;
 
-        // if an metrochart-svg element exists, clear its contents:
-        d3.select('#metrochart-svg').remove();
-
         // select the DOM element to draw in, and set its identifier, as well
         // as its width and height
-        let vis = this.elemSelection.append('svg')
-            .attr('id', 'metrochart-svg')
+        let vis = d3.select(this.elemid).append('svg')
             .attr('width', this.w)
             .attr('height', this.h);
 
@@ -921,6 +931,28 @@ export class MetroChart {
 
 
 
+
+    /**
+     * When the window is resized, redraw the metrochart graph in its entirety,
+     * while observing the new maximum size.
+     * @return {[type]} [description]
+     */
+    protected onResize() {
+
+        // get the div element that we want to redraw
+        let div = this.elemid;
+
+        // delete the contents of the div
+        while (div.firstChild) {
+            div.removeChild(div.firstChild);
+        }
+
+        this.draw();
+
+}
+
+
+
     /**
      * Get the color of a line from <code>this.colors</code>, given its index
      * <code>uindex</code> into <code>this.ulinks</code>. If
@@ -1004,13 +1036,8 @@ export class MetroChart {
 
                 console.log('MetroChart: \'Done loading data from "' + that._url + '"\'');
 
-                // determine the list of unique line names:
-                that.calcUniqueLines();
-                // verify the data and add some properties:
-                that.verifyData();
+                that.draw();
 
-                // draw the force directed graph:
-                that.drawForceDirectedGraph();
             }
         };
 
@@ -1109,6 +1136,12 @@ export class MetroChart {
         }
         return this;
     }
+
+    public updateWidthHeight() {
+        this.w = this.elemid.getBoundingClientRect().width;
+        this.h = this.elemid.getBoundingClientRect().height;
+    }
+
 
     // getters and setters from here
 

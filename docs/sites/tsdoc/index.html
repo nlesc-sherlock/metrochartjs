@@ -65,67 +65,10 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<p><a href="https://travis-ci.org/nlesc-sherlock/metrochartjs"><img src="https://travis-ci.org/nlesc-sherlock/metrochartjs.svg?branch=master" alt="Build Status"></a></p>
-				<h1 id="live-demo">Live demo</h1>
-				<p>See the live demo <a href="http://jspaaks.github.io/metrochart/demo/">here</a>.</p>
-				<h1 id="documentation">Documentation</h1>
-				<p>The TypeDoc is <a href="http://jspaaks.github.io/metrochart/tsdoc/">here</a>.</p>
-				<h1 id="usage-linux-ubuntu-">Usage (Linux Ubuntu)</h1>
-				<pre><code class="lang-bash">
-<span class="hljs-comment"># install version management git (needs root)</span>
-sudo apt-get install git
-
-<span class="hljs-comment"># get a copy of the repository</span>
-git <span class="hljs-built_in">clone</span> https://github.com/jspaaks/metrochart.git
-
-<span class="hljs-comment"># change into the directory</span>
-<span class="hljs-built_in">cd</span> metrochart
-
-<span class="hljs-comment"># install curl</span>
-sudo apt-get install curl
-
-<span class="hljs-comment"># Add new PPA and install nodejs version from it, not from the ubuntu</span>
-<span class="hljs-comment"># repo; don't do sudo apt-get install npm</span>
-sudo curl <span class="hljs-_">-s</span>L https://deb.nodesource.com/setup_4.x | sudo -E bash -
-sudo apt-get install nodejs
-
-<span class="hljs-comment"># we'll need to compile some stuff later, so install g++ (needs root)</span>
-sudo apt-get install g++
-sudo apt-get install make
-
-<span class="hljs-comment"># globally install typescript and tsd (needs root)</span>
-sudo npm install --global typescript
-sudo npm install --global tsd
-
-<span class="hljs-comment"># install the build automation tool (needs root)</span>
-sudo npm install --global gulp
-
-<span class="hljs-comment"># npm package node-gyp needs python 2.7</span>
-sudo apt-get install python2.7
-
-<span class="hljs-comment"># let node install packages from package.json</span>
-npm install
-
-<span class="hljs-comment"># let tsd generate the typing information from tsd.json</span>
-tsd install
-
-<span class="hljs-comment"># transpile the TypeScript to make a build</span>
-gulp clean &amp;&amp; gulp build
-
-<span class="hljs-comment"># generate the TypDoc documentation</span>
-gulp tsdoc
-
-<span class="hljs-comment"># change into the build/ directory, and serve the webapp from there using python's</span>
-<span class="hljs-comment"># SimpleHttpServer on port 8089</span>
-<span class="hljs-built_in">cd</span> build
-<span class="hljs-comment"># Python 2.x</span>
-python -m SimpleHTTPServer 8089
-<span class="hljs-comment"># Python 3.x equivalent:</span>
-<span class="hljs-comment"># python3 -m http.server 8089</span>
-
-<span class="hljs-comment"># Use your browser to go to http://localhost:8089/demo to see the webapp being served</span>
-<span class="hljs-comment"># Use your browser to go to http://localhost:8089/tsdoc to see the TypeDoc</span>
-</code></pre>
+				<ul>
+					<li>The TypeDoc is <a href="http://nlesc-sherlock.github.io/metrochartjs/sites/tsdoc/">here</a>.</li>
+					<li>The code coverage report is <a href="http://nlesc-sherlock.github.io/metrochartjs/sites/coverage/remapped/">here</a>.</li>
+				</ul>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">

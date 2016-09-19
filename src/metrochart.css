@@ -1,65 +1,67 @@
 
-#metrochart {
-    background-color: #3f5851;
-    width: 1600px;
-    height: 800px;
-    margin: 50px;
+.metrochart {
+    box-sizing: border-box;
+    float: left;
+    margin: 10px;
+    padding: 0;
+    position: relative;
+    width: 90%;
 }
 
 
-.link {
+.metrochart .link {
+    fill: none;
+    opacity: 1.0;
     stroke: #777;
     stroke-width: 3px;
-    opacity: 1.0;
-    fill: none;
 }
 
 
-.link.highlight {
+.metrochart .link .highlight {
     stroke-width: 5px;
 }
 
 
-.node {
+.metrochart .node {
     fill: #ddd;
     stroke: #222;
     stroke-width: 2px;
 }
 
 
-.node.highlight {
+.metrochart .node .highlight {
     fill: #fff;
     stroke: #000;
     stroke-width: 3px;
 }
 
 
-.vline {
+.metrochart .vline {
     stroke: #bbb;
-    stroke-width: 0.5px;
     stroke-dasharray: 5,1;
+    stroke-width: 0.5px;
 }
 
 
-.vline.highlight {
+.metrochart .vline .highlight {
     stroke: #000;
-    stroke-width: 1.5px;
     stroke-dasharray: 5,5;
+    stroke-width: 1.5px;
 }
 
 
-.label {
+.metrochart .label {
+    alignment-baseline: middle;
     fill: #a5b3af;
     font: 14px sans-serif;
-    alignment-baseline: middle;
     /* text-anchor vlaue is set by javascript */
 }
 
 
-.label.highlight {
-    fill: #000;
-    border-width: medium;
+.metrochart .label .highlight {
     background-color: #F00;
+    border-width: medium;
+    fill: #000;
     font-weight: bold;
     /* text-anchor value is set by javascript */
 }
